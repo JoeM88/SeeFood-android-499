@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "737623756393",
+    "firebase_url": "https://seefoodcap20.firebaseio.com",
+    "project_id": "seefoodcap20",
+    "storage_bucket": "seefoodcap20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737623756393:android:80104ea1022af695ad1cf8",
+        "android_client_info": {
+          "package_name": "com.example.seefood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737623756393-9o6hdh471oporci9auuotks14hpjqt68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ4sQzMCgRZA0glfJg_Cz6BU_eGzNSTRs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737623756393-9o6hdh471oporci9auuotks14hpjqt68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
