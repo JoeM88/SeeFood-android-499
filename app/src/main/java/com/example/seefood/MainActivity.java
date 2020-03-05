@@ -1,6 +1,8 @@
 package com.example.seefood;
 
+import android.content.Intent;//GS Added
 import android.os.Bundle;
+import android.view.View;//GS Added
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    public void viewProfile(View view){
+        Intent intent = new Intent(this, userProfileActivity.class);
+        //use put extra to pass things to the activity
+        startActivity(intent);
     }
 
 }
