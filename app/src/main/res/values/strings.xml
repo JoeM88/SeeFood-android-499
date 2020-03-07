@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SeeFood</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="category_type">Fast Food</string>
+    <string name="numReviews">45 Reviews</string>
+    <string name="address">123 Main St.</string>
+    <string name="res_name">McDonalds</string>
+    <string name="distance">21.7 mi</string>
+    <string name="restaurant_image">restaurant_image</string>
 </resources>
