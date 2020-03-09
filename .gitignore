@@ -12,3 +12,13 @@
 /captures
 .externalNativeBuild
 .cxx
+
+app/build/outputs/logs/
+
+.idea/
+
+*.ser
+
+app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml
+
+app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt
