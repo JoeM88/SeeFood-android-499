@@ -36,4 +36,13 @@
         tools:layout_editor_absoluteX="17dp"
         tools:layout_editor_absoluteY="426dp" />
 
+    <Button
+        android:id="@+id/loadingDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="postData"
+        android:text="Go Load Data"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="496dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

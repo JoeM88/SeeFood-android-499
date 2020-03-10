@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.navigation:navigation-ui:2.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/db7b73e6a038ea6fc17d2b8f0e9b33e8/navigation-ui-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/ef47903584e132f95c08c23292cec68e/material-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/a518426e46579177e15d07df26dcbd4d/appcompat-1.0.2/AndroidManifest.xml:17:1-22:12
@@ -59,25 +59,25 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/
 MERGED from [androidx.print:print:1.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/6dd4de7fc3225e55d58846adf9ecb0a7/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/c7e64f6181ef9b2b223b47bd6635a3b3/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:16.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/28950d5ca212ff0c86ed1244329056eb/jetified-firebase-components-16.0.0/AndroidManifest.xml:15:1-23:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
-INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
 	package
 		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:3:5-34
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-27:12
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:1-31:12
 		INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:5:5-25:19
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:5:5-29:19
 MERGED from [com.google.android.material:material:1.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/ef47903584e132f95c08c23292cec68e/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/ef47903584e132f95c08c23292cec68e/material-1.0.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/gurpreet/.gradle/caches/transforms-2/files-2.1/65c09879886c04dd03c37ecd65c89ae1/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
@@ -134,34 +134,38 @@ MERGED from [androidx.lifecycle:lifecycle-process:2.0.0] /Users/gurpreet/.gradle
 		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:11:9-40
-activity#com.example.seefood.userProfileActivity
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:12:9-15:20
-	android:parentActivityName
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:12:55-97
+activity#com.example.seefood.dataLoadingActivity
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:12:9-66
 	android:name
 		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:12:19-54
+activity#com.example.seefood.userProfileActivity
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:13:9-19:20
+	android:parentActivityName
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:15:13-55
+	android:name
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:14:13-48
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:13:13-14:50
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:16:13-18:56
 	android:value
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:14:17-47
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:18:17-53
 	android:name
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:13:24-70
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:17:17-63
 activity#com.example.seefood.MainActivity
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:16:9-24:20
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:20:9-28:20
 	android:label
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:18:13-45
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:22:13-45
 	android:name
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:17:13-41
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:21:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:19:13-23:29
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:20:17-69
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:20:25-66
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:22:17-77
+ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:22:27-74
+		ADDED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml:26:27-74
 uses-sdk
 INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/gurpreet/Desktop/seeFood/front/SeeFood-android-499/SeeFood-android-499/app/src/main/AndroidManifest.xml
