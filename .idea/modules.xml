@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SeeFood.iml" filepath="$PROJECT_DIR$/SeeFood.iml" group="SeeFood" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SeeFood-android-499.iml" filepath="$PROJECT_DIR$/.idea/SeeFood-android-499.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SeeFood/app" />
     </modules>
   </component>
