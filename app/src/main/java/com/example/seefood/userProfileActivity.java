@@ -17,6 +17,7 @@ public class userProfileActivity extends AppCompatActivity {
     public void postData(View view){
         Intent intent = new Intent(this, dataLoadingActivity.class);
         //use put extra to pass things to the activity
+        //Nonsense comment.
         startActivity(intent);
     }
 }
