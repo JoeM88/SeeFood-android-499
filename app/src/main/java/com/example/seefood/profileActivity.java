@@ -1,22 +1,23 @@
-package com.example.seefood
+package com.example.seefood;
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import org.junit.runner.RunWith
+import androidx.appcompat.app.AppCompatActivity;
 
-class profileActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.default_profile_fragment, FragmentProfile())
-        ft.replace(R.id.default_profile_fragment, FragmentProfile())
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toolbar;
+
+public class profileActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profile);
+
     }
 
-    fun goHome(view: View?) {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+    public void goHome(View view){
+        Intent intent =  new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

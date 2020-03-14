@@ -1,62 +1,77 @@
-package com.example.seefood
+package com.example.seefood;
 
-import org.junit.runner.RunWith
+public class Restaurant {
+    private String name;
+    private String address;
+    private int rating;
+    private double distance;
+    private int numReviews;
+    private String category;
+    private int image;
 
-class Restaurant(private var name: String?, private var address: String?, private var rating: Int, private var distance: Double, private var numReviews: Int, private var category: String?, private var image: Int) {
-    fun getName(): String? {
-        return name
+    public Restaurant(String name, String address, int rating, double distance, int numReviews, String category, int image) {
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+        this.distance = distance;
+        this.numReviews = numReviews;
+        this.category = category;
+        this.image = image;
     }
 
-    fun getAddress(): String? {
-        return address
+    public String getName(){
+        return name;
     }
 
-    fun getRating(): Int {
-        return rating
+    public String getAddress() {
+        return address;
     }
 
-    fun getDistance(): Double {
-        return distance
+    public int getRating() {
+        return rating;
     }
 
-    fun getNumReviews(): Int {
-        return numReviews
+    public double getDistance() {
+        return distance;
     }
 
-    fun getCategory(): String? {
-        return category
+    public int getNumReviews() {
+        return numReviews;
     }
 
-    fun getImage(): Int {
-        return image
+    public String getCategory() {
+        return category;
     }
 
-    fun setName(name: String?) {
-        this.name = name
+    public int getImage() {
+        return image;
     }
 
-    fun setAddress(address: String?) {
-        this.address = address
+    public void setName(String name) {
+        this.name = name;
     }
 
-    fun setRating(rating: Int) {
-        this.rating = rating
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    fun setDistance(distance: Double) {
-        this.distance = distance
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
-    fun setNumReviews(numReviews: Int) {
-        this.numReviews = numReviews
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
-    fun setCategory(category: String?) {
-        this.category = category
+    public void setNumReviews(int numReviews) {
+        this.numReviews = numReviews;
     }
 
-    fun setImage(image: Int) {
-        this.image = image
+    public void setCategory(String category) {
+        this.category = category;
     }
 
+    public void setImage(int image) {
+        this.image = image;
+    }
 }
