@@ -25,9 +25,9 @@ import java.util.regex.Pattern;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SignUpFragmentUser extends Fragment {
+public class SignUpRestaurantOwnerFragment extends Fragment {
 
-    public SignUpFragmentUser() {
+    public SignUpRestaurantOwnerFragment() {
         // Required empty public constructor
     }
 
@@ -45,30 +45,31 @@ public class SignUpFragmentUser extends Fragment {
     public static final Pattern EMAIL_PATTERN =
             Pattern.compile(
                     "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                            "\\@" +
-                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                            "(" +
-                            "\\." +
-                            "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                            ")+"
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                           "\\." +
+                           "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
             );
 
-    private TextInputLayout email, password;
+    private TextInputLayout email, passwordRO;
     private FirebaseAuth firebaseAuth;
     private Button button;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sign_up_user, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_up_restaurant_owner, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        email = view.findViewById(R.id.userTextInputLayoutEmail);
-        password = view.findViewById(R.id.userTextInputLayoutPassword);
+        passwordRO = view.findViewById(R.id.userTextInputLayoutPasswordRO);
+        email = view.findViewById(R.id.userTextInputLayoutEmailRO);
 
-        button = view.findViewById(R.id.buttonCreateAccUser);
+        button = view.findViewById(R.id.buttonCreateAccUserRO);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,27 +80,27 @@ public class SignUpFragmentUser extends Fragment {
         return view;
     }
 
+
     public void confirmInput(View v){
         if (!verifyPassword() | !verifyEmail()){
             return;
         }
         else {
-            firebaseAuth.createUserWithEmailAndPassword(email.getEditText().getText().toString(), password.getEditText().getText().toString())
+            firebaseAuth.createUserWithEmailAndPassword(email.getEditText().getText().toString(), passwordRO.getEditText().getText().toString())
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                // User is successfully registered and logged in
-                                Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT);
-                                startActivity(new Intent(getActivity(), MainActivity.class));
-                            }
+                              if(task.isSuccessful()){
+                                  // User is successfully registered and logged in
+                                  Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT);
+                                  startActivity(new Intent(getActivity(), MainActivity.class));
+                              }
                         }
                     });
         }
-
         String input = "Email: " + email.getEditText().getText().toString();
         input += "\n";
-        input += "Password: " + password.getEditText().getText().toString();
+        input += "Password: " + passwordRO.getEditText().getText().toString();
 
         Toast.makeText(getActivity(), input, Toast.LENGTH_SHORT).show();
     }
@@ -111,10 +112,13 @@ public class SignUpFragmentUser extends Fragment {
             email.setError("Email cannot be empty");
             return false;
         }
+
         else if (!EMAIL_PATTERN.matcher(emailInput).matches()) {
             email.setError("Please enter a valid email address");
             return false;
         }
+
+
         else {
             email.setError(null);
             return true;
@@ -122,19 +126,22 @@ public class SignUpFragmentUser extends Fragment {
     }
 
     private boolean verifyPassword() {
-        String passwordInput = password.getEditText().getText().toString().trim();
+        String passwordInput = passwordRO.getEditText().getText().toString().trim();
 
         if (passwordInput.isEmpty()) {
-            password.setError("Password cannot be empty");
+            passwordRO.setError("Password cannot be empty");
             return false;
         }
+
         else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            password.setError("Password does not meet requirements");
+            passwordRO.setError("Password does not meet requirements");
             return false;
         }
         else {
-            password.setError(null);
+            passwordRO.setError(null);
             return true;
         }
     }
+
+
 }
