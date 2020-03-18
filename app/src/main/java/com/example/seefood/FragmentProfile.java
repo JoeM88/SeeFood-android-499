@@ -12,9 +12,7 @@ public class FragmentProfile extends Fragment {
 
     private View v;
 
-    public FragmentProfile(){
-
-    }
+    public FragmentProfile(){}
 
     @Nullable
     @Override

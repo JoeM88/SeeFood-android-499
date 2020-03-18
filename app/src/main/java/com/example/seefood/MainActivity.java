@@ -10,21 +10,22 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import butterknife.ButterKnife;
+
 
 public class MainActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         BottomNavigationView botNav = findViewById(R.id.bottom_nav);
         botNav.setOnNavigationItemSelectedListener(navListener);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        ft.replace(R.id.container_fragment, new FragmentList());
+        ft.replace(R.id.container_fragment, new FragmentHome());
         ft.commit();
 
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    selectedFragment = new FragmentList();
+                    selectedFragment = new FragmentHome();
                     break;
                 case R.id.nav_favorite:
                     selectedFragment = new FragmentFavorite();
