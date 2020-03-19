@@ -1,38 +1,56 @@
 package com.example.seefood;
 
-import android.content.Intent;//GS Added
 import android.os.Bundle;
-import android.view.View;//GS Added
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
-    }
 
-    public void viewProfile(View view){
-        Intent intent = new Intent(this, userProfileActivity.class);
-        //use put extra to pass things to the activity
-        startActivity(intent);
-    }
+        BottomNavigationView botNav = findViewById(R.id.bottom_nav);
+        botNav.setOnNavigationItemSelectedListener(navListener);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
+        ft.replace(R.id.container_fragment, new FragmentList());
+        ft.commit();
+
+
+
+    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
+
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    selectedFragment = new FragmentList();
+                    break;
+                case R.id.nav_favorite:
+                    selectedFragment = new FragmentFavorite();
+                    break;
+                case R.id.nav_profile:
+                    selectedFragment = new FragmentProfile();
+                    break;
+
+            }
+            assert selectedFragment != null;
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
+
+            return true;
+        }
+    };
 }
