@@ -1,7 +1,9 @@
 package com.example.seefood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void viewProfile(View view){
+        Intent intent = new Intent(this, profileActivity.class);
+        startActivity(intent);
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -44,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.nav_profile:
                     selectedFragment = new FragmentProfile();
-                    break;
+                    //break;
+                    viewProfile(null);
 
             }
             assert selectedFragment != null;
