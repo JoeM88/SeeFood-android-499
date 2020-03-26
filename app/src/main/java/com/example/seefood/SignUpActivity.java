@@ -1,18 +1,11 @@
 package com.example.seefood;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.example.seefood.R;
-import com.google.android.material.textfield.TextInputLayout;
-
-import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -34,12 +27,12 @@ public class SignUpActivity extends AppCompatActivity {
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             SignUpFragmentUser signUpFragmentUser = new SignUpFragmentUser();
+            SignUpRestaurantOwnerFragment signUpRestaurantOwnerFragment = new SignUpRestaurantOwnerFragment();
+            LoginFragmentUser loginFragmentUser = new LoginFragmentUser();
 
-            SignUpRestaurantOwnerFragment test = new SignUpRestaurantOwnerFragment();
-
-            fragmentTransaction.add(R.id.fragment_container, signUpFragmentUser, null);
-
-            //fragmentTransaction.add(R.id.fragment_container, test, null);
+            fragmentTransaction.replace(R.id.fragment_container, loginFragmentUser, "LoginUser");
+            //fragmentTransaction.replace(R.id.fragment_container, signUpFragmentUser, "SignUpUser");
+            //fragmentTransaction.replace(R.id.fragment_container, signUpRestaurantOwnerFragment, "SignUpRO");
             fragmentTransaction.commit();
         }
     }

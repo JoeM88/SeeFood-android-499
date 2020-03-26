@@ -1,71 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SignUpFragmentUser">
+    tools:context=".LoginFragmentUser">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userTextInputLayoutEmail"
+        android:id="@+id/userTextInputLayoutEmailLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="250dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="250dp"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userTextInputEmail"
+            android:id="@+id/userTextInputEmailLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintEmail" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/userTextInputLayoutPassword"
+        android:id="@+id/userTextInputLayoutPasswordLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:counterEnabled="true"
         app:errorEnabled="true"
+        app:helperTextEnabled="true"
+        app:hintAnimationEnabled="true"
         app:hintEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutEmail"
+        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutEmailLogin"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/userTextInputPass"
+            android:id="@+id/userTextInputPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hintPassword"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true"
-            android:singleLine="true" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/buttonCreateAccUser"
+        android:id="@+id/buttonLoginUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="162dp"
+        android:layout_marginLeft="161dp"
         android:layout_marginRight="162dp"
-        android:text="@string/button_createAcc"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/button_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutPasswordLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

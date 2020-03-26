@@ -24,6 +24,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.seefood.SignUpActivity" />
+        <activity android:name="com.example.seefood.profileActivity" />
         <activity
             android:name="com.example.seefood.MainActivity"
             android:label="@string/app_name" >
@@ -33,10 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.seefood.ui.signup.SignUpActivity"
-            android:exported="true" />
-        <activity android:name="com.example.seefood.ui.login.LoginActivity" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
             android:excludeFromRecents="true"
@@ -74,12 +72,6 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <provider
-            android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.seefood.firebaseinitprovider"
-            android:exported="false"
-            android:initOrder="100" />
-
         <receiver
             android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
             android:enabled="true"
@@ -104,6 +96,12 @@
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="com.example.seefood.firebaseinitprovider"
+            android:exported="false"
+            android:initOrder="100" />
 
         <meta-data
             android:name="com.google.android.gms.version"
