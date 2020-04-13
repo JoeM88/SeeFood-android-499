@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentHome">
+
+    <AutoCompleteTextView
+        android:id="@+id/search_input"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dp"
+        android:hint="Search"/>
+
+    <ImageButton
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/search_input"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_menu_search" />
+
+    <Button
+        android:id="@+id/near_me_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_input"
+        android:layout_marginLeft="25dp"
+        android:text="Near Me"
+        android:drawableTop="@android:drawable/ic_menu_compass"/>
+
+    <Button
+        android:id="@+id/favorites_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_input"
+        android:layout_toRightOf="@id/near_me_button"
+        android:layout_marginLeft="15dp"
+        android:text="Favorites"
+        android:drawableTop="@android:drawable/btn_star"/>
+
+    <Button
+        android:id="@+id/recents_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_input"
+        android:layout_toRightOf="@id/favorites_button"
+        android:layout_marginLeft="15dp"
+        android:text="Recent"
+        android:drawableTop="@android:drawable/ic_menu_search"/>
+
+</RelativeLayout>

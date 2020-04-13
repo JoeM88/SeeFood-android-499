@@ -6,5 +6,15 @@
     <string name="res_name">McDonalds</string>
     <string name="distance">21.7 mi</string>
     <string name="restaurant_image">restaurant_image</string>
+<<<<<<< HEAD
     <string name="detailsImageDesription">Restaurant image for the details page</string>
+=======
+    <!--Bottom Navigation Bar-->
+    <string name="nav_bar_home">Home</string>
+    <string name="nav_bar_favorite">Favorite</string>
+    <string name="nav_bar_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+>>>>>>> ec7b7b18295895c968431acb4de5b555f665ca70
 </resources>
