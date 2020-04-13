@@ -7,6 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+<<<<<<< HEAD
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
@@ -21,6 +22,14 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/seefood/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/seefood/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/seefood/ui/signup/SignUpFragmentUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/seefood/ui/signup/SignUpFragmentUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+=======
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f06f3017-12a6-45b6-8736-977db5baef44" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+>>>>>>> origin/Nick
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +37,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_XL_API_R" />
+=======
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_XL_API_27" />
+>>>>>>> origin/Nick
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -37,6 +53,7 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+<<<<<<< HEAD
         <task path="$PROJECT_DIR$/app">
           <activation />
         </task>
@@ -81,6 +98,11 @@
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
+=======
+        <projects_view>
+          <tree_state>
+            <expand />
+>>>>>>> origin/Nick
             <select />
           </tree_state>
         </projects_view>
@@ -192,7 +214,7 @@
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="" />
+      <option name="ACTIVITY_CLASS" value="com.example.seefood.ui.signup.SignUpActivity" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -258,7 +280,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6fec620d-cc92-499d-85af-58ad5a022ee3" name="Default Changelist" comment="" />
+      <changelist id="f06f3017-12a6-45b6-8736-977db5baef44" name="Default Changelist" comment="" />
       <created>1581995643386</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -278,7 +300,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583732195812</updated>
     </task>
+<<<<<<< HEAD
     <option name="localTasksCounter" value="3" />
+=======
+    <task id="LOCAL-00003" summary="updating gradle">
+      <created>1585186556975</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585186556975</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+>>>>>>> origin/Nick
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,5 +331,6 @@
     <MESSAGE value="initializing empty project" />
     <MESSAGE value="updating gradle" />
     <option name="LAST_COMMIT_MESSAGE" value="updating gradle" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>

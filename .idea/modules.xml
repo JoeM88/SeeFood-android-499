@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/Android Projects-SeeFood-android-499-app.iml" filepath="$PROJECT_DIR$/app/Android Projects-SeeFood-android-499-app.iml" group="SeeFood/app" />
       <module fileurl="file://$PROJECT_DIR$/SeeFood.iml" filepath="$PROJECT_DIR$/SeeFood.iml" group="SeeFood" />
+      <module fileurl="file://$PROJECT_DIR$/SeeFood-android-499-SeeFood.iml" filepath="$PROJECT_DIR$/SeeFood-android-499-SeeFood.iml" group="SeeFood" />
       <module fileurl="file://$PROJECT_DIR$/app/SeeFood-android-499-app.iml" filepath="$PROJECT_DIR$/app/SeeFood-android-499-app.iml" group="SeeFood/app" />
       <module fileurl="file://$PROJECT_DIR$/StudioProjects-SeeFood.iml" filepath="$PROJECT_DIR$/StudioProjects-SeeFood.iml" group="SeeFood" />
-      <module fileurl="file://$PROJECT_DIR$/app/StudioProjects-app.iml" filepath="$PROJECT_DIR$/app/StudioProjects-app.iml" group="SeeFood/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SeeFood/app" />
+      <module fileurl="file://$PROJECT_DIR$/woo-SeeFood.iml" filepath="$PROJECT_DIR$/woo-SeeFood.iml" group="SeeFood" />
     </modules>
   </component>
 </project>
