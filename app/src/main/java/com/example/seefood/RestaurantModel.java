@@ -1,6 +1,5 @@
 package com.example.seefood;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +11,8 @@ public class RestaurantModel {
     public String zipCode;
     public String phoneNumber;
     public String city;
+    public String photoName;
+    public String photoURL;
 
     //meal offerings
     public HashMap<String, ArrayList<String>> offerings;
@@ -26,7 +27,7 @@ public class RestaurantModel {
 
     public RestaurantModel(String restName, String owner, String streetAddress, String state, String zipCode,
                            String city, String phoneNumber, HashMap<String, ArrayList<String>> offerings,
-                           ArrayList<HashMap<String, HashMap<String, Integer>>> hoursOperation)
+                           ArrayList<HashMap<String, HashMap<String, Integer>>> hoursOperation, String photoName, String photoURL)
     {
         this.restName = restName;
         this.owner = owner;
@@ -37,6 +38,8 @@ public class RestaurantModel {
         this.phoneNumber = phoneNumber;
         this.offerings = offerings;
         this.hoursOperation = hoursOperation;
+        this.photoName = photoName;
+        this.photoURL = photoURL;
     }
 
     public String getRestName() {

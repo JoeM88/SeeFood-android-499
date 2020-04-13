@@ -66,4 +66,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutPassword" />
 
+    <Button
+        android:id="@+id/loginFragmentGo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log-In Instead"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreateAccUser" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="20dp"
+        android:text="Already a member? "
+        app:layout_constraintBottom_toTopOf="@+id/loginFragmentGo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCreateAccUser" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
