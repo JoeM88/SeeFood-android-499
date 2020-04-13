@@ -10,6 +10,12 @@
     <string name="button_login">Login</string>
     <string name="hintEmail">Email</string>
     <string name="button_signUpRO">Sign Up RO</string>
+    <string name="category_type">Fast Food</string>
+    <string name="numReviews">45 Reviews</string>
+    <string name="address">123 Main St.</string>
+    <string name="res_name">McDonalds</string>
+    <string name="distance">21.7 mi</string>
+    <string name="restaurant_image">restaurant_image</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.container_fragment, new FragmentList());
         ft.commit();
 
-
-
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

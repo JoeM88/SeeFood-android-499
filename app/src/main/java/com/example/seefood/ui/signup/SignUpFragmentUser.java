@@ -55,6 +55,7 @@ public class SignUpFragmentUser extends Fragment {
 
     private TextInputLayout email, password;
     private FirebaseAuth firebaseAuth;
+    private String userId;
     private Button button;
 
     @Override
@@ -90,7 +91,8 @@ public class SignUpFragmentUser extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 // User is successfully registered and logged in
-                                Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT);
+                                userId = firebaseAuth.getCurrentUser().getUid();
+                                Toast.makeText(getActivity(), "Registered Successfully" + userId, Toast.LENGTH_SHORT);
                                 startActivity(new Intent(getActivity(), MainActivity.class));
                             }
                         }
