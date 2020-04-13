@@ -26,6 +26,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     private RecyclerView myRecyclerView;
     private List<Restaurant> lstRestaurant;
     private RecyclerViewAdapter recycleAdapter;
+    private Context mContext;
 
 
     public FragmentList(){
@@ -65,18 +66,22 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
     @Override
     public void onRestaurantClick(int position) {
-        
-        Bundle b = new Bundle();
-        b.putParcelable("RestaurantObject", lstRestaurant.get(position));
-        FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
-        frag.setArguments(b);
+        mContext = getContext();
+        if(mContext == null)
+        {
+            return;
+        }
 
-        AppCompatActivity activity = (AppCompatActivity) v.getContext();
-        activity.getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container_fragment, frag)
-                .addToBackStack(null)
-                .commit();
+        if (mContext instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity)mContext;
+            Bundle b = new Bundle();
+            b.putParcelable("RestaurantObject", lstRestaurant.get(position));
+            FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
+            frag.setArguments(b);
+            mainActivity.switchContent(R.id.container_fragment, frag);
+        }
+
+
 
     }
 

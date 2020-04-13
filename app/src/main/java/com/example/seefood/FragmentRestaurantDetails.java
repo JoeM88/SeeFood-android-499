@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 public class FragmentRestaurantDetails extends Fragment {
     private View v;
     private TextView detailsName;
+    private TextView detailsCategory;
 
 
     public FragmentRestaurantDetails(){}
@@ -26,6 +27,8 @@ public class FragmentRestaurantDetails extends Fragment {
         assert obj != null;
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsName.setText(obj.getName());
+        detailsCategory = v.findViewById(R.id.Restaurant_Details_Category);
+        detailsCategory.setText(obj.getCategory());
         return v;
     }
 

@@ -6,4 +6,5 @@
     <string name="res_name">McDonalds</string>
     <string name="distance">21.7 mi</string>
     <string name="restaurant_image">restaurant_image</string>
+    <string name="detailsImageDesription">Restaurant image for the details page</string>
 </resources>
