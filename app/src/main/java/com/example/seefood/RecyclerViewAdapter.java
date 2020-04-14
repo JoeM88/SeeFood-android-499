@@ -16,30 +16,31 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
 
-    private Context mContext;
-    private OnRestaurantListener mOnRestaurantListener;
-    private List<Restaurant> mData;
+    Context mContext;
 
-    public RecyclerViewAdapter(Context myContext, List<Restaurant> mData, OnRestaurantListener mOnRestaurantListener) {
+    public RecyclerViewAdapter(Context myContext, List<Restaurant> mData) {
         this.mContext = myContext;
         this.mData = mData;
-        this.mOnRestaurantListener = mOnRestaurantListener;
     }
 
-
+    List<Restaurant> mData;
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.restaurnt_item, parent, false);
-        return new MyViewHolder(v, mOnRestaurantListener);
+        v = LayoutInflater.from(mContext).inflate(R.layout.restaurant_item, parent, false);
+        MyViewHolder vHolder = new MyViewHolder(v);
+
+
+        return vHolder;
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.restaurantName.setText(mData.get(position).getName());
-        holder.distance.setText(String.format("%s mi", mData.get(position).getDistance()));
+        holder.distance.setText(String.valueOf(mData.get(position).getDistance()) + " mi");
         holder.address.setText(mData.get(position).getAddress());
         holder.category.setText(mData.get(position).getCategory());
         holder.rate.setRating(mData.get(position).getRating());
@@ -51,37 +52,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView restaurantName;
         private TextView address;
         private TextView distance;
         private TextView category;
         private RatingBar rate;
         private ImageView img;
-        OnRestaurantListener onRestaurantListener;
 
-        public MyViewHolder(@NonNull View itemView, OnRestaurantListener onRestaurantListener) {
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            restaurantName = itemView.findViewById(R.id.restaurant_name);
-            address = itemView.findViewById(R.id.address);
-            distance = itemView.findViewById(R.id.distance);
-            category = itemView.findViewById(R.id.category);
-            rate = itemView.findViewById(R.id.ratingBar);
-            img = itemView.findViewById(R.id.restaurant_img);
-            this.onRestaurantListener = onRestaurantListener;
-
-            itemView.setOnClickListener(this);
-
+            restaurantName = (TextView) itemView.findViewById(R.id.restaurant_name);
+            address = (TextView) itemView.findViewById(R.id.address);
+            distance = (TextView) itemView.findViewById(R.id.distance);
+            category = (TextView) itemView.findViewById(R.id.category);
+            rate = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            img = (ImageView) itemView.findViewById(R.id.restaurant_img);
 
         }
-        public void onClick(View view)
-        {
-             onRestaurantListener.onRestaurantClick(getAdapterPosition());
-        }
-
     }
-    public interface OnRestaurantListener{
-        void onRestaurantClick(int position);
-    }
-
 }

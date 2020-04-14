@@ -2,26 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?android:attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
+    android:layout_margin="8dp"
+    android:orientation="horizontal"
+    android:outlineAmbientShadowColor="@color/black_effective"
+    android:background="@color/colorDivider">
 
     <ImageView
         android:id="@+id/restaurant_img"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/restaurant_image"
         android:src="@mipmap/ic_launcher_round"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints"></ImageView>
+
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -43,8 +40,7 @@
         android:text="@string/numReviews"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        android:layout_marginLeft="4dp" />
+        app:layout_constraintStart_toEndOf="@+id/ratingBar" />
 
     <TextView
         android:id="@+id/address"
@@ -64,8 +60,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/restaurant_img"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="15dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/category"

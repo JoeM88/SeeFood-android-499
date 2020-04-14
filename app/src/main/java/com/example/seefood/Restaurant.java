@@ -1,13 +1,6 @@
 package com.example.seefood;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.IOException;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
-
-public class Restaurant implements Parcelable {
+public class Restaurant {
     private String name;
     private String address;
     private int rating;
@@ -15,7 +8,6 @@ public class Restaurant implements Parcelable {
     private int numReviews;
     private String category;
     private int image;
-
 
     public Restaurant(String name, String address, int rating, double distance, int numReviews, String category, int image) {
         this.name = name;
@@ -26,29 +18,6 @@ public class Restaurant implements Parcelable {
         this.category = category;
         this.image = image;
     }
-
-
-    protected Restaurant(Parcel in) {
-        name = in.readString();
-        address = in.readString();
-        rating = in.readInt();
-        distance = in.readDouble();
-        numReviews = in.readInt();
-        category = in.readString();
-        image = in.readInt();
-    }
-
-    public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
-        @Override
-        public Restaurant createFromParcel(Parcel in) {
-            return new Restaurant(in);
-        }
-
-        @Override
-        public Restaurant[] newArray(int size) {
-            return new Restaurant[size];
-        }
-    };
 
     public String getName(){
         return name;
@@ -104,21 +73,5 @@ public class Restaurant implements Parcelable {
 
     public void setImage(int image) {
         this.image = image;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(address);
-        parcel.writeString(category);
-        parcel.writeInt(rating);
-        parcel.writeInt(numReviews);
-        parcel.writeInt(image);
-
     }
 }
