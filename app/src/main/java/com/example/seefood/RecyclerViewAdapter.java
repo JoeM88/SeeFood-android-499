@@ -32,17 +32,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-<<<<<<< HEAD
         v = LayoutInflater.from(mContext).inflate(R.layout.restaurnt_item, parent, false);
         return new MyViewHolder(v, mOnRestaurantListener);
-=======
-        v = LayoutInflater.from(mContext).inflate(R.layout.restaurant_item, parent, false);
-        MyViewHolder vHolder = new MyViewHolder(v);
-
-
-        return vHolder;
->>>>>>> ec7b7b18295895c968431acb4de5b555f665ca70
-
     }
 
     @Override
