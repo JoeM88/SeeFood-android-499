@@ -129,7 +129,7 @@ public class SignUpFragmentUser extends Fragment {
             return false;
         }
         else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            password.setError("Password does not meet requirements");
+            password.setError("Password does not meet requirements. Requires at least 1 Uppercase, Lowercase, Number, and Special Character: @#$%^&+_ are valid characters");
             return false;
         }
         else {

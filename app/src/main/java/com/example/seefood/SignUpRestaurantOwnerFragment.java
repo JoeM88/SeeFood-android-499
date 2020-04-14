@@ -134,7 +134,7 @@ public class SignUpRestaurantOwnerFragment extends Fragment {
         }
 
         else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            passwordRO.setError("Password does not meet requirements");
+            passwordRO.setError("Password does not meet requirements. Requires at least 1 Uppercase, Lowercase, Number, and Special Character: @#$%^&+_ are valid characters");
             return false;
         }
         else {
