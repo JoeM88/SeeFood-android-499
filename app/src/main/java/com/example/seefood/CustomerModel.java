@@ -7,16 +7,18 @@ public class CustomerModel {
     private String photoName;
     private String photoUrl;
     private ArrayList<String> favorites;
+    private ArrayList<String> recentPlaces;
 
     public CustomerModel(){
         //Empty constructor
     }
 
-    public CustomerModel(String dname, ArrayList<String> favs, String pname, String purl){
+    public CustomerModel(String dname, ArrayList<String> favs, String pname, String purl, ArrayList<String> recent){
         this.diplayName = dname;
         this.favorites = favs;
         this.photoName = pname;
         this.photoUrl = purl;
+        this.recentPlaces = recent;
     }
 
     public String getDiplayName() {
@@ -48,5 +50,13 @@ public class CustomerModel {
 
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+    }
+
+    public ArrayList<String> getRecentPlaces() {
+        return recentPlaces;
+    }
+
+    public void setRecentPlaces(ArrayList<String> recentPlaces) {
+        this.recentPlaces = recentPlaces;
     }
 }

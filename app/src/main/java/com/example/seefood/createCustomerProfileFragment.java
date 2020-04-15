@@ -187,7 +187,8 @@ public class createCustomerProfileFragment extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
                             ArrayList<String> list = new ArrayList<String>();
-                            CustomerModel cm = new CustomerModel(editText.getText().toString(), list, uid, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            ArrayList<String> rec = new ArrayList<>();
+                            CustomerModel cm = new CustomerModel(editText.getText().toString(), list, uid, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(), rec);
                             String uploadID = uid;
                             mDatabaseRef.child(uploadID).setValue(cm);
                             db.collection("Customer").document(firebaseAuth.getUid()).set(cm);
