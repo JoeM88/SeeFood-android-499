@@ -26,4 +26,7 @@
     <string name="hintEmail">Email</string>
     <string name="button_signUpRO">Sign Up RO</string>
     <!-- -->
+
+    <string name="owner">owner</string>
+    <string name="notOwner">notOwner</string>
 </resources>

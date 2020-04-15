@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SignUpFragmentUser">
+    tools:context=".login.SignUpFragmentUser">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userTextInputLayoutEmail"
@@ -55,17 +55,31 @@
 
     <Button
         android:id="@+id/buttonCreateAccUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginLeft="161dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginRight="162dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="202dp"
+        android:layout_height="64dp"
         android:text="@string/button_createAcc"
+        android:background="@color/red"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/goLogin"
+        android:layout_width="202dp"
+        android:layout_height="64dp"
+        android:text="Login"
+        android:textColor="@color/red"
+        android:background="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

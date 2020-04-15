@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.seefood.R;
+
 public class SignUpActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
@@ -14,7 +16,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_sign_up);
 
         fragmentManager = getSupportFragmentManager();
 

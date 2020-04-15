@@ -8,14 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.seefood.MainActivity;
+import com.example.seefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 
 public class LoginFragmentUser extends Fragment {
@@ -26,6 +29,8 @@ public class LoginFragmentUser extends Fragment {
     private TextInputLayout email, password;
     private Button button;
     private FirebaseAuth firebaseAuth;
+
+    private Button switchButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +48,17 @@ public class LoginFragmentUser extends Fragment {
             @Override
             public void onClick(View view) {
                 confirmInput(view);
+            }
+        });
+
+        switchButton = view.findViewById(R.id.switchToSignUp);
+        switchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v){
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, new SignUpFragmentUser());
+                ft.commit();
             }
         });
 

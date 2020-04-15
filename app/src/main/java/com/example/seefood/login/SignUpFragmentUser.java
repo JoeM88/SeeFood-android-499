@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
@@ -55,6 +56,7 @@ public class SignUpFragmentUser extends Fragment {
     private TextInputLayout email, password;
     private FirebaseAuth firebaseAuth;
     private Button button;
+    private Button goLogin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +74,16 @@ public class SignUpFragmentUser extends Fragment {
             @Override
             public void onClick(View view) {
                 confirmInput(view);
+            }
+        });
+
+        goLogin = view.findViewById(R.id.goLogin);
+        goLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, new LoginFragmentUser());
+                ft.commit();
             }
         });
 
