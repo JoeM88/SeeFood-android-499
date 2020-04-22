@@ -12,64 +12,395 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <CheckedTextView
-            android:id="@+id/checkedTextView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:gravity="center_horizontal"
-            android:text="CheckedTextView"
-            android:textAlignment="center"
-            android:textColor="@color/red"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.165"
-            tools:layout_editor_absoluteX="0dp" />
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="408dp"-->
+<!--            android:layout_height="95dp"-->
+<!--            android:background="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.333"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0">-->
 
-        <CheckedTextView
-            android:id="@+id/checkedTextView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:gravity="center_horizontal"
-            android:text="CheckedTextView"
-            android:textAlignment="center"
-            android:textColor="@color/red"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.284"
-            tools:layout_editor_absoluteX="0dp" />
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.017"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
 
-        <CheckedTextView
-            android:id="@+id/checkedTextView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="#ffffff"
-            android:text="CheckedTextView"
-            android:textAlignment="center"
-            android:textColor="@color/red"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.407"
-            tools:layout_editor_absoluteX="0dp" />
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton2"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.21"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
 
-        <CheckedTextView
-            android:id="@+id/checkedTextView5"
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton3"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.403"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton4"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.596"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton5"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.789"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton6"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.982"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/mondayButton7"-->
+<!--                android:layout_width="66dp"-->
+<!--                android:layout_height="95dp"-->
+<!--                android:text="Mon"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.017"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintVertical_bias="0.0" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="96dp"
+            android:orientation="horizontal"
             android:background="#ffffff"
-            android:text="CheckedTextView"
-            android:textAlignment="center"
-            android:textColor="@color/red"
-            android:textSize="30dp"
+            android:weightSum="7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.537"
-            tools:layout_editor_absoluteX="-16dp" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="108dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/mondayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="MON" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/tuesdayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="TUE"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/wednesdayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="WED"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/thursdayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="THU"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/fridayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="FRI"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/saturdayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="SAT"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/sundayButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:text="SUN"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.183" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.264" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.345" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.424" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText5"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.492" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.561" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/appleText7"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="NONSENSE"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.375"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.65" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="MONDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.051"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.192" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="TUESDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.05"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.261" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="WenesDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.045"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.341" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText4"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ThursDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.045"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.419" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText5"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="FriDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.045"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.487" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText6"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="SaturDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.045"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.554" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/mondayText7"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="SunDAY"-->
+<!--            android:textColor="#ffffff"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.045"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.643" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

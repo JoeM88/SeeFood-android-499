@@ -15,8 +15,9 @@ public class RestaurantModel {
     public String photoURL;
 
     //meal offerings
-    public HashMap<String, ArrayList<String>> offerings;
-    public ArrayList<HashMap<String, HashMap<String, Integer>>> hoursOperation;
+    public HashMap<String, ArrayList<MealModel>> offerings;
+//    private ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation;
+    private HashMap<String, HashMap<String, OperationsModel>>hOps;
 
     //TODO: Logo and Photo, must be via camera or file explorer in android studio
 
@@ -26,8 +27,8 @@ public class RestaurantModel {
     }
 
     public RestaurantModel(String restName, String owner, String streetAddress, String state, String zipCode,
-                           String city, String phoneNumber, HashMap<String, ArrayList<String>> offerings,
-                           ArrayList<HashMap<String, HashMap<String, Integer>>> hoursOperation, String photoName, String photoURL)
+                           String city, String phoneNumber, HashMap<String, ArrayList<MealModel>> offerings,
+                           /*ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation*/HashMap<String, HashMap<String, OperationsModel>> hOps, String photoName, String photoURL)
     {
         this.restName = restName;
         this.owner = owner;
@@ -37,7 +38,8 @@ public class RestaurantModel {
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.offerings = offerings;
-        this.hoursOperation = hoursOperation;
+//        this.hoursOperation = hoursOperation;
+        this.hOps = hOps;
         this.photoName = photoName;
         this.photoURL = photoURL;
     }
@@ -90,19 +92,57 @@ public class RestaurantModel {
         this.city = city;
     }
 
-    public HashMap<String, ArrayList<String>> getOfferings() {
+    public HashMap<String, ArrayList<MealModel>> getOfferings() {
         return offerings;
     }
 
-    public void setOfferings(HashMap<String, ArrayList<String>> offerings) {
+    public void setOfferings(HashMap<String, ArrayList<MealModel>> offerings) {
         this.offerings = offerings;
     }
 
-    public ArrayList<HashMap<String, HashMap<String, Integer>>> getHoursOperation() {
-        return hoursOperation;
+//    public ArrayList<HashMap<String, HashMap<String, String>>> getHoursOperation() {
+//        return hoursOperation;
+//    }
+//
+//    public void setHoursOperation(ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation) {
+//        this.hoursOperation = hoursOperation;
+//    }
+
+
+    public String getOwner() {
+        return owner;
     }
 
-    public void setHoursOperation(ArrayList<HashMap<String, HashMap<String, Integer>>> hoursOperation) {
-        this.hoursOperation = hoursOperation;
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getPhotoName() {
+        return photoName;
+    }
+
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public HashMap<String, HashMap<String, OperationsModel>> gethOps() {
+        return hOps;
+    }
+
+    public void sethOps(HashMap<String, HashMap<String, OperationsModel>> hOps) {
+        this.hOps = hOps;
+    }
+
+    public String printRest(RestaurantModel rm){
+        return "Name --> " + rm.getRestName() + "\n" + "Address --> " + rm.getStreetAddress() + "\n" + "City --> " + rm.getCity() + "\n"
+                + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n";
     }
 }

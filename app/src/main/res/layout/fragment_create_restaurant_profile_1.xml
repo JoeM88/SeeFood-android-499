@@ -9,7 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/red">
+        android:background="@color/red"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="27dp">
 
         <TextView
             android:id="@+id/textView"
@@ -23,41 +25,104 @@
             app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.036" />
+            app:layout_constraintVertical_bias="0.223" />
 
-        <EditText
-            android:id="@+id/editText2"
+<!--        <EditText-->
+<!--            android:id="@+id/PhoneText_Input"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="#ffffff"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:inputType="phone"-->
+<!--            android:digits="0123456789+"-->
+
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.834"-->
+<!--            tools:layout_editor_absoluteX="0dp" />-->
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/PhoneText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
+            android:gravity="center_horizontal"
+            android:inputType="phone"
+            android:digits="0123456789+"
+            app:met_mask="(###) ### - ####"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.089"
+            app:layout_constraintVertical_bias="0.834"
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Street Address"
+            android:text="Phone Number"
             android:textColor="#ffffff"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.184" />
+            app:layout_constraintVertical_bias="0.768" />
 
         <EditText
-            android:id="@+id/StreetText_input"
+            android:id="@+id/ZipText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
+            android:gravity="center_horizontal"
+            android:maxLength="5"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.248"
-            tools:layout_editor_absoluteX="-16dp" />
+            app:layout_constraintVertical_bias="0.72" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zip Code"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.659" />
+
+
+
+<!--        <EditText-->
+<!--            android:id="@+id/StateText_Input"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="#ffffff"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.607" />-->
+
+        <Spinner
+            android:id="@+id/StateText_Input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.607" />
 
         <TextView
             android:id="@+id/textView6"
@@ -68,22 +133,23 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.046"
+            app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.485" />
+            app:layout_constraintVertical_bias="0.549" />
 
         <EditText
-            android:id="@+id/StateText_Input"
+            android:id="@+id/CityText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
+            android:gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.558" />
+            app:layout_constraintVertical_bias="0.494" />
 
         <TextView
             android:id="@+id/textView8"
@@ -97,45 +163,56 @@
             app:layout_constraintHorizontal_bias="0.042"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.336" />
+            app:layout_constraintVertical_bias="0.438" />
 
         <EditText
-            android:id="@+id/CityText_Input"
+            android:id="@+id/Street_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
+            android:gravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintVertical_bias="0.383"
+            tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zip Code"
+            android:text="Address"
             android:textColor="#ffffff"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.64" />
+            app:layout_constraintVertical_bias="0.332" />
 
         <EditText
-            android:id="@+id/ZipText_Input"
+            android:id="@+id/RestName_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#ffffff"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.719" />
+            app:layout_constraintVertical_bias="0.27"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <!--        <com.seatgeek.placesautocomplete.PlacesAutocompleteTextView-->
+        <!--            android:id="@+id/places_autocomplete"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="#ffffff"-->
+        <!--            android:textColor="@color/red"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.234"-->
+        <!--            app:pacv_googleMapsApiKey="AIzaSyAnuKtCuR8_6WyQ2pNGP_JYnkYSzdF4vgU"-->
+        <!--            tools:layout_editor_absoluteX="16dp" />-->
 
         <Button
             android:id="@+id/nextButton"
@@ -151,7 +228,51 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.87" />
+            app:layout_constraintVertical_bias="0.975" />
+
+        <TextView
+            android:id="@+id/topText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Welcome to SeeFood! Let's get started with some basic details..."
+            android:textColor="#ffffff"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/place_details"-->
+        <!--            android:layout_width="371dp"-->
+        <!--            android:layout_height="258dp"-->
+        <!--            android:text="TextView"-->
+        <!--            android:background="#ffffff"-->
+        <!--            android:textColor="@color/red"-->
+        <!--            android:padding="20dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.653" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/setAddress"-->
+        <!--            style="?android:attr/borderlessButtonStyle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Set Address"-->
+        <!--            android:textColor="#ffffff"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.067"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.307" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
