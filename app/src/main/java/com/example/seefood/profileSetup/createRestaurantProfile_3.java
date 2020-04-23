@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.seefood.R;
+import com.example.seefood.models.RestaurantModel;
 
 
 /**
@@ -47,6 +49,14 @@ public class createRestaurantProfile_3 extends Fragment {
 //    TextView myText6;
 //    TextView myText7;
 
+    /*TEST ONLY*/
+    TextView rmDetails;
+    TextView purl;
+    /*TEST ONLY*/
+
+    Bundle bundle;
+
+RestaurantModel rm = new RestaurantModel();
 
 
     @Override
@@ -85,6 +95,20 @@ public class createRestaurantProfile_3 extends Fragment {
         satButton.setTextColor(Color.RED);
         sunButton.getBackground().setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY);
         sunButton.setTextColor(Color.RED);
+
+        bundle = getArguments();
+
+        rm.setRestName(bundle.getString("name"));
+        rm.setStreetAddress(bundle.getString("address"));
+        rm.setCity(bundle.getString("city"));
+        rm.setState(bundle.getString("state"));
+        rm.setZipCode(bundle.getString("zipCode"));
+        rm.setPhoneNumber(bundle.getString("phone"));
+
+
+
+        //rmDetails.setText(rm.printRest(rm));
+        //purl.setText(url);
 
         monButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")

@@ -13,11 +13,13 @@ public class RestaurantModel {
     public String city;
     public String photoName;
     public String photoURL;
+    private HashMap<String, HashMap<String, OperationsModel>>hOps;
+    public HashMap<String, ArrayList<MealModel>> offerings;
 
     //meal offerings
-    public HashMap<String, ArrayList<MealModel>> offerings;
-//    private ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation;
-    private HashMap<String, HashMap<String, OperationsModel>>hOps;
+//    public HashMap<String, ArrayList<MealModel>> offerings;
+////    private ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation;
+//    private HashMap<String, HashMap<String, OperationsModel>>hOps;
 
     //TODO: Logo and Photo, must be via camera or file explorer in android studio
 

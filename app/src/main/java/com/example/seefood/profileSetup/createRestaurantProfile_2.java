@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.seefood.R;
 import com.example.seefood.models.RestaurantModel;
@@ -65,6 +66,8 @@ public class createRestaurantProfile_2 extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
 
+    Bundle bundle;
+
     RestaurantModel rm = new RestaurantModel();
 
     @Override
@@ -76,7 +79,7 @@ public class createRestaurantProfile_2 extends Fragment {
         addPhoto = view.findViewById(R.id.addRestPhoto);
         restPhoto = view.findViewById(R.id.imageView4);
 
-        Bundle bundle = getArguments();
+        bundle = getArguments();
 
         rm.setRestName(bundle.getString("name"));
         rm.setStreetAddress(bundle.getString("address"));
@@ -94,7 +97,13 @@ public class createRestaurantProfile_2 extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToStep3();
+                //goToStep3();
+                if(selectedImage != null){
+                    uploadPhoto();
+
+                } else {
+                    Toast.makeText(getContext(), "Please select a photo", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -108,7 +117,12 @@ public class createRestaurantProfile_2 extends Fragment {
     }
 
     private void goToStep3() {
-
+        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+        bundle.putString("photoURL", photoURL);
+        Fragment nextStep = new createRestaurantProfile_3();
+        nextStep.setArguments(bundle);
+        ft.replace(R.id.createProf_container, nextStep);
+        ft.commit();
     }
 
     private void profilePhoto() {
@@ -218,6 +232,7 @@ public class createRestaurantProfile_2 extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
                             photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                            goToStep3();
 
                         }
                     })
