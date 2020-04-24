@@ -119,6 +119,9 @@ public class createRestaurantProfile_2 extends Fragment {
     private void goToStep3() {
         final FragmentTransaction ft = getFragmentManager().beginTransaction();
         bundle.putString("photoURL", photoURL);
+        String uid = firebaseAuth.getUid();
+        bundle.putString("photoName", uid);
+        bundle.putString("owner", uid);
         Fragment nextStep = new createRestaurantProfile_3();
         nextStep.setArguments(bundle);
         ft.replace(R.id.createProf_container, nextStep);
