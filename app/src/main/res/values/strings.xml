@@ -27,6 +27,209 @@
     <string name="button_signUpRO">Sign Up RO</string>
     <!-- -->
 
+    <string-array name="hours">
+        <item>12</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+    <string-array name="minutes">
+        <item>00</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+    </string-array>
+
+    <string-array name="dayNight">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
+    <string-array name="states_array">
+        <item>Select State...</item>
+        <item>AL</item>
+        <item>AK</item>
+        <item>AS</item>
+        <item>AZ</item>
+        <item>AR</item>
+        <item>CA</item>
+        <item>CO</item>
+        <item>CT</item>
+        <item>DE</item>
+        <item>DC</item>
+        <item>FL</item>
+        <item>GA</item>
+        <item>GU</item>
+        <item>HI</item>
+        <item>ID</item>
+        <item>IL</item>
+        <item>IN</item>
+        <item>IA</item>
+        <item>KS</item>
+        <item>KY</item>
+        <item>LA</item>
+        <item>ME</item>
+        <item>MD</item>
+        <item>MA</item>
+        <item>MI</item>
+        <item>MN</item>
+        <item>MS</item>
+        <item>MO</item>
+        <item>MT</item>
+        <item>NE</item>
+        <item>NV</item>
+        <item>NH</item>
+        <item>NJ</item>
+        <item>NM</item>
+        <item>NY</item>
+        <item>NC</item>
+        <item>ND</item>
+        <item>MP</item>
+        <item>OH</item>
+        <item>OK</item>
+        <item>OR</item>
+        <item>PA</item>
+        <item>PR</item>
+        <item>RI</item>
+        <item>SC</item>
+        <item>SD</item>
+        <item>TN</item>
+        <item>TX</item>
+        <item>UT</item>
+        <item>VT</item>
+        <item>VA</item>
+        <item>VI</item>
+        <item>WA</item>
+        <item>WV</item>
+        <item>WI</item>
+        <item>WY</item>
+    </string-array>
+
+<!--    <string-array name="states_array">-->
+<!--        <item>Select State...</item>-->
+<!--        <item>Alabama</item>-->
+<!--        <item>Alaska</item>-->
+<!--        <item>American Samoa</item>-->
+<!--        <item>Arizona</item>-->
+<!--        <item>Arkansas</item>-->
+<!--        <item>California</item>-->
+<!--        <item>Colorado</item>-->
+<!--        <item>Connecticut</item>-->
+<!--        <item>Delaware</item>-->
+<!--        <item>District of Columbia</item>-->
+<!--        <item>Florida</item>-->
+<!--        <item>Georgia</item>-->
+<!--        <item>Guam</item>-->
+<!--        <item>Hawaii</item>-->
+<!--        <item>Idaho</item>-->
+<!--        <item>Illinois</item>-->
+<!--        <item>Indiana</item>-->
+<!--        <item>Iowa</item>-->
+<!--        <item>Kansas</item>-->
+<!--        <item>Kentucky</item>-->
+<!--        <item>Louisiana</item>-->
+<!--        <item>Maine</item>-->
+<!--        <item>Maryland</item>-->
+<!--        <item>Massachusetts</item>-->
+<!--        <item>Michigan</item>-->
+<!--        <item>Minnesota</item>-->
+<!--        <item>Mississippi</item>-->
+<!--        <item>Missouri</item>-->
+<!--        <item>Montana</item>-->
+<!--        <item>Nebraska</item>-->
+<!--        <item>Nevada</item>-->
+<!--        <item>New Hampshire</item>-->
+<!--        <item>New Jersey</item>-->
+<!--        <item>New Mexico</item>-->
+<!--        <item>New York</item>-->
+<!--        <item>North Carolina</item>-->
+<!--        <item>North Dakota</item>-->
+<!--        <item>Northern Marianas Islands</item>-->
+<!--        <item>Ohio</item>-->
+<!--        <item>Oklahoma</item>-->
+<!--        <item>Oregon</item>-->
+<!--        <item>Pennsylvania</item>-->
+<!--        <item>Puerto Rico</item>-->
+<!--        <item>Rhode Island</item>-->
+<!--        <item>South Carolina</item>-->
+<!--        <item>South Dakota</item>-->
+<!--        <item>Tennessee</item>-->
+<!--        <item>Texas</item>-->
+<!--        <item>Utah</item>-->
+<!--        <item>Vermont</item>-->
+<!--        <item>Virginia</item>-->
+<!--        <item>Virgin Islands</item>-->
+<!--        <item>Washington</item>-->
+<!--        <item>West Virginia</item>-->
+<!--        <item>Wisconsin</item>-->
+<!--        <item>Wyoming</item>-->
+<!--    </string-array>-->
+
     <string name="owner">owner</string>
     <string name="notOwner">notOwner</string>
 </resources>
