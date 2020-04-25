@@ -557,7 +557,12 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
     }
 
     private void createFinalObject() {
-        rm.setOfferings(new HashMap<String, ArrayList<MealModel>>());
+        HashMap<String, ArrayList<MealModel>> offerings = new HashMap<String, ArrayList<MealModel>>();
+        offerings.put("Breakfast", new ArrayList<MealModel>());
+        offerings.put("Lunch", new ArrayList<MealModel>());
+        offerings.put("Dinner", new ArrayList<MealModel>());
+        offerings.put("Dessert", new ArrayList<MealModel>());
+        rm.setOfferings(offerings);
         rm.sethOps(hoursOperation);
         rm.setOwner(bundle.getString("owner"));
         firebaseAuth = FirebaseAuth.getInstance();

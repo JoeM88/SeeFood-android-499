@@ -1,9 +1,10 @@
 package com.example.seefood.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RestaurantModel {
+public class RestaurantModel implements Serializable {
     public String restName;
     public String owner;
     public String streetAddress;
