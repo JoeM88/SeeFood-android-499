@@ -1,19 +1,20 @@
-package com.example.seefood;
+package com.example.seefood.restaurantList;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
+import com.example.seefood.MainActivity;
+import com.example.seefood.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +52,15 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         super.onCreate(savedInstanceState);
         //String name, String address, int rating, double distance, int numReviews, String category
         lstRestaurant = new ArrayList<>();
-        lstRestaurant.add(new Restaurant("McDonalds", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Burger King", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Pizza Hut", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Carls Jr", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Pizaa factory", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Blaze", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Chipotle", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Deli Delicious", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("Starbucks", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
-        lstRestaurant.add(new Restaurant("ChopStix", "123 Main St.", 3, 21.5, 45, "fastfood", R.drawable.mcdonalds ));
+        lstRestaurant.add(new Restaurant("McDonalds", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.mcdonalds.com/content/dam/uk/logo/logo-80.png" ));
+        lstRestaurant.add(new Restaurant("Burger King", "123 Main St.", 3, 21.5, 45, "fastfood", "https://pbs.twimg.com/profile_images/1229180816435142660/MLoubJPL_400x400.jpg" ));
+        lstRestaurant.add(new Restaurant("Pizza Hut", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/sco/thumb/d/d2/Pizza_Hut_logo.svg/1200px-Pizza_Hut_logo.svg.png" ));
+        lstRestaurant.add(new Restaurant("Carls Jr", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Carls_logo_%281%29.png/245px-Carls_logo_%281%29.png" ));
+        lstRestaurant.add(new Restaurant("Pizaa factory", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/a/a2/Pizza_Factory_logo.png" ));
+        lstRestaurant.add(new Restaurant("Blaze", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.alshaya.com/images/portfolio_logo/english/logo_blazepizza.jpg"));
+        lstRestaurant.add(new Restaurant("Chipotle", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/220px-Chipotle_Mexican_Grill_logo.svg.png" ));
+        lstRestaurant.add(new Restaurant("Starbucks", "123 Main St.", 3, 21.5, 45, "fastfood","https://pbs.twimg.com/profile_images/1109148609218412545/XDVmdQm9_400x400.png" ));
+        lstRestaurant.add(new Restaurant("ChopStix", "123 Main St.", 3, 21.5, 45, "fastfood", "https://cdn.doordash.com/media/restaurant/cover/ChopstixMilwaukee_1820_Milwaukee_WI.png"));
 
     }
 

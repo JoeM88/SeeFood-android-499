@@ -20,18 +20,21 @@
             android:contentDescription="@string/detailsImageDesription" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@color/colorIcons">
+        android:layout_height="wrap_content"
+        android:background="@color/colorIcons"
+        android:padding="8dp">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="8dp"
-            app:civ_border_width="4dp"
-            app:civ_border_color="#FF000000"/>
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="4dp" />
 
         <TextView
             android:id="@+id/Restaurant_Details_Name"
@@ -45,7 +48,7 @@
             android:layout_toRightOf="@+id/profile_image"
             android:text="@string/res_name"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/Restaurant_Details_Category"
@@ -58,7 +61,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="4dp"
             android:text="@string/category_type"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray" />
 
 
     </RelativeLayout>
@@ -66,6 +69,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_color">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/detailsRecyclerView">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
 
     </RelativeLayout>
 
