@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,7 @@ public class createRestaurantProfile_2 extends Fragment {
     private DatabaseReference mDatabaseRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
+    String pathURL;
 
     Bundle bundle;
 
@@ -117,15 +119,56 @@ public class createRestaurantProfile_2 extends Fragment {
     }
 
     private void goToStep3() {
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        bundle.putString("photoURL", photoURL);
-        String uid = firebaseAuth.getUid();
-        bundle.putString("photoName", uid);
-        bundle.putString("owner", uid);
-        Fragment nextStep = new createRestaurantProfile_3();
-        nextStep.setArguments(bundle);
-        ft.replace(R.id.createProf_container, nextStep);
-        ft.commit();
+        //Toast.makeText(getContext(), pathURL, Toast.LENGTH_LONG).show();
+        nextButton.setVisibility(View.GONE);
+        findDownloadURL();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                bundle.putString("photoURL", rm.getPhotoURL());
+                Toast.makeText(getContext(), rm.getPhotoURL(), Toast.LENGTH_LONG).show();
+                String uid = firebaseAuth.getUid();
+                bundle.putString("photoName", uid);
+                bundle.putString("owner", uid);
+                Fragment nextStep = new createRestaurantProfile_3();
+                nextStep.setArguments(bundle);
+                ft.replace(R.id.createProf_container, nextStep);
+                ft.commit();
+            }
+        }, 500);
+//        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        bundle.putString("photoURL", rm.getPhotoURL());
+//        Toast.makeText(getContext(), rm.getPhotoURL(), Toast.LENGTH_LONG).show();
+//        String uid = firebaseAuth.getUid();
+//        bundle.putString("photoName", uid);
+//        bundle.putString("owner", uid);
+//        Fragment nextStep = new createRestaurantProfile_3();
+//        nextStep.setArguments(bundle);
+//        ft.replace(R.id.createProf_container, nextStep);
+//        //ft.commit();
+    }
+
+    private void findDownloadURL() {
+        StorageReference ref = mStorageRef.child(pathURL);
+//        String answer = ref.getDownloadUrl().toString();
+//        Toast.makeText(getContext(), "YOU GOT THIS --> " + answer, Toast.LENGTH_LONG).show();
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String url = uri.toString();
+                //Toast.makeText(getContext(),  url, Toast.LENGTH_LONG).show();
+                //photoURL = url;
+                rm.setPhotoURL(url);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "ERROR!!!!", Toast.LENGTH_LONG).show();
+            }
+        });
+       //return photoURL;
     }
 
     private void profilePhoto() {
@@ -229,12 +272,14 @@ public class createRestaurantProfile_2 extends Fragment {
         final String uid = firebaseAuth.getUid();
         if(selectedImage != null){
             StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
+            //pathURL = fileReference.toString();
+            pathURL = uid + "." + getFileExtension(selectedImage);
             fileReference.putFile(selectedImage)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
-                            photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                            //photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
                             goToStep3();
 
                         }
