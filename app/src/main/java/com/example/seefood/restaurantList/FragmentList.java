@@ -72,20 +72,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-//        lstRestaurant.add(new Restaurant("McDonalds", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.mcdonalds.com/content/dam/uk/logo/logo-80.png" ));
-//        lstRestaurant.add(new Restaurant("Burger King", "123 Main St.", 3, 21.5, 45, "fastfood", "https://pbs.twimg.com/profile_images/1229180816435142660/MLoubJPL_400x400.jpg" ));
-//        lstRestaurant.add(new Restaurant("Pizza Hut", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/sco/thumb/d/d2/Pizza_Hut_logo.svg/1200px-Pizza_Hut_logo.svg.png" ));
-//        lstRestaurant.add(new Restaurant("Carls Jr", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Carls_logo_%281%29.png/245px-Carls_logo_%281%29.png" ));
-//        lstRestaurant.add(new Restaurant("Pizaa factory", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/a/a2/Pizza_Factory_logo.png" ));
-//        lstRestaurant.add(new Restaurant("Blaze", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.alshaya.com/images/portfolio_logo/english/logo_blazepizza.jpg"));
-//        lstRestaurant.add(new Restaurant("Chipotle", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/220px-Chipotle_Mexican_Grill_logo.svg.png" ));
-//        lstRestaurant.add(new Restaurant("Starbucks", "123 Main St.", 3, 21.5, 45, "fastfood","https://pbs.twimg.com/profile_images/1109148609218412545/XDVmdQm9_400x400.png" ));
-//        lstRestaurant.add(new Restaurant("ChopStix", "123 Main St.", 3, 21.5, 45, "fastfood", "https://cdn.doordash.com/media/restaurant/cover/ChopstixMilwaukee_1820_Milwaukee_WI.png"));
-
     }
 
     @Override
