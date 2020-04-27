@@ -53,6 +53,8 @@ public class createCustomerProfileFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private String photoURL;
+
     private ImageView imageView;
     private Uri selectedImage;
     private Bitmap cameraImage;

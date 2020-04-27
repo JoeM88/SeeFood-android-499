@@ -80,6 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(this);
 
 
+
         }
         public void onClick(View view)
         {
