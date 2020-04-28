@@ -25,7 +25,7 @@ public class FoodViewHolder extends ChildViewHolder {
         public void onBind(Food food) {
                 foodName.setText(food.getFoodName());
                 Picasso.get()
-                        .load(food.getPhotoUrl()).into(foodPicture);
+                        .load(food.getPhotoUrl()).fit().centerInside().into(foodPicture);
         }
 
 
