@@ -56,6 +56,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //star view
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
     //firebase
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
     implementation 'com.google.firebase:firebase-database:19.2.1'
