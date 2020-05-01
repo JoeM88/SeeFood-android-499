@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/Android Projects-SeeFood-android-499-app.iml" filepath="$PROJECT_DIR$/app/Android Projects-SeeFood-android-499-app.iml" group="SeeFood/app" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidStudioProjects-SeeFood-android-499-SeeFood.iml" filepath="$PROJECT_DIR$/AndroidStudioProjects-SeeFood-android-499-SeeFood.iml" group="SeeFood" />
+      <module fileurl="file://$PROJECT_DIR$/app/AndroidStudioProjects-SeeFood-android-499-app.iml" filepath="$PROJECT_DIR$/app/AndroidStudioProjects-SeeFood-android-499-app.iml" group="SeeFood/app" />
       <module fileurl="file://$PROJECT_DIR$/app/Desktop-SeeFood-android-499-app.iml" filepath="$PROJECT_DIR$/app/Desktop-SeeFood-android-499-app.iml" group="SeeFood/app" />
       <module fileurl="file://$PROJECT_DIR$/Documents-SeeFood-android-499-SeeFood.iml" filepath="$PROJECT_DIR$/Documents-SeeFood-android-499-SeeFood.iml" group="SeeFood" />
       <module fileurl="file://$PROJECT_DIR$/SeeFood.iml" filepath="$PROJECT_DIR$/SeeFood.iml" group="SeeFood" />

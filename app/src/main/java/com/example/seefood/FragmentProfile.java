@@ -88,7 +88,7 @@ public class FragmentProfile extends Fragment {
                         final FragmentTransaction ft = getFragmentManager().beginTransaction();
                         if(theType.equals("owner")){
                             ft.replace(R.id.container_fragment, new displayRestaurantProfile());
-                            ft.commit();
+                            //ft.commit();
                         } else {
 
                         }
