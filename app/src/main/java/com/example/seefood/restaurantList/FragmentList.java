@@ -15,15 +15,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.seefood.models.RestaurantModel;
-import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -57,7 +54,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         mContext = getContext();
         //String name, String address, int rating, double distance, int numReviews, String category
         assert getArguments() != null;
-        String type = getArguments().getString("type");
+        //String type = getArguments().getString("type");
         assert type != null;
         restaurantNames = new ArrayList<>();
         lstRestaurant = new ArrayList<>();
@@ -117,10 +114,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             lstRestaurant.clear();
         }
 
-        switch (type)
-        {
-            case("All"):
-                db.collection("Restaurants")
+        db.collection("Restaurants")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
@@ -141,52 +135,76 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                         Log.v("----1----", e.getMessage());
                     }
                 });
-            case("favorite"):
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                String userId = firebaseAuth.getUid();
-                DocumentReference docRef = db.collection("Customer").document(userId);
-                readData(new FireStoreCallBack() {
-                    @Override
-                    public void onCallBack(List<String> res) {
-                        restaurantNames = res;
-                    }
-                }, docRef);
 
 
 
-
+//        switch (type)
+//        {
+//            case("All"):
+//                db.collection("Restaurants")
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                for(DocumentSnapshot querySnapshot : task.getResult()){
+//                                    Restaurant res = new Restaurant(querySnapshot.getString("restName") , querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+//                                    lstRestaurant.add(res);
+//                                }
+//                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+//                                myRecyclerView.setAdapter(recycleAdapter);
+//
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+//                        Log.v("----1----", e.getMessage());
+//                    }
+//                });
+//            case("favorite"):
+//                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//                String userId = firebaseAuth.getUid();
+//                DocumentReference docRef = db.collection("Customer").document(userId);
+//                readData(new FireStoreCallBack() {
+//                    @Override
+//                    public void onCallBack(List<String> res) {
+//                        restaurantNames = res;
+//                    }
+//                }, docRef);
+//
+//
+//
+//
         }
 
 
 
     }
-    private void readData(FireStoreCallBack f, DocumentReference docRef){
-        docRef.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
-                        if(task.isSuccessful()){
-                            DocumentSnapshot document = task.getResult();
-
-                            if(document.exists()){
-                                restaurantNames = (List<String>) document.get("favorites");
-                                f.onCallBack(restaurantNames);
-                            }
-                            else {
-                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
-
-                            }
-                        }
-                        else {
-                            Toast.makeText(mContext, "data does not exist",  Toast.LENGTH_SHORT);
-                        }
-
-                    }
-                });
-    }
-    private interface FireStoreCallBack{
-        void onCallBack(List<String> restaurantNames);
-    }
-
-
-}
+//    private void readData(FireStoreCallBack f, DocumentReference docRef){
+//        docRef.get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
+//                        if(task.isSuccessful()){
+//                            DocumentSnapshot document = task.getResult();
+//
+//                            if(document.exists()){
+//                                restaurantNames = (List<String>) document.get("favorites");
+//                                f.onCallBack(restaurantNames);
+//                            }
+//                            else {
+//                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
+//
+//                            }
+//                        }
+//                        else {
+//                            Toast.makeText(mContext, "data does not exist",  Toast.LENGTH_SHORT);
+//                        }
+//
+//                    }
+//                });
+//    }
+//    private interface FireStoreCallBack{
+//        void onCallBack(List<String> restaurantNames);
+//    }
