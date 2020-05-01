@@ -6,15 +6,17 @@ public class MealModel {
     private String photoName;
     private String photoURL;
     private String type;
+    private String description;
 
     public MealModel(){ /*empty constructor*/ }
 
-    public MealModel(String name, String calories, String photoName, String photoURL, String type){
+    public MealModel(String name, String calories, String photoName, String photoURL, String type, String description){
         this.name = name;
         this.calories = calories;
         this.photoName = photoName;
         this.photoURL = photoURL;
         this.type = type;
+        this.description = description;
     }
 
     public String getName() {
@@ -55,5 +57,13 @@ public class MealModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
