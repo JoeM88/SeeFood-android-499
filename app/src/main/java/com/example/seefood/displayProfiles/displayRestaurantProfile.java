@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.editRestaurant.viewRestMenuItemsFragment;
 import com.example.seefood.models.RestaurantModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,6 +51,11 @@ public class displayRestaurantProfile extends Fragment {
     ImageView im;
     Button logoutButton;
 
+    Button breakfastButton;
+    Button lunchButton;
+    Button dinnerButton;
+    Button dessertButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,10 +69,53 @@ public class displayRestaurantProfile extends Fragment {
         im = view.findViewById(R.id.profile_image_rest);
         logoutButton = view.findViewById(R.id.logoutButton);
 
+        breakfastButton = view.findViewById(R.id.dispRest_Breakfast);
+        lunchButton = view.findViewById(R.id.dispRest_Lunch);
+        dinnerButton = view.findViewById(R.id.dispRest_Lunch);
+        dessertButton = view.findViewById(R.id.dispRest_Dessert);
+
         logoutButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 logout(v);
+            }
+        });
+
+        breakfastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle passForward = new Bundle();
+                passForward.putString("viewController", "Breakfast");
+                //passForward.putSerializable("restaurant", dispRest);
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment nextStep = new viewRestMenuItemsFragment();
+                nextStep.setArguments(passForward);
+                ft.replace(R.id.container_fragment, nextStep);
+                ft.commit();
+            }
+        });
+
+        lunchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle passForward = new Bundle();
+                passForward.putString("viewController", "Lunch");
+            }
+        });
+
+        dinnerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle passForward = new Bundle();
+                passForward.putString("viewController", "Dinner");
+            }
+        });
+
+        dessertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle passForward = new Bundle();
+                passForward.putString("viewController", "Dessert");
             }
         });
 
