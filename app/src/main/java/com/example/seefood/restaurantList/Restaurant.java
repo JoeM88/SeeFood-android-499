@@ -1,11 +1,7 @@
-package com.example.seefood;
+package com.example.seefood.restaurantList;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.IOException;
-import java.io.ObjectStreamException;
-import java.io.Serializable;
 
 public class Restaurant implements Parcelable {
     private String name;
@@ -14,17 +10,17 @@ public class Restaurant implements Parcelable {
     private double distance;
     private int numReviews;
     private String category;
-    private int image;
+    private String imageUrl;
 
 
-    public Restaurant(String name, String address, int rating, double distance, int numReviews, String category, int image) {
+    public Restaurant(String name, String address, int rating, double distance, int numReviews, String category, String image) {
         this.name = name;
         this.address = address;
         this.rating = rating;
         this.distance = distance;
         this.numReviews = numReviews;
         this.category = category;
-        this.image = image;
+        this.imageUrl = image;
     }
 
 
@@ -35,7 +31,7 @@ public class Restaurant implements Parcelable {
         distance = in.readDouble();
         numReviews = in.readInt();
         category = in.readString();
-        image = in.readInt();
+        imageUrl = in.readString();
     }
 
     public static final Creator<Restaurant> CREATOR = new Creator<Restaurant>() {
@@ -74,8 +70,8 @@ public class Restaurant implements Parcelable {
         return category;
     }
 
-    public int getImage() {
-        return image;
+    public String getImage() {
+        return imageUrl;
     }
 
     public void setName(String name) {
@@ -102,8 +98,8 @@ public class Restaurant implements Parcelable {
         this.category = category;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
@@ -118,7 +114,7 @@ public class Restaurant implements Parcelable {
         parcel.writeString(category);
         parcel.writeInt(rating);
         parcel.writeInt(numReviews);
-        parcel.writeInt(image);
+        parcel.writeString(imageUrl);
 
     }
 }
