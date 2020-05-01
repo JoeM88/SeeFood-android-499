@@ -27,6 +27,13 @@
     <string name="button_signUpRO">Sign Up RO</string>
     <!-- -->
 
+    <string-array name="mealType">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Dessert</item>
+    </string-array>
+
     <string-array name="hours">
         <item>12</item>
         <item>1</item>
