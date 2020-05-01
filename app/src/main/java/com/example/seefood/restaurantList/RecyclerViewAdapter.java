@@ -1,4 +1,4 @@
-package com.example.seefood;
+package com.example.seefood.restaurantList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.seefood.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,7 +48,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.address.setText(mData.get(position).getAddress());
         holder.category.setText(mData.get(position).getCategory());
         holder.rate.setRating(mData.get(position).getRating());
-        holder.img.setImageResource(mData.get(position).getImage());
+        Picasso.get()
+                .load(mData.get(position).getImage()).into(holder.img);
+
     }
 
     @Override
@@ -73,6 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.onRestaurantListener = onRestaurantListener;
 
             itemView.setOnClickListener(this);
+
 
 
         }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:layout_margin="8dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/list_meal_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_margin="16dp"
+        android:gravity="center_vertical"
+        android:text="Breakfast">
+
+    </TextView>
+
+    <ImageView
+        android:id="@+id/list_item_meal_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginRight="@dimen/horizontal_margin"
+        android:src="@drawable/ic_arrow_down" />
+
+</FrameLayout>

@@ -22,24 +22,18 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@color/colorIcons">
-<!--        <de.hdodenhof.circleimageview.CircleImageView-->
-<!--            android:id="@+id/profile_image"-->
-<!--            android:layout_width="96dp"-->
-<!--            android:layout_height="96dp"-->
-<!--            android:src="@mipmap/ic_launcher_round"-->
-<!--            android:padding="8dp"-->
-<!--            app:civ_border_width="4dp"-->
-<!--            app:civ_border_color="#FF000000"/>-->
+        android:layout_height="wrap_content"
+        android:background="@color/colorIcons"
+        android:padding="8dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="8dp"
-            />
+            android:src="@mipmap/ic_launcher_round"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="4dp" />
 
         <TextView
             android:id="@+id/Restaurant_Details_Name"
@@ -53,7 +47,7 @@
             android:layout_toRightOf="@+id/profile_image"
             android:text="@string/res_name"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/Restaurant_Details_Category"
@@ -66,7 +60,17 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="4dp"
             android:text="@string/category_type"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="31dp"
+            android:layout_marginRight="31dp"
+            app:mfb_favorite_image="@drawable/ic_star_black_24dp"
+            app:mfb_not_favorite_image="@drawable/ic_star_border_black_24dp" />
 
 
     </RelativeLayout>
@@ -74,6 +78,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_color">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detailsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
 
     </RelativeLayout>
 
