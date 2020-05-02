@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,6 +68,8 @@ public class createRestaurantProfile_2 extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     String pathURL;
+
+    Spinner typeSpinner;
 
     Bundle bundle;
 

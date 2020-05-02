@@ -1,10 +1,12 @@
 package com.example.seefood.models;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RestaurantModel implements Serializable {
+public class RestaurantModel implements Parcelable {
     public String restName;
     public String owner;
     public String streetAddress;
@@ -146,6 +148,17 @@ public class RestaurantModel implements Serializable {
 
     public String printRest(RestaurantModel rm){
         return "Name --> " + rm.getRestName() + "\n" + "Address --> " + rm.getStreetAddress() + "\n" + "City --> " + rm.getCity() + "\n"
-                + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n";
+                + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n" +
+                rm.getOfferings() + "\n";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

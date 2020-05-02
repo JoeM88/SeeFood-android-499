@@ -28,6 +28,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  *
@@ -71,7 +73,7 @@ public class displayRestaurantProfile extends Fragment {
 
         breakfastButton = view.findViewById(R.id.dispRest_Breakfast);
         lunchButton = view.findViewById(R.id.dispRest_Lunch);
-        dinnerButton = view.findViewById(R.id.dispRest_Lunch);
+        dinnerButton = view.findViewById(R.id.dispRest_Dinner);
         dessertButton = view.findViewById(R.id.dispRest_Dessert);
 
         logoutButton.setOnClickListener(new View.OnClickListener(){
@@ -87,6 +89,7 @@ public class displayRestaurantProfile extends Fragment {
                 Bundle passForward = new Bundle();
                 passForward.putString("viewController", "Breakfast");
                 //passForward.putSerializable("restaurant", dispRest);
+                passForward.putParcelable("restaurant", dispRest);
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new viewRestMenuItemsFragment();
                 nextStep.setArguments(passForward);
@@ -137,6 +140,44 @@ public class displayRestaurantProfile extends Fragment {
                         dispRest = document.toObject(RestaurantModel.class);
                         showRestName.setText(dispRest.getRestName());
                         showRestAddress.setText(dispRest.getStreetAddress() + "\n" + dispRest.getCity() + ", " + dispRest.getState() + " " + dispRest.getZipCode() + "\n" + dispRest.getPhoneNumber());
+
+                        if(Objects.requireNonNull(dispRest.getOfferings().get("Breakfast")).size() != 0){
+                            int items = dispRest.getOfferings().get("Breakfast").size();
+                            String newText = breakfastButton.getText() + " (" + Integer.toString(items) + " items)";
+                            breakfastButton.setText(newText);
+                        } else {
+                            String newText = breakfastButton.getText() + " (0 Items)";
+                            breakfastButton.setText(newText);
+                        }
+
+                        if(Objects.requireNonNull(dispRest.getOfferings().get("Lunch")).size() != 0){
+                            int items = dispRest.getOfferings().get("Lunch").size();
+                            String newText = lunchButton.getText() + " (" + Integer.toString(items) + " items)";
+                            lunchButton.setText(newText);
+                        } else {
+                            String newText = lunchButton.getText() + " (0 Items)";
+                            lunchButton.setText(newText);
+                        }
+
+                        if(Objects.requireNonNull(dispRest.getOfferings().get("Dinner")).size() != 0){
+                            int items = dispRest.getOfferings().get("Dinner").size();
+                            String newText = dinnerButton.getText() + " (" + Integer.toString(items) + " items)";
+                            dinnerButton.setText(newText);
+                        } else {
+                            String newText = dinnerButton.getText() + " (0 Items)";
+                            dinnerButton.setText(newText);
+                        }
+
+                        if(Objects.requireNonNull(dispRest.getOfferings().get("Dessert")).size() != 0){
+                            int items = dispRest.getOfferings().get("Dessert").size();
+                            String newText = dessertButton.getText() + " (" + Integer.toString(items) + " items)";
+                            dessertButton.setText(newText);
+                        } else {
+                            String newText = dessertButton.getText() + " (0 Items)";
+                            dessertButton.setText(newText);
+                        }
+
+
 
                         Glide.with(getContext())
                                 .load(dispRest.getPhotoURL())
