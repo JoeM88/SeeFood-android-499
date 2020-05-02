@@ -1,5 +1,8 @@
 package com.example.seefood.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +49,22 @@ public class RestaurantModel implements Serializable {
         this.photoName = photoName;
         this.photoURL = photoURL;
     }
+
+//    protected RestaurantModel(Parcel in) {
+//        restName = in.readString();
+//        owner = in.readString();
+//        streetAddress = in.readString();
+//        state = in.readString();
+//        zipCode = in.readString();
+//        city = in.readString();
+//        phoneNumber = in.readString();
+//        offerings = in.readHashMap(OperationsModel.class.getClassLoader());
+//        hOps = in.readHashMap()
+//
+//        this.hOps = hOps;
+//        this.photoName = photoName;
+//        this.photoURL = photoURL;
+//    }
 
     public String getRestName() {
         return restName;
@@ -148,4 +167,5 @@ public class RestaurantModel implements Serializable {
         return "Name --> " + rm.getRestName() + "\n" + "Address --> " + rm.getStreetAddress() + "\n" + "City --> " + rm.getCity() + "\n"
                 + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n";
     }
+
 }

@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
     private View v;
     private RecyclerView myRecyclerView;
-    List<Restaurant> lstRestaurant;
+    List<RestaurantModel> lstRestaurant;
     List<String> restaurantNames;
     private RecyclerViewAdapter recycleAdapter;
     private Context mContext;
@@ -56,9 +57,9 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         v = inflater.inflate(R.layout.list_fragment, container, false);
         mContext = getContext();
         //String name, String address, int rating, double distance, int numReviews, String category
-        assert getArguments() != null;
-        String type = getArguments().getString("type");
-        assert type != null;
+//        assert getArguments() != null;
+//        String type = getArguments().getString("type");
+//        assert type != null;
         restaurantNames = new ArrayList<>();
         lstRestaurant = new ArrayList<>();
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
@@ -66,7 +67,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         db = FirebaseFirestore.getInstance();
-        loadDataFromFirebase(type);
+        loadDataFromFirebase("");
 
 
         return v;
@@ -102,7 +103,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (mContext instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity)mContext;
             Bundle b = new Bundle();
-            b.putParcelable("RestaurantObject", lstRestaurant.get(position));
+            b.putSerializable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
             mainActivity.switchContent(R.id.container_fragment, frag);
@@ -117,16 +118,18 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             lstRestaurant.clear();
         }
 
-        switch (type)
-        {
-            case("All"):
+//        switch (type)
+//        {
+//            case("All"):
                 db.collection("Restaurants")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 for(DocumentSnapshot querySnapshot : task.getResult()){
-                                    Restaurant res = new Restaurant(querySnapshot.getString("restName") , querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                    //String restName, String owner, String streetAddress, String state, String zipCode,
+                                    //                           String city, String phoneNumber, HashMap<String, ArrayList<MealModel>> offerings,
+                                    RestaurantModel res =  querySnapshot.toObject(RestaurantModel.class);
                                     lstRestaurant.add(res);
                                 }
                                 recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
@@ -141,16 +144,16 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                         Log.v("----1----", e.getMessage());
                     }
                 });
-            case("favorite"):
-                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-                String userId = firebaseAuth.getUid();
-                DocumentReference docRef = db.collection("Customer").document(userId);
-                readData(new FireStoreCallBack() {
-                    @Override
-                    public void onCallBack(List<String> res) {
-                        restaurantNames = res;
-                    }
-                }, docRef);
+//            case("favorite"):
+//                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+//                String userId = firebaseAuth.getUid();
+//                DocumentReference docRef = db.collection("Customer").document(userId);
+//                readData(new FireStoreCallBack() {
+//                    @Override
+//                    public void onCallBack(List<String> res) {
+//                        restaurantNames = res;
+//                    }
+//                }, docRef);
 
 
 
@@ -160,33 +163,33 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
 
     }
-    private void readData(FireStoreCallBack f, DocumentReference docRef){
-        docRef.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
-                        if(task.isSuccessful()){
-                            DocumentSnapshot document = task.getResult();
+//    private void readData(FireStoreCallBack f, DocumentReference docRef){
+//        docRef.get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
+//                        if(task.isSuccessful()){
+//                            DocumentSnapshot document = task.getResult();
+//
+//                            if(document.exists()){
+//                                restaurantNames = (List<String>) document.get("favorites");
+//                                f.onCallBack(restaurantNames);
+//                            }
+//                            else {
+//                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
+//
+//                            }
+//                        }
+//                        else {
+//                            Toast.makeText(mContext, "data does not exist",  Toast.LENGTH_SHORT);
+//                        }
+//
+//                    }
+//                });
+//    }
+//    private interface FireStoreCallBack{
+//        void onCallBack(List<String> restaurantNames);
+//    }
 
-                            if(document.exists()){
-                                restaurantNames = (List<String>) document.get("favorites");
-                                f.onCallBack(restaurantNames);
-                            }
-                            else {
-                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
 
-                            }
-                        }
-                        else {
-                            Toast.makeText(mContext, "data does not exist",  Toast.LENGTH_SHORT);
-                        }
-
-                    }
-                });
-    }
-    private interface FireStoreCallBack{
-        void onCallBack(List<String> restaurantNames);
-    }
-
-
-}
+//}

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
-import com.example.seefood.restaurantList.Restaurant;
+import com.example.seefood.models.RestaurantModel;
+import com.squareup.picasso.Picasso;
 
+
+import java.io.Serializable;
 import java.util.List;
 import static com.example.seefood.restaurantDetails.MealsData.makeMeals;
 
@@ -22,8 +26,10 @@ public class FragmentRestaurantDetails extends Fragment {
 
     private View v;
     private TextView detailsName;
-    private TextView detailsCategory;
+    private TextView detailsAddress;
+    private ImageView detailsCirclePhotoURL;
     private RecyclerView myRecyclerView;
+
     private List<Meals> lstMeals;
     private MealsAdapter mealRecycleAdapter;
 
@@ -35,12 +41,17 @@ public class FragmentRestaurantDetails extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.restaurant_details_fragment, container, false);
         assert getArguments() != null;
-        Restaurant obj = getArguments().getParcelable("RestaurantObject");
+        Serializable obj = getArguments().getSerializable("RestaurantObject");
+
+        RestaurantModel restaurant = (RestaurantModel) obj;
         assert obj != null;
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
-        detailsName.setText(obj.getName());
-        detailsCategory = v.findViewById(R.id.Restaurant_Details_Category);
-        detailsCategory.setText(obj.getCategory());
+        detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
+        detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
+        detailsName.setText(restaurant.getRestName());
+        detailsAddress.setText(restaurant.getStreetAddress());
+        Picasso.get()
+                .load(restaurant.getPhotoURL()).into(detailsCirclePhotoURL);
 
         mealRecycleAdapter = new MealsAdapter(lstMeals);
         myRecyclerView = v.findViewById(R.id.detailsRecyclerView);

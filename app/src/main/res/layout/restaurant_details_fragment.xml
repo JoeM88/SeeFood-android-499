@@ -27,7 +27,7 @@
         android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/Restaurant_Details_Circle_Photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
@@ -43,14 +43,14 @@
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/profile_image"
-            android:layout_toRightOf="@+id/profile_image"
+            android:layout_toEndOf="@+id/Restaurant_Details_Circle_Photo"
+            android:layout_toRightOf="@+id/Restaurant_Details_Circle_Photo"
             android:text="@string/res_name"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/Restaurant_Details_Category"
+            android:id="@+id/Restaurant_Details_Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Restaurant_Details_Name"
