@@ -28,8 +28,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Restaurant_Details_Circle_Photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
             android:padding="8dp"
             android:src="@mipmap/ic_launcher_round"
             app:civ_border_color="#FF000000"
