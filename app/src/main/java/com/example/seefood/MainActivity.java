@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         botNav.setOnNavigationItemSelectedListener(navListener);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        ft.replace(R.id.container_fragment, new FragmentList());
+        //ft.replace(R.id.container_fragment, new FragmentList());
+        ft.replace(R.id.container_fragment, new FragmentHome());
         ft.commit();
 
 
