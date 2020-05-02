@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.seefood.R;
-import com.example.seefood.Restaurant;
+import com.example.seefood.restaurantList.Restaurant;
 
 
 /**

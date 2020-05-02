@@ -44,22 +44,13 @@ public class LoginFragmentUser extends Fragment {
         email = view.findViewById(R.id.userTextInputLayoutEmailLogin);
 
         button = view.findViewById(R.id.buttonLoginUser);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                confirmInput(view);
-            }
-        });
+        button.setOnClickListener(view1 -> confirmInput(view1));
 
         switchButton = view.findViewById(R.id.switchToSignUp);
-        switchButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v){
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_container, new SignUpFragmentUser());
-                ft.commit();
-            }
+        switchButton.setOnClickListener(v -> {
+            final FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, new SignUpFragmentUser());
+            ft.commit();
         });
 
         return view;
@@ -67,21 +58,18 @@ public class LoginFragmentUser extends Fragment {
 
     public void confirmInput(View v){
         firebaseAuth.signInWithEmailAndPassword(email.getEditText().getText().toString(), password.getEditText().getText().toString())
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            // Sign in success, Maybe? update UI with the signed in user's info
-                            // Not currently in use
-                            // FirebaseUser user = firebaseAuth.getCurrentUser();
+                .addOnCompleteListener(getActivity(), task -> {
+                    if(task.isSuccessful()) {
+                        // Sign in success, Maybe? update UI with the signed in user's info
+                        // Not currently in use
+                        // FirebaseUser user = firebaseAuth.getCurrentUser();
 
-                            Toast.makeText(getActivity(), "Logged in Successfully", Toast.LENGTH_SHORT);
-                            startActivity(new Intent(getActivity(), MainActivity.class));
-                        }
-                        else {
-                            // If sign in fails, display a message to the user
-                            Toast.makeText(getActivity(), "Authentication failed", Toast.LENGTH_SHORT);
-                        }
+                        Toast.makeText(getActivity(), "Logged in Successfully", Toast.LENGTH_SHORT);
+                        startActivity(new Intent(getActivity(), MainActivity.class));
+                    }
+                    else {
+                        // If sign in fails, display a message to the user
+                        Toast.makeText(getActivity(), "Authentication failed", Toast.LENGTH_SHORT);
                     }
                 });
     }

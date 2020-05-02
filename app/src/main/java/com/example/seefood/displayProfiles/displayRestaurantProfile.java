@@ -129,19 +129,16 @@ public class displayRestaurantProfile extends Fragment {
     private void displayTestData() {
         CollectionReference rp = db.collection("Restaurants");
         Query queryRestaurant = rp.whereEqualTo("owner", uid);
-        queryRestaurant.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
-                        dispRest = document.toObject(RestaurantModel.class);
-                        showRestName.setText(dispRest.getRestName());
-                        showRestAddress.setText(dispRest.getStreetAddress() + "\n" + dispRest.getCity() + ", " + dispRest.getState() + " " + dispRest.getZipCode() + "\n" + dispRest.getPhoneNumber());
+        queryRestaurant.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for(QueryDocumentSnapshot document : task.getResult()){
+                    dispRest = document.toObject(RestaurantModel.class);
+                    showRestName.setText(dispRest.getRestName());
+                    showRestAddress.setText(dispRest.getStreetAddress() + "\n" + dispRest.getCity() + ", " + dispRest.getState() + " " + dispRest.getZipCode() + "\n" + dispRest.getPhoneNumber());
 
-                        Glide.with(getContext())
-                                .load(dispRest.getPhotoURL())
-                                .into(im);
-                    }
+                    Glide.with(getContext())
+                            .load(dispRest.getPhotoURL())
+                            .into(im);
                 }
             }
         });

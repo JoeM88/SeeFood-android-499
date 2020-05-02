@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.seefood.favorites.FragmentFavorite;
 import com.example.seefood.restaurantList.FragmentList;
+import com.example.seefood.restaurantList.Restaurant;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.ButterKnife;
@@ -28,38 +30,36 @@ public class MainActivity extends AppCompatActivity {
 
         ft.replace(R.id.container_fragment, new FragmentList());
         ft.commit();
-
-
-
     }
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
 
-            switch (item.getItemId()) {
-                case R.id.nav_home:
-                    selectedFragment = new FragmentList();
-                    break;
-                case R.id.nav_favorite:
-                    selectedFragment = new FragmentFavorite();
-                    break;
-                case R.id.nav_profile:
-                    selectedFragment = new FragmentProfile();
-                    break;
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
+        Fragment selectedFragment = null;
 
-            }
-            assert selectedFragment != null;
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                selectedFragment = new FragmentList();
+                break;
+            case R.id.nav_favorite:
+                selectedFragment = new FragmentFavorite();
+                break;
+            case R.id.nav_profile:
+                selectedFragment = new FragmentProfile();
+                break;
 
-            return true;
         }
+        assert selectedFragment != null;
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
+
+        return true;
     };
 
     public void switchContent(int id, Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(id, fragment, fragment.toString());
-        ft.addToBackStack(null);
-        ft.commit();
+        ft.addToBackStack(null).commit();
+    }
+
+    public void addToFavorites(Restaurant restaurant) {
+
     }
 }

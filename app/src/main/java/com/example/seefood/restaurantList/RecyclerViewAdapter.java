@@ -2,6 +2,7 @@ package com.example.seefood.restaurantList;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
@@ -31,13 +33,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.restaurant_item, parent, false);
         return new MyViewHolder(v, mOnRestaurantListener);
-
 
     }
 
@@ -57,6 +59,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mData.size();
     }
+
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView restaurantName;
@@ -78,18 +82,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.onRestaurantListener = onRestaurantListener;
 
             itemView.setOnClickListener(this);
-
-
-
         }
-        public void onClick(View view)
-        {
+        public void onClick(View view) {
              onRestaurantListener.onRestaurantClick(getAdapterPosition());
         }
-
     }
     public interface OnRestaurantListener{
         void onRestaurantClick(int position);
     }
-
 }

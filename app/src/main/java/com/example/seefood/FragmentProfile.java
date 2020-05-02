@@ -73,33 +73,30 @@ public class FragmentProfile extends Fragment {
     public void checkProfExists(){
         CollectionReference cf = db.collection("userType");
         Query query = cf.whereEqualTo("user_id", uid);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
-                        //Toast.makeText(getActivity(), "User is typed", Toast.LENGTH_LONG).show();
-                        Map<String, Object> data = document.getData();
-                        String theID = (String) data.get("user_id");
-                        String theType = (String) data.get("userType");
+        //call something else if you don't get directed into the proper profile fragment
+        query.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for(QueryDocumentSnapshot document : task.getResult()){
+                    //Toast.makeText(getActivity(), "User is typed", Toast.LENGTH_LONG).show();
+                    Map<String, Object> data = document.getData();
+                    String theID = (String) data.get("user_id");
+                    String theType = (String) data.get("userType");
 //                        tv.append(theID);
 //                        tv.append(theType);
 //                        tv.append(data.toString());
-                        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        if(theType.equals("owner")){
-                            ft.replace(R.id.container_fragment, new displayRestaurantProfile());
-                            ft.commit();
-                        } else {
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    if(theType.equals("owner")){
+                        ft.replace(R.id.container_fragment, new displayRestaurantProfile());
+                        ft.commit();
+                    } else {
 
-                        }
                     }
-                } else {
-                    //Toast.makeText(getActivity(), "User is NOT typed", Toast.LENGTH_LONG).show();
-                    createProfile(null);
-
                 }
+            } else {
+                //Toast.makeText(getActivity(), "User is NOT typed", Toast.LENGTH_LONG).show();
+                createProfile(null);
+
             }
-            //call something else if you don't get directed into the proper profile fragment
         });
 //        CollectionReference rp = db.collection("Restaurants");
 //        Query queryRestaurant = rp.whereEqualTo("owner", uid);
