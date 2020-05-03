@@ -11,6 +11,7 @@ import com.example.seefood.R;
 import com.example.seefood.models.RestaurantModel;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  */

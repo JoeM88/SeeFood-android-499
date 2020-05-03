@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         botNav.setOnNavigationItemSelectedListener(navListener);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        ft.replace(R.id.container_fragment, new FragmentList());
+        //ft.replace(R.id.container_fragment, new FragmentList());
+        ft.replace(R.id.container_fragment, new FragmentHome());
         ft.commit();
 
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    selectedFragment = new FragmentList();
+                    selectedFragment = new FragmentHome();
                     break;
                 case R.id.nav_favorite:
                     selectedFragment = new FragmentFavorite();

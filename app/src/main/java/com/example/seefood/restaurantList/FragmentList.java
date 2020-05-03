@@ -16,15 +16,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.seefood.models.RestaurantModel;
-import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -59,10 +56,13 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.list_fragment, container, false);
         mContext = getContext();
-//        assert getArguments() != null;
-//        String type = getArguments().getString("type");
-//        assert type != null;
-        restaurantIds = new ArrayList<>();
+
+        assert getArguments() != null;
+        //String type = getArguments().getString("type");
+        type = getArguments().getString("type");
+        assert type != null;
+        restaurantNames = new ArrayList<>();
+
         lstRestaurant = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         userId = firebaseAuth.getUid();
@@ -83,20 +83,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-//        lstRestaurant.add(new Restaurant("McDonalds", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.mcdonalds.com/content/dam/uk/logo/logo-80.png" ));
-//        lstRestaurant.add(new Restaurant("Burger King", "123 Main St.", 3, 21.5, 45, "fastfood", "https://pbs.twimg.com/profile_images/1229180816435142660/MLoubJPL_400x400.jpg" ));
-//        lstRestaurant.add(new Restaurant("Pizza Hut", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/sco/thumb/d/d2/Pizza_Hut_logo.svg/1200px-Pizza_Hut_logo.svg.png" ));
-//        lstRestaurant.add(new Restaurant("Carls Jr", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Carls_logo_%281%29.png/245px-Carls_logo_%281%29.png" ));
-//        lstRestaurant.add(new Restaurant("Pizaa factory", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/a/a2/Pizza_Factory_logo.png" ));
-//        lstRestaurant.add(new Restaurant("Blaze", "123 Main St.", 3, 21.5, 45, "fastfood", "https://www.alshaya.com/images/portfolio_logo/english/logo_blazepizza.jpg"));
-//        lstRestaurant.add(new Restaurant("Chipotle", "123 Main St.", 3, 21.5, 45, "fastfood", "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Chipotle_Mexican_Grill_logo.svg/220px-Chipotle_Mexican_Grill_logo.svg.png" ));
-//        lstRestaurant.add(new Restaurant("Starbucks", "123 Main St.", 3, 21.5, 45, "fastfood","https://pbs.twimg.com/profile_images/1109148609218412545/XDVmdQm9_400x400.png" ));
-//        lstRestaurant.add(new Restaurant("ChopStix", "123 Main St.", 3, 21.5, 45, "fastfood", "https://cdn.doordash.com/media/restaurant/cover/ChopstixMilwaukee_1820_Milwaukee_WI.png"));
-
     }
 
     ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -143,18 +129,19 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             lstRestaurant.clear();
         }
 
-//        switch (type)
-//        {
-//            case("All"):
+
+        if(type.charAt(0) < 58 && type.charAt(0) > 47){
+            if(type.length() > 5){
                 db.collection("Restaurants")
+                        .whereEqualTo("streetAddress", type)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for(DocumentSnapshot querySnapshot : task.getResult()){
-                                    //String restName, String owner, String streetAddress, String state, String zipCode,
-                                    //                           String city, String phoneNumber, HashMap<String, ArrayList<MealModel>> offerings,
+
+                                for (DocumentSnapshot querySnapshot : task.getResult()) {
                                     RestaurantModel res =  querySnapshot.toObject(RestaurantModel.class);
+
                                     lstRestaurant.add(res);
                                 }
                                 recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
@@ -170,49 +157,56 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                     }
                 });
 
-//            case("favorite"):
-//                readData(new FireStoreCallBack() {
-//                    @Override
-//                    public void onCallBack(List<String> res) {
-//                        restaurantIds = res;
-//                    }
-//                });
+            }
+            else {
+                db.collection("Restaurants")
+                        .whereEqualTo("zipCode", type)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                    Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                    lstRestaurant.add(res);
+                                }
+                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+                                myRecyclerView.setAdapter(recycleAdapter);
 
 
-
-
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                        Log.v("----1----", e.getMessage());
+                    }
+                });
+            }
         }
+        else {
+            db.collection("Restaurants")
+                    .whereEqualTo("city", type)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                lstRestaurant.add(res);
+                            }
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+                            myRecyclerView.setAdapter(recycleAdapter);
 
 
-
-//    }
-//    private void readData(FireStoreCallBack f){
-//        db.collection("Customer").document(userId).get()
-//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
-//                        if(task.isSuccessful()){
-//                            DocumentSnapshot document = task.getResult();
-//
-//                            if(document.exists()){
-//                                restaurantIds = (List<String>) document.get("favorites");
-//                                f.onCallBack(restaurantIds);
-//                            }
-//                            else {
-//                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
-//
-//                            }
-//                        }
-//                        else {
-//                            Toast.makeText(mContext, "data does not exist",  Toast.LENGTH_SHORT);
-//                        }
-//
-//                    }
-//                });
-//    }
-//    private interface FireStoreCallBack{
-//        void onCallBack(List<String> restaurantNames);
-//    }
-
-
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                    Log.v("----1----", e.getMessage());
+                }
+            });
+        }
+      
 }
+
