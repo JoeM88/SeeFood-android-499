@@ -55,6 +55,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         //String name, String address, int rating, double distance, int numReviews, String category
         assert getArguments() != null;
         //String type = getArguments().getString("type");
+        type = getArguments().getString("type");
         assert type != null;
         restaurantNames = new ArrayList<>();
         lstRestaurant = new ArrayList<>();
@@ -100,13 +101,16 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             lstRestaurant.clear();
         }
 
-        db.collection("Restaurants")
+        if(type.charAt(0) < 58 && type.charAt(0) > 47){
+            if(type.length() > 5){
+                db.collection("Restaurants")
+                        .whereEqualTo("streetAddress", type)
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for(DocumentSnapshot querySnapshot : task.getResult()){
-                                    Restaurant res = new Restaurant(querySnapshot.getString("restName") , querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                    Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
                                     lstRestaurant.add(res);
                                 }
                                 recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
@@ -121,6 +125,78 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                         Log.v("----1----", e.getMessage());
                     }
                 });
+            }
+            else {
+                db.collection("Restaurants")
+                        .whereEqualTo("zipCode", type)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                    Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                    lstRestaurant.add(res);
+                                }
+                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+                                myRecyclerView.setAdapter(recycleAdapter);
+
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                        Log.v("----1----", e.getMessage());
+                    }
+                });
+            }
+        }
+        else {
+            db.collection("Restaurants")
+                    .whereEqualTo("city", type)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                lstRestaurant.add(res);
+                            }
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+                            myRecyclerView.setAdapter(recycleAdapter);
+
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                    Log.v("----1----", e.getMessage());
+                }
+            });
+        }
+
+//        db.collection("Restaurants")
+//                        .get()
+//                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                for(DocumentSnapshot querySnapshot : task.getResult()){
+//                                    Restaurant res = new Restaurant(querySnapshot.getString("restName") , querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+//                                    lstRestaurant.add(res);
+//                                }
+//                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
+//                                myRecyclerView.setAdapter(recycleAdapter);
+//
+//
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+//                        Log.v("----1----", e.getMessage());
+//                    }
+//                });
 
 
 

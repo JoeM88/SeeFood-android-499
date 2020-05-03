@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".FragmentHome">
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/search_input"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="25dp"
-        android:hint="Search"/>
+        android:hint="City/Zip Code" />
 
     <ImageButton
         android:id="@+id/search_button"

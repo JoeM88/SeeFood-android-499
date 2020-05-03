@@ -53,6 +53,20 @@
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/passwordInfoRequirement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/passwordInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userTextInputLayoutPassword" />
+
     <Button
         android:id="@+id/buttonCreateAccUser"
         style="?android:attr/borderlessButtonStyle"

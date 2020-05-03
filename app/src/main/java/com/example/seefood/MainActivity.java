@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.nav_home:
-                    selectedFragment = new FragmentList();
+                    selectedFragment = new FragmentHome();
                     break;
                 case R.id.nav_favorite:
                     selectedFragment = new FragmentFavorite();
