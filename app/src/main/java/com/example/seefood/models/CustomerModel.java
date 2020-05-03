@@ -1,9 +1,13 @@
 package com.example.seefood.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class CustomerModel {
+public class CustomerModel implements Parcelable {
     private String diplayName;
+    private String displayID;
     private String photoName;
     private String photoUrl;
     private ArrayList<String> favorites;
@@ -58,5 +62,23 @@ public class CustomerModel {
 
     public void setRecentPlaces(ArrayList<String> recentPlaces) {
         this.recentPlaces = recentPlaces;
+    }
+
+    public String getDisplayID() {
+        return displayID;
+    }
+
+    public void setDisplayID(String displayID) {
+        this.displayID = displayID;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

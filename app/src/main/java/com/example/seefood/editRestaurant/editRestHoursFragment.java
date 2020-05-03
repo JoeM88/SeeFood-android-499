@@ -17,9 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.seefood.R;
-import com.example.seefood.models.RestaurantModel;
-
-
 import com.example.seefood.displayProfiles.displayRestaurantProfile;
 import com.example.seefood.models.OperationsModel;
 import com.example.seefood.models.RestaurantModel;
@@ -100,7 +97,7 @@ public class editRestHoursFragment extends Fragment implements AdapterView.OnIte
         // Required empty public constructor
     }
 
-//    RestaurantModel dispRest;
+    //RestaurantModel dispRest;
 
 
     @Override
