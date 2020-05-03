@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.models.RestaurantModel;
 import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener{
+public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener {
 
 
     private View v;
@@ -46,8 +48,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     String userId;
 
 
-
-    public FragmentList(){
+    public FragmentList() {
 
     }
 
@@ -58,10 +59,9 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         mContext = getContext();
 
         assert getArguments() != null;
-        //String type = getArguments().getString("type");
         type = getArguments().getString("type");
         assert type != null;
-        restaurantNames = new ArrayList<>();
+        //restaurantNames = new ArrayList<>();
 
         lstRestaurant = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -74,7 +74,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         itemTouchHelper.attachToRecyclerView(myRecyclerView);
 
         db = FirebaseFirestore.getInstance();
-        loadDataFromFirebase("");
+        loadDataFromFirebase(type);
 
 
         return v;
@@ -98,7 +98,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         }
     };
 
-    public void onLongItemClick(final int position){
+    public void onLongItemClick(final int position) {
 
     }
 
@@ -106,13 +106,12 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     @Override
     public void onRestaurantClick(int position) {
 
-        if(mContext == null)
-        {
+        if (mContext == null) {
             return;
         }
 
         if (mContext instanceof MainActivity) {
-            MainActivity mainActivity = (MainActivity)mContext;
+            MainActivity mainActivity = (MainActivity) mContext;
             Bundle b = new Bundle();
             b.putSerializable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
@@ -121,17 +120,16 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         }
 
 
-
     }
-    public void loadDataFromFirebase(String type){
-        if(lstRestaurant.size() > 0)
-        {
+
+    public void loadDataFromFirebase(String type) {
+        if (lstRestaurant.size() > 0) {
             lstRestaurant.clear();
         }
 
 
-        if(type.charAt(0) < 58 && type.charAt(0) > 47){
-            if(type.length() > 5){
+        if (type.charAt(0) < 58 && type.charAt(0) > 47) {
+            if (type.length() > 5) {
                 db.collection("Restaurants")
                         .whereEqualTo("streetAddress", type)
                         .get()
@@ -140,7 +138,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                                 for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    RestaurantModel res =  querySnapshot.toObject(RestaurantModel.class);
+                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
 
                                     lstRestaurant.add(res);
                                 }
@@ -157,8 +155,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                     }
                 });
 
-            }
-            else {
+            } else {
                 db.collection("Restaurants")
                         .whereEqualTo("zipCode", type)
                         .get()
@@ -166,7 +163,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
                                     lstRestaurant.add(res);
                                 }
                                 recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
@@ -182,8 +179,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                     }
                 });
             }
-        }
-        else {
+        } else {
             db.collection("Restaurants")
                     .whereEqualTo("city", type)
                     .get()
@@ -191,7 +187,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                Restaurant res = new Restaurant(querySnapshot.getString("restName"), querySnapshot.getString("streetAddress"), 3, 21.5, 45, "fastfood", querySnapshot.getString("photoURL"));
+                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
                                 lstRestaurant.add(res);
                             }
                             recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
@@ -207,6 +203,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                 }
             });
         }
-      
+
+    }
 }
 

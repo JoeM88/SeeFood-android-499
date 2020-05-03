@@ -83,9 +83,8 @@
             app:icon_type="Star"
             app:is_enabled="true"
             app:like_drawable="@drawable/star_on"
-            app:liked="false"
-            app:unlike_drawable="@drawable/ic_star_border_black_24dp" />
-
+            app:liked="false"/>
+<!--            app:unlike_drawable="@drawable/ic_star_border_black_24dp" />-->
 
     </RelativeLayout>
     <RelativeLayout
