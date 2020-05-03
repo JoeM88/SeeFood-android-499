@@ -97,10 +97,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         }
     };
 
-    public void onLongItemClick(final int position) {
-
-    }
-
 
     @Override
     public void onRestaurantClick(int position) {
