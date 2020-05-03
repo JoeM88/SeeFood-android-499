@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class RestaurantModel implements Parcelable {
     public String restName;
@@ -49,21 +50,29 @@ public class RestaurantModel implements Parcelable {
         this.photoURL = photoURL;
     }
 
-//    protected RestaurantModel(Parcel in) {
-//        restName = in.readString();
-//        owner = in.readString();
-//        streetAddress = in.readString();
-//        state = in.readString();
-//        zipCode = in.readString();
-//        city = in.readString();
-//        phoneNumber = in.readString();
-//        offerings = in.readHashMap(OperationsModel.class.getClassLoader());
-//        hOps = in.readHashMap()
-//
-//        this.hOps = hOps;
-//        this.photoName = photoName;
-//        this.photoURL = photoURL;
-//    }
+    protected RestaurantModel(Parcel in) {
+        restName = in.readString();
+        owner = in.readString();
+        streetAddress = in.readString();
+        state = in.readString();
+        zipCode = in.readString();
+        city = in.readString();
+        phoneNumber = in.readString();
+        in.readMap(offerings, HashMap.class.getClassLoader());
+        in.readMap(hOps, List.class.getClassLoader());
+    }
+
+    public static final Creator<RestaurantModel> CREATOR = new Creator<RestaurantModel>() {
+        @Override
+        public RestaurantModel createFromParcel(Parcel in) {
+            return new RestaurantModel(in);
+        }
+
+        @Override
+        public RestaurantModel[] newArray(int size) {
+            return new RestaurantModel[size];
+        }
+    };
 
     public String getRestName() {
         return restName;
@@ -175,6 +184,17 @@ public class RestaurantModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(restName);
+        dest.writeString(owner);
+        dest.writeString(streetAddress);
+        dest.writeString(state);
+        dest.writeString(zipCode);
+        dest.writeString(phoneNumber);
+        dest.writeString(photoName);
+        dest.writeString(city);
+        dest.writeString(photoURL);
+        dest.writeMap(hOps);
+        dest.writeMap(offerings);
 
     }
 
