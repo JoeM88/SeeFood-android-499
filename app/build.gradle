@@ -57,7 +57,7 @@ dependencies {
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //star view
-    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     //firebase
     implementation 'com.google.firebase:firebase-firestore:21.4.1'
     implementation 'com.google.firebase:firebase-database:19.2.1'
@@ -73,6 +73,10 @@ dependencies {
     // https://firebase.google.com/docs/android/setup#available-libraries
     // For developers using AndroidX in their applications
 
+    // google places api
+    implementation 'com.google.android.libraries.places:places:2.2.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation 'com.jakewharton:butterknife:10.2.1'
@@ -86,8 +90,6 @@ dependencies {
 
 // For developers using the Android Support Library
     implementation 'com.seatgeek:placesautocomplete:0.3-SNAPSHOT'
-
-    implementation 'com.google.android.libraries.places:places:1.0.0'
 
     implementation 'com.github.santalu:mask-edittext:1.1.1'
 

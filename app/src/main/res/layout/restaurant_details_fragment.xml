@@ -22,14 +22,14 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:background="@color/colorIcons"
         android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/Restaurant_Details_Circle_Photo"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
             android:padding="8dp"
             android:src="@mipmap/ic_launcher_round"
             app:civ_border_color="#FF000000"
@@ -40,17 +40,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/profile_image"
-            android:layout_toRightOf="@+id/profile_image"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/Restaurant_Details_Circle_Photo"
+            android:layout_toRightOf="@+id/Restaurant_Details_Circle_Photo"
             android:text="@string/res_name"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/Restaurant_Details_Category"
+            android:id="@+id/Restaurant_Details_Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Restaurant_Details_Name"
@@ -62,16 +62,29 @@
             android:text="@string/category_type"
             android:textColor="@android:color/darker_gray" />
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <com.like.LikeButton
+            android:id="@+id/star_button"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="31dp"
-            android:layout_marginRight="31dp"
-            app:mfb_favorite_image="@drawable/ic_star_black_24dp"
-            app:mfb_not_favorite_image="@drawable/ic_star_border_black_24dp" />
-
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            app:anim_scale_factor="5"
+            app:circle_end_color="@color/colorAccent"
+            app:circle_start_color="@color/colorPrimary"
+            app:dots_primary_color="@color/colorAccent"
+            app:dots_secondary_color="@color/colorPrimary"
+            app:icon_size="10dp"
+            app:icon_type="Star"
+            app:is_enabled="true"
+            app:like_drawable="@drawable/star_on"
+            app:liked="false"/>
+<!--            app:unlike_drawable="@drawable/ic_star_border_black_24dp" />-->
 
     </RelativeLayout>
     <RelativeLayout

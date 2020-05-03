@@ -5,15 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
+import com.example.seefood.models.OperationsModel;
+import com.example.seefood.models.RestaurantModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -21,9 +25,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
     private OnRestaurantListener mOnRestaurantListener;
-    private List<Restaurant> mData;
+    private List<RestaurantModel> mData;
 
-    public RecyclerViewAdapter(Context myContext, List<Restaurant> mData, OnRestaurantListener mOnRestaurantListener) {
+    public RecyclerViewAdapter(Context myContext, List<RestaurantModel> mData, OnRestaurantListener mOnRestaurantListener) {
         this.mContext = myContext;
         this.mData = mData;
         this.mOnRestaurantListener = mOnRestaurantListener;
@@ -43,13 +47,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.restaurantName.setText(mData.get(position).getName());
-        holder.distance.setText(String.format("%s mi", mData.get(position).getDistance()));
-        holder.address.setText(mData.get(position).getAddress());
-        holder.category.setText(mData.get(position).getCategory());
-        holder.rate.setRating(mData.get(position).getRating());
+        holder.restName.setText(mData.get(position).getRestName());
+        holder.streetAddress.setText(mData.get(position).getStreetAddress());
         Picasso.get()
-                .load(mData.get(position).getImage()).into(holder.img);
+                .load(mData.get(position).getPhotoURL()).into(holder.photoURL);
 
     }
 
@@ -59,22 +60,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView restaurantName;
-        private TextView address;
-        private TextView distance;
-        private TextView category;
-        private RatingBar rate;
-        private ImageView img;
+        public TextView restName;
+        public TextView streetAddress;
+        public ImageView photoURL;
         OnRestaurantListener onRestaurantListener;
 
         public MyViewHolder(@NonNull View itemView, OnRestaurantListener onRestaurantListener) {
             super(itemView);
-            restaurantName = itemView.findViewById(R.id.restaurant_name);
-            address = itemView.findViewById(R.id.address);
-            distance = itemView.findViewById(R.id.distance);
-            category = itemView.findViewById(R.id.category);
-            rate = itemView.findViewById(R.id.ratingBar);
-            img = itemView.findViewById(R.id.restaurant_img);
+            restName = itemView.findViewById(R.id.restaurant_name);
+            streetAddress = itemView.findViewById(R.id.address);
+            photoURL = itemView.findViewById(R.id.restaurant_img);
             this.onRestaurantListener = onRestaurantListener;
 
             itemView.setOnClickListener(this);
