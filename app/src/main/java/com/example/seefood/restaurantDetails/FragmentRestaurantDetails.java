@@ -1,6 +1,7 @@
 package com.example.seefood.restaurantDetails;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,8 @@ import com.example.seefood.models.RestaurantModel;
 import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
-
-import java.io.Serializable;
 import java.util.List;
+
 import static com.example.seefood.restaurantDetails.MealsData.makeMeals;
 
 public class FragmentRestaurantDetails extends Fragment {
@@ -44,7 +44,7 @@ public class FragmentRestaurantDetails extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.restaurant_details_fragment, container, false);
         assert getArguments() != null;
-        Serializable obj = getArguments().getSerializable("RestaurantObject");
+        Parcelable obj = getArguments().getParcelable("RestaurantObject");
 
         RestaurantModel restaurant = (RestaurantModel) obj;
         assert obj != null;

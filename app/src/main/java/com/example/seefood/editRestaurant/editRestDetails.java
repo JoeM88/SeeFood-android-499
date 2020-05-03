@@ -117,6 +117,42 @@ public class editRestDetails extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
+        address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                address.setText(null);
+                return false;
+            }
+        });
+
+//        city = view.findViewById(R.id.CityText_Input);
+//        zipCode = view.findViewById(R.id.ZipText_Input);
+//        phone = view.findViewById(R.id.PhoneText_Input);
+
+        city.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                city.setText(null);
+                return false;
+            }
+        });
+
+        zipCode.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                zipCode.setText(null);
+                return false;
+            }
+        });
+
+        phone.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                phone.setText(null);
+                return false;
+            }
+        });
+
         return view;
     }
 

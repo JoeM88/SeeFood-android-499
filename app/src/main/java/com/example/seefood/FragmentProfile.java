@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.seefood.displayProfiles.dispCustomerProfile;
 import com.example.seefood.displayProfiles.displayRestaurantProfile;
 import com.example.seefood.login.SignUpActivity;
 import com.example.seefood.profileSetup.createProfileActivity;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class FragmentProfile extends Fragment {
 
@@ -77,7 +79,7 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-                    for(QueryDocumentSnapshot document : task.getResult()){
+                    for(QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())){
                         //Toast.makeText(getActivity(), "User is typed", Toast.LENGTH_LONG).show();
                         Map<String, Object> data = document.getData();
                         String theID = (String) data.get("user_id");
@@ -90,7 +92,8 @@ public class FragmentProfile extends Fragment {
                             ft.replace(R.id.container_fragment, new displayRestaurantProfile());
                             ft.commit();
                         } else {
-
+                            ft.replace(R.id.container_fragment, new dispCustomerProfile());
+                            ft.commit();
                         }
                     }
                 } else {

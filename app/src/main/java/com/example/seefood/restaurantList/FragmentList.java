@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +112,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (mContext instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) mContext;
             Bundle b = new Bundle();
-            b.putSerializable("RestaurantObject", lstRestaurant.get(position));
+            b.putParcelable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
             mainActivity.switchContent(R.id.container_fragment, frag);
