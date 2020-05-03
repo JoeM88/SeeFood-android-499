@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
 import com.example.seefood.models.RestaurantModel;
+import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
 
@@ -28,7 +29,9 @@ public class FragmentRestaurantDetails extends Fragment {
     private TextView detailsName;
     private TextView detailsAddress;
     private ImageView detailsCirclePhotoURL;
+
     private RecyclerView myRecyclerView;
+    private LikeButton starButton;
 
     private List<Meals> lstMeals;
     private MealsAdapter mealRecycleAdapter;
@@ -48,6 +51,8 @@ public class FragmentRestaurantDetails extends Fragment {
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
+//        detailsFavorites = v.findViewById(R.id.favorite_icon_button);
+
         detailsName.setText(restaurant.getRestName());
         detailsAddress.setText(restaurant.getStreetAddress());
         Picasso.get()

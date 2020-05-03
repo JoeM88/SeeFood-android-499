@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,11 +40,13 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     private View v;
     private RecyclerView myRecyclerView;
     List<RestaurantModel> lstRestaurant;
-    List<String> restaurantNames;
+    List<String> restaurantIds;
     private RecyclerViewAdapter recycleAdapter;
     private Context mContext;
     private FirebaseFirestore db;
     private String type;
+    FirebaseAuth firebaseAuth;
+    String userId;
 
 
 
@@ -56,15 +59,19 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.list_fragment, container, false);
         mContext = getContext();
-        //String name, String address, int rating, double distance, int numReviews, String category
 //        assert getArguments() != null;
 //        String type = getArguments().getString("type");
 //        assert type != null;
-        restaurantNames = new ArrayList<>();
+        restaurantIds = new ArrayList<>();
         lstRestaurant = new ArrayList<>();
+        firebaseAuth = FirebaseAuth.getInstance();
+        userId = firebaseAuth.getUid();
+
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(myRecyclerView);
 
         db = FirebaseFirestore.getInstance();
         loadDataFromFirebase("");
@@ -91,6 +98,24 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 //        lstRestaurant.add(new Restaurant("ChopStix", "123 Main St.", 3, 21.5, 45, "fastfood", "https://cdn.doordash.com/media/restaurant/cover/ChopstixMilwaukee_1820_Milwaukee_WI.png"));
 
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            Toast.makeText(mContext, "Swiped worked", Toast.LENGTH_SHORT);
+        }
+    };
+
+    public void onLongItemClick(final int position){
+
+    }
+
 
     @Override
     public void onRestaurantClick(int position) {
@@ -144,16 +169,14 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                         Log.v("----1----", e.getMessage());
                     }
                 });
+
 //            case("favorite"):
-//                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-//                String userId = firebaseAuth.getUid();
-//                DocumentReference docRef = db.collection("Customer").document(userId);
 //                readData(new FireStoreCallBack() {
 //                    @Override
 //                    public void onCallBack(List<String> res) {
-//                        restaurantNames = res;
+//                        restaurantIds = res;
 //                    }
-//                }, docRef);
+//                });
 
 
 
@@ -162,9 +185,9 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
 
 
-    }
-//    private void readData(FireStoreCallBack f, DocumentReference docRef){
-//        docRef.get()
+//    }
+//    private void readData(FireStoreCallBack f){
+//        db.collection("Customer").document(userId).get()
 //                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 //                    @Override
 //                    public void onComplete(@NonNull Task<DocumentSnapshot> task){
@@ -172,8 +195,8 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 //                            DocumentSnapshot document = task.getResult();
 //
 //                            if(document.exists()){
-//                                restaurantNames = (List<String>) document.get("favorites");
-//                                f.onCallBack(restaurantNames);
+//                                restaurantIds = (List<String>) document.get("favorites");
+//                                f.onCallBack(restaurantIds);
 //                            }
 //                            else {
 //                                Toast.makeText(mContext, "problem retrieving data", Toast.LENGTH_SHORT);
@@ -192,4 +215,4 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 //    }
 
 
-//}
+}
