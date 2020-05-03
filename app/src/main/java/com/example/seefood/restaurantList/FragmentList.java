@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,22 +19,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.models.CustomerModel;
 import com.example.seefood.models.RestaurantModel;
 import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener {
+
+public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener, RecyclerViewAdapter.OnRestaurantLikeListener {
 
 
     private View v;
@@ -46,6 +54,8 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     private String type;
     FirebaseAuth firebaseAuth;
     String userId;
+    DocumentReference docRef;
+    CustomerModel mCustomer;
 
 
     public FragmentList() {
@@ -58,6 +68,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         v = inflater.inflate(R.layout.list_fragment, container, false);
         mContext = getContext();
 
+
         assert getArguments() != null;
         type = getArguments().getString("type");
         assert type != null;
@@ -67,11 +78,10 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         firebaseAuth = FirebaseAuth.getInstance();
         userId = firebaseAuth.getUid();
 
+
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(myRecyclerView);
 
         db = FirebaseFirestore.getInstance();
         loadDataFromFirebase(type);
@@ -84,20 +94,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int position = viewHolder.getAdapterPosition();
-            Toast.makeText(mContext, "Swiped worked", Toast.LENGTH_SHORT);
-        }
-    };
-
 
     @Override
     public void onRestaurantClick(int position) {
@@ -114,9 +110,8 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             frag.setArguments(b);
             mainActivity.switchContent(R.id.container_fragment, frag);
         }
-
-
     }
+
 
     public void loadDataFromFirebase(String type) {
         if (lstRestaurant.size() > 0) {
@@ -129,77 +124,65 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                 db.collection("Restaurants")
                         .whereEqualTo("streetAddress", type)
                         .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        .addOnCompleteListener(task -> {
 
-                                for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
 
-                                    lstRestaurant.add(res);
-                                }
-                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                                myRecyclerView.setAdapter(recycleAdapter);
-
-
+                                lstRestaurant.add(res);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                        Log.v("----1----", e.getMessage());
-                    }
-                });
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                            myRecyclerView.setAdapter(recycleAdapter);
+
+
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            Log.v("----1----", e.getMessage());
+                        });
 
             } else {
                 db.collection("Restaurants")
                         .whereEqualTo("zipCode", type)
                         .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
-                                    lstRestaurant.add(res);
-                                }
-                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                                myRecyclerView.setAdapter(recycleAdapter);
-
-
+                        .addOnCompleteListener(task -> {
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                                lstRestaurant.add(res);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                        Log.v("----1----", e.getMessage());
-                    }
-                });
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                            myRecyclerView.setAdapter(recycleAdapter);
+
+
+                        }).addOnFailureListener(e -> {
+                            Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            Log.v("----1----", e.getMessage());
+                        });
             }
         } else {
             db.collection("Restaurants")
                     .whereEqualTo("city", type)
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
-                                lstRestaurant.add(res);
-                            }
-                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                            myRecyclerView.setAdapter(recycleAdapter);
-
-
+                    .addOnCompleteListener(task -> {
+                        for (DocumentSnapshot querySnapshot : task.getResult()) {
+                            RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                            lstRestaurant.add(res);
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                    Log.v("----1----", e.getMessage());
-                }
-            });
+                        recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                        myRecyclerView.setAdapter(recycleAdapter);
+
+
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                        Log.v("----1----", e.getMessage());
+                    });
         }
 
+    }
+
+    @Override
+    public void onRestaurantLikeClicked(int position, ImageView img) {
+        img.setImageResource(R.drawable.heart_on);
+        Log.v("pressed", "like button pressed");
     }
 }
 
