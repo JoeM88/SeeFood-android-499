@@ -1,8 +1,11 @@
 package com.example.seefood.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 
-public class MealModel {
+public class MealModel implements Parcelable {
     private String name;
     private String calories;
     private String photoName;
@@ -22,6 +25,28 @@ public class MealModel {
         this.description = description;
         this.allergies = allergies;
     }
+
+    protected MealModel(Parcel in) {
+        name = in.readString();
+        calories = in.readString();
+        photoName = in.readString();
+        photoURL = in.readString();
+        type = in.readString();
+        description = in.readString();
+        in.readMap(allergies, HashMap.class.getClassLoader());
+    }
+
+    public static final Creator<MealModel> CREATOR = new Creator<MealModel>() {
+        @Override
+        public MealModel createFromParcel(Parcel in) {
+            return new MealModel(in);
+        }
+
+        @Override
+        public MealModel[] newArray(int size) {
+            return new MealModel[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -77,5 +102,21 @@ public class MealModel {
 
     public void setAllergies(HashMap<String, Boolean> allergies) {
         this.allergies = allergies;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(calories);
+        parcel.writeString(photoName);
+        parcel.writeString(photoURL);
+        parcel.writeString(type);
+        parcel.writeString(description);
+        parcel.writeMap(allergies);
     }
 }

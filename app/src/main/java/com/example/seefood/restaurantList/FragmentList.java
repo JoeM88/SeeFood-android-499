@@ -113,7 +113,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (mContext instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) mContext;
             Bundle b = new Bundle();
-            b.putSerializable("RestaurantObject", lstRestaurant.get(position));
+            b.putParcelable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
             mainActivity.switchContent(R.id.container_fragment, frag);

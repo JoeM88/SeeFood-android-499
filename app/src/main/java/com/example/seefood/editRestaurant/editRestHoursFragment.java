@@ -100,7 +100,7 @@ public class editRestHoursFragment extends Fragment implements AdapterView.OnIte
         // Required empty public constructor
     }
 
-    RestaurantModel dispRest;
+//    RestaurantModel dispRest;
 
 
     @Override

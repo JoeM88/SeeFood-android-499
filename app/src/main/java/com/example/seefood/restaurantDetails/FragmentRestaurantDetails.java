@@ -44,19 +44,19 @@ public class FragmentRestaurantDetails extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.restaurant_details_fragment, container, false);
         assert getArguments() != null;
-        Serializable obj = getArguments().getSerializable("RestaurantObject");
+        RestaurantModel obj = getArguments().getParcelable("RestaurantObject");
+        System.out.println(obj.gethOps().toString());
 
-        RestaurantModel restaurant = (RestaurantModel) obj;
         assert obj != null;
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
 //        detailsFavorites = v.findViewById(R.id.favorite_icon_button);
 
-        detailsName.setText(restaurant.getRestName());
-        detailsAddress.setText(restaurant.getStreetAddress());
+        detailsName.setText(obj.getRestName());
+        detailsAddress.setText(obj.getStreetAddress());
         Picasso.get()
-                .load(restaurant.getPhotoURL()).into(detailsCirclePhotoURL);
+                .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
 
         mealRecycleAdapter = new MealsAdapter(lstMeals);
         myRecyclerView = v.findViewById(R.id.detailsRecyclerView);
