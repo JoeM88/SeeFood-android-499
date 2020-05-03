@@ -45,18 +45,18 @@ public class viewRestMenuItemsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_view_rest_menu_items, container, false);
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
-        tv = v.findViewById(R.id.showDetails);
+        //tv = v.findViewById(R.id.showDetails);
         newItem = v.findViewById(R.id.newItem);
 
         bundle = getArguments();
         assert bundle != null;
         dispRest = bundle.getParcelable("restaurant");
-        tv.setText(dispRest.printRest(dispRest));
+        //tv.setText(dispRest.printRest(dispRest));
         //tv.append(dispRest.getOfferings().get("Breakfast").toString());
 //        ArrayList<MealModel> templist = new ArrayList<MealModel>();
 //        templist = dispRest.getOfferings().get("Breakfast");
 //        tv.append(templist.toString());
-        tv.append(dispRest.getOfferings().get("Breakfast").get(0).getName());
+        //tv.append(dispRest.getOfferings().get("Breakfast").get(0).getName());
 
         /*passForward.putString("viewController", "Breakfast");
                 passForward.putSerializable("restaurant", dispRest);*/

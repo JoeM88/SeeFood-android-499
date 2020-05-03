@@ -1,5 +1,7 @@
 package com.example.seefood.models;
 
+import java.util.HashMap;
+
 public class MealModel {
     private String name;
     private String calories;
@@ -7,16 +9,18 @@ public class MealModel {
     private String photoURL;
     private String type;
     private String description;
+    private HashMap<String, Boolean> allergies;
 
     public MealModel(){ /*empty constructor*/ }
 
-    public MealModel(String name, String calories, String photoName, String photoURL, String type, String description){
+    public MealModel(String name, String calories, String photoName, String photoURL, String type, String description, HashMap<String, Boolean> allergies){
         this.name = name;
         this.calories = calories;
         this.photoName = photoName;
         this.photoURL = photoURL;
         this.type = type;
         this.description = description;
+        this.allergies = allergies;
     }
 
     public String getName() {
@@ -67,4 +71,11 @@ public class MealModel {
         this.description = description;
     }
 
+    public HashMap<String, Boolean> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(HashMap<String, Boolean> allergies) {
+        this.allergies = allergies;
+    }
 }

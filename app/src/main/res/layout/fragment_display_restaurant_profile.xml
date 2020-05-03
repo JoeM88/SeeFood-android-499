@@ -138,7 +138,7 @@
             app:layout_constraintVertical_bias="0.323" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/editRestDetails"
             android:layout_width="49dp"
             android:layout_height="28dp"
             android:background="#9e0b0f"
@@ -152,7 +152,22 @@
             app:layout_constraintVertical_bias="0.257" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/editRestPhoto"
+            android:layout_width="109dp"
+            android:layout_height="34dp"
+            android:background="#9e0b0f"
+            android:text="Change Photo"
+            android:textColor="#ffffff"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.261" />
+
+        <Button
+            android:id="@+id/editHours"
             android:layout_width="49dp"
             android:layout_height="28dp"
             android:background="#9e0b0f"
@@ -178,7 +193,7 @@
             app:layout_constraintVertical_bias="0.604" />
 
         <TextView
-            android:id="@+id/textView21"
+            android:id="@+id/hoursOperationText"
             android:layout_width="361dp"
             android:layout_height="208dp"
             android:text="TextView"

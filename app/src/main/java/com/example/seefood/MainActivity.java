@@ -1,5 +1,6 @@
 package com.example.seefood;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -62,4 +63,11 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null);
         ft.commit();
     }
+
+        @SuppressLint("MissingSuperCall")
+        @Override
+        public void onBackPressed() {
+
+        }
+
 }

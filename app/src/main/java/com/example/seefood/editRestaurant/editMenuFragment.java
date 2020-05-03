@@ -18,6 +18,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -45,6 +46,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -80,6 +82,15 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
     EditText description;
     String setDateTime;
 
+    CheckBox dairybox;
+    CheckBox eggbox;
+    CheckBox fishbox;
+    CheckBox shellbox;
+    CheckBox treebox;
+    CheckBox wheatbox;
+    CheckBox soybox;
+    CheckBox peanutbox;
+
 
     MealModel myMeal = new MealModel();
 
@@ -92,6 +103,8 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     String pathURL;
+
+    HashMap<String, Boolean> allergies = new HashMap<String, Boolean>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,9 +121,28 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
         mealTypeSpinner.setAdapter(mealAdapter);
         mealTypeSpinner.setOnItemSelectedListener(this);
 
+        allergies.put("Dairy", false);
+        allergies.put("Eggs", false);
+        allergies.put("Fish", false);
+        allergies.put("Shellfish", false);
+        allergies.put("Tree Nuts", false);
+        allergies.put("Wheat", false);
+        allergies.put("Soy", false);
+        allergies.put("Peanuts", false);
+
         foodName = view.findViewById(R.id.foodNameField);
         calories = view.findViewById(R.id.calorieField);
         description = view.findViewById(R.id.mealDescription);
+
+        dairybox = view.findViewById(R.id.dairyBox);
+        eggbox = view.findViewById(R.id.eggBox);
+        fishbox = view.findViewById(R.id.fishBox);
+        shellbox = view.findViewById(R.id.shellfishBox);
+        treebox = view.findViewById(R.id.treenutsBox);
+        wheatbox = view.findViewById(R.id.wheatBox);
+        soybox = view.findViewById(R.id.soyBox);
+        peanutbox = view.findViewById(R.id.peanutBox);
+
 
         bundle = getArguments();
         assert bundle != null;
@@ -207,7 +239,7 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
                     break;
                 case 1:
                     checkLocationRequest();
-                    Toast.makeText(getActivity(), "Reached CASE 1", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "Reached CASE 1", Toast.LENGTH_LONG).show();
                     if (resultCode == RESULT_OK && data != null) {
                         selectedImage =  data.getData();
                         restPhoto.setImageURI(selectedImage);
@@ -340,6 +372,7 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void injectData(){
+        myMeal.setAllergies(allergies);
         findDownloadURL();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -363,6 +396,55 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
                 myMeal.setCalories(calories.getText().toString());
                 myMeal.setDescription(description.getText().toString());
                 myMeal.setType(whereMeal);
+
+                if(dairybox.isChecked()){
+                    allergies.put("Dairy", true);
+                } else {
+                    allergies.put("Dairy", false);
+                }
+
+                if(eggbox.isChecked()){
+                    allergies.put("Eggs", true);
+                } else {
+                    allergies.put("Eggs", false);
+                }
+
+                if(fishbox.isChecked()){
+                    allergies.put("Fish", true);
+                } else {
+                    allergies.put("Fish", false);
+                }
+
+                if(shellbox.isChecked()){
+                    allergies.put("Shellfish", true);
+                } else {
+                    allergies.put("Shellfish", false);
+                }
+
+                if(treebox.isChecked()){
+                    allergies.put("Tree Nuts", true);
+                } else {
+                    allergies.put("Tree Nuts", false);
+                }
+
+                if(wheatbox.isChecked()){
+                    allergies.put("Wheat", true);
+                } else {
+                    allergies.put("Wheat", false);
+                }
+
+                if(soybox.isChecked()){
+                    allergies.put("Soy", true);
+                } else {
+                    allergies.put("Soy", false);
+                }
+
+                if(peanutbox.isChecked()){
+                    allergies.put("Peanuts", true);
+                } else {
+                    allergies.put("Peanuts", false);
+                }
+
                 uploadPhoto();
             } else {
                 Toast.makeText(getContext(), "Error: Form not complete", Toast.LENGTH_SHORT).show();
