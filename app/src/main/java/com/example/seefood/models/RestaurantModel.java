@@ -20,10 +20,6 @@ public class RestaurantModel implements Parcelable {
     private HashMap<String, HashMap<String, OperationsModel>>hOps;
     public HashMap<String, ArrayList<MealModel>> offerings;
 
-    //meal offerings
-//    public HashMap<String, ArrayList<MealModel>> offerings;
-////    private ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation;
-//    private HashMap<String, HashMap<String, OperationsModel>>hOps;
 
     //TODO: Logo and Photo, must be via camera or file explorer in android studio
 
@@ -44,7 +40,6 @@ public class RestaurantModel implements Parcelable {
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.offerings = offerings;
-//        this.hoursOperation = hoursOperation;
         this.hOps = hOps;
         this.photoName = photoName;
         this.photoURL = photoURL;

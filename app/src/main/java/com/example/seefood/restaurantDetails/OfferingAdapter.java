@@ -5,14 +5,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
 import com.thoughtbot.expandablerecyclerview.ExpandableRecyclerViewAdapter;
 import com.thoughtbot.expandablerecyclerview.models.ExpandableGroup;
 import java.util.List;
 
-public class MealsAdapter extends ExpandableRecyclerViewAdapter<MealsViewHolder, FoodViewHolder> {
+public class OfferingAdapter extends ExpandableRecyclerViewAdapter<MealsViewHolder, FoodViewHolder> {
 
 
-    public MealsAdapter(List<? extends ExpandableGroup> groups){
+    public OfferingAdapter(List<? extends ExpandableGroup> groups){
         super(groups);
     }
     @Override
@@ -32,8 +33,8 @@ public class MealsAdapter extends ExpandableRecyclerViewAdapter<MealsViewHolder,
     @Override
     public void onBindChildViewHolder(FoodViewHolder holder, int flatPosition, ExpandableGroup group,
                                       int childIndex) {
-        final Food food = ((Meals)group).getItems().get(childIndex);
-        holder.onBind(food);
+        final MealModel meal = ((Offering)group).getItems().get(childIndex);
+        holder.onBind(meal);
     }
 
     @Override

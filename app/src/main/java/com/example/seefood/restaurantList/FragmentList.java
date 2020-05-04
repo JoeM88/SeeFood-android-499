@@ -69,8 +69,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(myRecyclerView);
+
 
         db = FirebaseFirestore.getInstance();
         loadDataFromFirebase(type);
@@ -84,22 +83,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         super.onCreate(savedInstanceState);
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int position = viewHolder.getAdapterPosition();
-            Toast.makeText(mContext, "Swiped worked", Toast.LENGTH_SHORT);
-        }
-    };
-
-    public void onLongItemClick(final int position) {
-
-    }
 
 
     @Override

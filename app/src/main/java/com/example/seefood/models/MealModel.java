@@ -104,6 +104,13 @@ public class MealModel implements Parcelable {
         this.allergies = allergies;
     }
 
+    public String toString(){
+        return "Meal Name: " + name + " calories: " + calories + " photo name: "
+                + photoName + " photo URL: " + photoURL + " type: " + type + " description: "
+                + description + " allergies: " + allergies;
+
+    }
+
     @Override
     public int describeContents() {
         return 0;

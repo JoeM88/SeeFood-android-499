@@ -25,6 +25,27 @@ public class CustomerModel implements Parcelable {
         this.recentPlaces = recent;
     }
 
+    protected CustomerModel(Parcel in) {
+        diplayName = in.readString();
+        displayID = in.readString();
+        photoName = in.readString();
+        photoUrl = in.readString();
+        favorites = in.createStringArrayList();
+        recentPlaces = in.createStringArrayList();
+    }
+
+    public static final Creator<CustomerModel> CREATOR = new Creator<CustomerModel>() {
+        @Override
+        public CustomerModel createFromParcel(Parcel in) {
+            return new CustomerModel(in);
+        }
+
+        @Override
+        public CustomerModel[] newArray(int size) {
+            return new CustomerModel[size];
+        }
+    };
+
     public String getDiplayName() {
         return diplayName;
     }
@@ -79,6 +100,11 @@ public class CustomerModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(diplayName);
+        dest.writeString(displayID);
+        dest.writeString(photoName);
+        dest.writeString(photoUrl);
+        dest.writeStringList(favorites);
+        dest.writeStringList(recentPlaces);
     }
 }
