@@ -25,6 +25,7 @@ import com.example.seefood.models.RestaurantModel;
 import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,11 +34,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 
 public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener, RecyclerViewAdapter.OnRestaurantLikeListener {
@@ -52,14 +54,11 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     private String type;
     private FragmentProfile mFragmentProfile;
     List<RestaurantModel> lstRestaurant;
-    List<String> restaurantIds;
     FirebaseAuth firebaseAuth;
+    DocumentReference customerRef;
     String userId;
-    DocumentReference docRef;
     CustomerModel mCustomer;
-    ArrayList<RestaurantModel> mFavoriteRests;
-
-
+    ArrayList<String> mFavoriteRestaurants;
 
     public FragmentList() {
 
@@ -75,20 +74,20 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         assert getArguments() != null;
         type = getArguments().getString("type");
         assert type != null;
-        //restaurantNames = new ArrayList<>();
 
         lstRestaurant = new ArrayList<>();
+        mFavoriteRestaurants = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         userId = firebaseAuth.getUid();
-
 
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         db = FirebaseFirestore.getInstance();
+        customerRef = db.collection("Customer").document(userId);
+        getCustomer();
         loadDataFromFirebase(type);
-
 
         return v;
     }
@@ -120,7 +119,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (lstRestaurant.size() > 0) {
             lstRestaurant.clear();
         }
-
 
         if (type.charAt(0) < 58 && type.charAt(0) > 47) {
             if (type.length() > 5) {
@@ -186,8 +184,14 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     public void onRestaurantLikeClicked(int position, ImageView img) {
         this.mCurrentUser = firebaseAuth.getCurrentUser();
         if (this.mCurrentUser != null) {
+            RestaurantModel currRestaurant = lstRestaurant.get(position);
             img.setImageResource(R.drawable.heart_on);
-            userId = mCurrentUser.getUid();
+            mFavoriteRestaurants.add(currRestaurant.restName);
+            if (!mFavoriteRestaurants.isEmpty()) {
+                for (String rest : mFavoriteRestaurants) {
+                    Log.d("added to favorites", rest);
+                }
+            }
         } else {
             mFragmentProfile = new FragmentProfile();
             mFragmentProfile.goSignUp(null);
@@ -198,6 +202,29 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     @Override
     public void onPause() {
         super.onPause();
+        updateCustomer();
+    }
+
+    private void getCustomer() {
+        this.customerRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                this.mCustomer = task.getResult().toObject(CustomerModel.class);
+                this.mFavoriteRestaurants = mCustomer.getFavorites();
+                Log.d("display name", this.mCustomer.getDiplayName());
+            } else {
+                Log.d("query error", "Could not find customer");
+            }
+        });
+    }
+
+    private void updateCustomer() {
+        this.customerRef.update("favorites", mFavoriteRestaurants)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("successful update", "Customer data updated successfully!");
+                })
+                .addOnFailureListener(aVoid -> {
+                    Log.d("failed update", "Customer update failed");
+                });
     }
 }
 

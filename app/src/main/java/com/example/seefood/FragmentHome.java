@@ -65,7 +65,7 @@ public class FragmentHome extends Fragment {
     private static final int PERMISSION_ID = 711;
     private View view;
     private Context mContext;
-    private String APIkey = "AIzaSyAnuKtCuR8_6WyQ2pNGP_JYnkYSzdF4vgU"; // PLEASE CHANGE WHEN APP GOES OUT OTHERWISE I JUST GAVE AWAY AN API KEY
+    private String APIkey = "@hidden_strings/apiKey"; // PLEASE CHANGE WHEN APP GOES OUT OTHERWISE I JUST GAVE AWAY AN API KEY
     private double latitude = 36.683; // currently set to marina, but if you change these values it shows the different local restaurants
     private double longitude = -121.798;
     @BindView(R.id.search_input) EditText searchText;
