@@ -203,6 +203,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     public void onPause() {
         super.onPause();
         updateCustomer();
+        mCustomer.setFavorites(mFavoriteRestaurants);
     }
 
     private void getCustomer() {
