@@ -8,6 +8,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/restaurant_recyclerview"
+        android:id="@+id/favorite_list_fragment"
         android:background="@color/bg_color"/>
 </LinearLayout>

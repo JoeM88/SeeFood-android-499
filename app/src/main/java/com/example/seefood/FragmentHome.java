@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.seefood.favorites.FragmentFavorite;
 import com.example.seefood.restaurantList.FragmentList;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
@@ -126,6 +127,14 @@ public class FragmentHome extends Fragment {
             MainActivity mainActivity = (MainActivity) mContext;
             mainActivity.switchContent(R.id.container_fragment, fl);
         });
+
+        favoritesButton.setOnClickListener(view -> {
+            FragmentFavorite ff = new FragmentFavorite();
+            ff.setArguments(null);
+            MainActivity mainActivity = (MainActivity) mContext;
+            mainActivity.switchContent(R.id.container_fragment, ff);
+        });
+
         return view;
     }
 
