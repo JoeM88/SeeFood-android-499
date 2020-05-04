@@ -1,5 +1,6 @@
 package com.example.seefood.favorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.seefood.FragmentProfile;
 import com.example.seefood.R;
+import com.example.seefood.login.SignUpActivity;
 import com.example.seefood.restaurantList.Restaurant;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +40,7 @@ public class FragmentFavorite extends Fragment {
             uid = currentUser.getUid();
             mFragmentProfile.checkProfExists();
         } else {
-            mFragmentProfile.goSignUp(null);
+            goSignUp(null);
         }
     }
 
@@ -52,6 +54,11 @@ public class FragmentFavorite extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    public void goSignUp(View view){
+        Intent intent = new Intent(getContext(), SignUpActivity.class);
+        startActivity(intent);
     }
 
 }
