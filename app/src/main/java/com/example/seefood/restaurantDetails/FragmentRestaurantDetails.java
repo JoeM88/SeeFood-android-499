@@ -54,10 +54,10 @@ public class FragmentRestaurantDetails extends Fragment {
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
 //        detailsFavorites = v.findViewById(R.id.favorite_icon_button);
 
-        detailsName.setText(obj.getRestName());
-        detailsAddress.setText(obj.getStreetAddress());
-        Picasso.get()
-                .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
+//        detailsName.setText(obj.getRestName());
+//        detailsAddress.setText(obj.getStreetAddress());
+//        Picasso.get()
+//                .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
 
         mealRecycleAdapter = new MealsAdapter(lstMeals);
         myRecyclerView = v.findViewById(R.id.detailsRecyclerView);

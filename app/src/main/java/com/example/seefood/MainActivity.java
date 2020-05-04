@@ -28,12 +28,8 @@ public class MainActivity extends AppCompatActivity {
         botNav.setOnNavigationItemSelectedListener(navListener);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        //ft.replace(R.id.container_fragment, new FragmentList());
         ft.replace(R.id.container_fragment, new FragmentHome());
         ft.commit();
-
-
-
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -53,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
             assert selectedFragment != null;
-            getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
-
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment, selectedFragment)
+                    .addToBackStack(null)
+                    .commit();
             return true;
         }
     };
@@ -67,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-        @SuppressLint("MissingSuperCall")
-        @Override
-        public void onBackPressed() {
-
-        }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() { }
 
 }

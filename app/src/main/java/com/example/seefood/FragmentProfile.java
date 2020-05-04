@@ -99,7 +99,6 @@ public class FragmentProfile extends Fragment {
                 } else {
                     //Toast.makeText(getActivity(), "User is NOT typed", Toast.LENGTH_LONG).show();
                     createProfile(null);
-
                 }
             }
             //call something else if you don't get directed into the proper profile fragment
@@ -124,26 +123,27 @@ public class FragmentProfile extends Fragment {
         //tv = v.findViewById(R.id.displayData);
         logoutButton = v.findViewById(R.id.logoutButton);
         createProfileButton = v.findViewById(R.id.create_profile);
-       logoutButton.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
+        logoutButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
                logout(v);
            }
-       });
-       createProfileButton.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View v){
-               createProfile(v);
-           }
-       });
+        });
+        createProfileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                createProfile(v);
+            }
+        });
+
+        logoutButton.setVisibility(View.INVISIBLE);
+        createProfileButton.setVisibility(View.INVISIBLE);
         return v;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
 

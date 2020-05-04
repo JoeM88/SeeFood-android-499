@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seefood.FragmentProfile;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
 import com.example.seefood.models.CustomerModel;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,8 +38,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener, RecyclerViewAdapter.OnRestaurantLikeListener {
@@ -45,16 +45,20 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
     private View v;
     private RecyclerView myRecyclerView;
-    List<RestaurantModel> lstRestaurant;
-    List<String> restaurantIds;
     private RecyclerViewAdapter recycleAdapter;
     private Context mContext;
     private FirebaseFirestore db;
+    private FirebaseUser mCurrentUser;
     private String type;
+    private FragmentProfile mFragmentProfile;
+    List<RestaurantModel> lstRestaurant;
+    List<String> restaurantIds;
     FirebaseAuth firebaseAuth;
     String userId;
     DocumentReference docRef;
     CustomerModel mCustomer;
+    ArrayList<RestaurantModel> mFavoriteRests;
+
 
 
     public FragmentList() {
@@ -180,8 +184,20 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
     @Override
     public void onRestaurantLikeClicked(int position, ImageView img) {
-        img.setImageResource(R.drawable.heart_on);
+        this.mCurrentUser = firebaseAuth.getCurrentUser();
+        if (this.mCurrentUser != null) {
+            img.setImageResource(R.drawable.heart_on);
+            userId = mCurrentUser.getUid();
+        } else {
+            mFragmentProfile = new FragmentProfile();
+            mFragmentProfile.goSignUp(null);
+        }
         Log.v("pressed", "like button pressed");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }
 

@@ -66,11 +66,10 @@ public class FragmentHome extends Fragment {
     private View view;
     private Context mContext;
     private String APIkey = "AIzaSyAnuKtCuR8_6WyQ2pNGP_JYnkYSzdF4vgU"; // PLEASE CHANGE WHEN APP GOES OUT OTHERWISE I JUST GAVE AWAY AN API KEY
-    private EditText searchText;
-    private ImageButton searchBtn;
     private double latitude = 36.683; // currently set to marina, but if you change these values it shows the different local restaurants
     private double longitude = -121.798;
-    @BindView(R.id.search_button) ImageButton searchButton;
+    @BindView(R.id.search_input) EditText searchText;
+    @BindView(R.id.search_button) ImageButton searchBtn;
     @BindView(R.id.near_me_button) Button nearMeButton;
     @BindView(R.id.favorites_button) Button favoritesButton;
     @BindView(R.id.recents_button) Button recentButton;
@@ -95,48 +94,37 @@ public class FragmentHome extends Fragment {
             Places.initialize(getActivity(), APIkey);
         }
         placesClient = Places.createClient(getActivity());
-        searchBtn = view.findViewById(R.id.search_button);
-        searchText = view.findViewById(R.id.search_input);
-        nearMeButton = view.findViewById(R.id.near_me_button);
         //FragmentTransaction ft = getFragmentManager().beginTransaction(); Probably dont need
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                String searchedObj = searchText.getText().toString();
-                if(searchedObj.length() == 0){
-                    return;
-                }
-                else {
-                    Bundle b = new Bundle();
-                    b.putString("type", searchedObj);
-                    FragmentList fl = new FragmentList();
-                    fl.setArguments(b);
-                    //ft.replace(R.id.container_fragment, fl); Probably don't need this anymore
-                    //ft.commit();
-                    MainActivity mainActivity = (MainActivity) mContext;
-                    mainActivity.switchContent(R.id.container_fragment, fl);
-                }
+        searchBtn.setOnClickListener(view -> {
+            String searchedObj = searchText.getText().toString();
+            if(searchedObj.length() == 0){
+                return;
             }
-        });
-
-        nearMeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getLastLocation();
-                // Test numbers for the moment
-                String address = getAddressFromLocation(latitude, longitude);
+            else {
                 Bundle b = new Bundle();
-                b.putString("type", address);
+                b.putString("type", searchedObj);
                 FragmentList fl = new FragmentList();
                 fl.setArguments(b);
+                //ft.replace(R.id.container_fragment, fl); Probably don't need this anymore
+                //ft.commit();
                 MainActivity mainActivity = (MainActivity) mContext;
                 mainActivity.switchContent(R.id.container_fragment, fl);
             }
+        });
 
+        nearMeButton.setOnClickListener(view -> {
+            getLastLocation();
+            // Test numbers for the moment
+            String address = getAddressFromLocation(latitude, longitude);
+            Bundle b = new Bundle();
+            b.putString("type", address);
+            FragmentList fl = new FragmentList();
+            fl.setArguments(b);
+            MainActivity mainActivity = (MainActivity) mContext;
+            mainActivity.switchContent(R.id.container_fragment, fl);
         });
         return view;
     }
@@ -174,17 +162,14 @@ public class FragmentHome extends Fragment {
         if (checkPermissions()){
             if (isLocationEnabled()) {
                 mFusedLocationClient.getLastLocation().addOnCompleteListener(
-                        new OnCompleteListener<Location>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Location> task) {
-                                Location location = task.getResult();
-                                if (location == null) {
-                                    requestNewLocationData();
-                                }
-                                else {
-                                    latitude = location.getLatitude();
-                                    longitude = location.getLongitude();
-                                }
+                        task -> {
+                            Location location = task.getResult();
+                            if (location == null) {
+                                requestNewLocationData();
+                            }
+                            else {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
                             }
                         }
                 );
@@ -254,7 +239,6 @@ public class FragmentHome extends Fragment {
             frag.setArguments(b);
             mainActivity.switchContent(R.id.container_fragment, frag);
         }
-        Toast.makeText(getActivity(), "Working", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.seefood.favorites;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class FragmentFavorite extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        mFragmentProfile = new FragmentProfile();
         currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             uid = currentUser.getUid();
