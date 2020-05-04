@@ -9,12 +9,19 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
 import com.example.seefood.models.RestaurantModel;
+import com.example.seefood.restaurantList.RecyclerViewAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +45,10 @@ public class viewRestMenuItemsFragment extends Fragment {
     TextView tv;
     String uid;
 
+    private RecyclerView editRecycler;
+    private EditRecyclerViewAdapter editAdapter;
+    private ArrayList<MealModel> mealModelArrayList;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,12 +56,24 @@ public class viewRestMenuItemsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_view_rest_menu_items, container, false);
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
+        mealModelArrayList = new ArrayList<>();
         //tv = v.findViewById(R.id.showDetails);
         newItem = v.findViewById(R.id.newItem);
+        editRecycler = v.findViewById(R.id.menu_management_recycler);
+
+        editRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        editRecycler.addItemDecoration(new DividerItemDecoration(editRecycler.getContext(), DividerItemDecoration.VERTICAL));
 
         bundle = getArguments();
         assert bundle != null;
         dispRest = bundle.getParcelable("restaurant");
+        mealModelArrayList.add(dispRest.getOfferings().get("Breakfast").get(0));
+        editAdapter = new EditRecyclerViewAdapter(mealModelArrayList);
+        editRecycler.setAdapter(editAdapter);
+
+
+
+
         //tv.setText(dispRest.printRest(dispRest));
         //tv.append(dispRest.getOfferings().get("Breakfast").toString());
 //        ArrayList<MealModel> templist = new ArrayList<MealModel>();
@@ -62,6 +85,8 @@ public class viewRestMenuItemsFragment extends Fragment {
                 passForward.putSerializable("restaurant", dispRest);*/
 
         //dispRest = (RestaurantModel) bundle.getSerializable("dispRest");
+
+
 
         newItem.setOnClickListener(new View.OnClickListener() {
             @Override

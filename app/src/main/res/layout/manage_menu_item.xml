@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.115" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/mealDescription"
         android:layout_width="216dp"
         android:layout_height="45dp"
         android:text="Meal description..."
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.371" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/allergiesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Allergy List"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.652" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/mealCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Calories"

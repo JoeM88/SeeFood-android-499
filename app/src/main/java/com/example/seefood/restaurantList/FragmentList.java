@@ -84,6 +84,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
+
         db = FirebaseFirestore.getInstance();
         customerRef = db.collection("Customer").document(userId);
         getCustomer();

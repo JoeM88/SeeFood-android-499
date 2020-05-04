@@ -1,7 +1,6 @@
 package com.example.seefood.restaurantDetails;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
 import com.example.seefood.models.RestaurantModel;
-import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import static com.example.seefood.restaurantDetails.MealsData.makeMeals;
 
 public class FragmentRestaurantDetails extends Fragment {
 
@@ -31,10 +31,9 @@ public class FragmentRestaurantDetails extends Fragment {
     private ImageView detailsCirclePhotoURL;
 
     private RecyclerView myRecyclerView;
-    private LikeButton starButton;
 
-    private List<Meals> lstMeals;
-    private MealsAdapter mealRecycleAdapter;
+    private List<Offering> lstMeals;
+    private OfferingAdapter mealRecycleAdapter;
 
 
     public FragmentRestaurantDetails(){}
@@ -43,23 +42,36 @@ public class FragmentRestaurantDetails extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.restaurant_details_fragment, container, false);
+
         assert getArguments() != null;
-
-
-        Parcelable obj = getArguments().getParcelable("RestaurantObject");
-
+        RestaurantModel obj = getArguments().getParcelable("RestaurantObject");
         assert obj != null;
+        lstMeals = new ArrayList<>();
+        ArrayList<MealModel> arr = new ArrayList<>();
+
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
-//        detailsFavorites = v.findViewById(R.id.favorite_icon_button);
 
 //        detailsName.setText(obj.getRestName());
 //        detailsAddress.setText(obj.getStreetAddress());
 //        Picasso.get()
 //                .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
 
-        mealRecycleAdapter = new MealsAdapter(lstMeals);
+        for (Map.Entry mapElement : obj.getOfferings().entrySet()) {
+
+            if(mapElement.getValue() != null)
+            {
+                String offer = (String)mapElement.getKey();
+                arr = (ArrayList<MealModel>) mapElement.getValue();
+                System.out.println(arr.get(0).getCalories());
+                Offering o = new Offering(offer, arr);
+                lstMeals.add(o);
+            }
+
+
+        }
+        mealRecycleAdapter = new OfferingAdapter(lstMeals);
         myRecyclerView = v.findViewById(R.id.detailsRecyclerView);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(mealRecycleAdapter);
@@ -70,7 +82,6 @@ public class FragmentRestaurantDetails extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lstMeals = makeMeals();
     }
 
 }
