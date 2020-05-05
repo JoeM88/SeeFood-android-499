@@ -17,8 +17,9 @@ public class CustomerModel implements Parcelable {
         //Empty constructor
     }
 
-    public CustomerModel(String dname, ArrayList<String> favs, String pname, String purl, ArrayList<String> recent){
+    public CustomerModel(String dname, String displayId, ArrayList<String> favs, String pname, String purl, ArrayList<String> recent){
         this.diplayName = dname;
+        this.displayID = displayId;
         this.favorites = favs;
         this.photoName = pname;
         this.photoUrl = purl;

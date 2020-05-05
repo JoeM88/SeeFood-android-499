@@ -64,8 +64,10 @@ public class createCustomerProfileFragment extends Fragment {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //final String uid = firebaseAuth.getUid();
+    String uid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +80,9 @@ public class createCustomerProfileFragment extends Fragment {
         editText = view.findViewById(R.id.editText);
         mStorageRef = FirebaseStorage.getInstance().getReference("profilePhotos");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Customer");
+        uid = firebaseAuth.getUid();
+
+        Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
 
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
 //                PackageManager.PERMISSION_GRANTED) {
@@ -96,7 +101,9 @@ public class createCustomerProfileFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 uploadProfile();
+                Toast.makeText(getContext(), uid, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -182,8 +189,8 @@ public class createCustomerProfileFragment extends Fragment {
     }
 
     private void uploadProfile(){
-        firebaseAuth = FirebaseAuth.getInstance();
-        final String uid = firebaseAuth.getUid();
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        final String uid = firebaseAuth.getUid();
         if(selectedImage != null){
             StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
             fileReference.putFile(selectedImage)
@@ -193,7 +200,14 @@ public class createCustomerProfileFragment extends Fragment {
                             Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
                             ArrayList<String> list = new ArrayList<String>();
                             ArrayList<String> rec = new ArrayList<>();
-                            CustomerModel cm = new CustomerModel(editText.getText().toString(), list, uid, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(), rec);
+                            CustomerModel cm = new CustomerModel();
+                            //editText.getText().toString(), list, uid, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(), rec
+                            cm.setDiplayName(editText.getText().toString());
+                            cm.setFavorites(list);
+                            cm.setPhotoName(uid);
+                            cm.setDisplayID(uid);
+                            cm.setPhotoUrl(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+                            cm.setRecentPlaces(rec);
                             String uploadID = uid;
                             mDatabaseRef.child(uploadID).setValue(cm);
                             db.collection("Customer").document(firebaseAuth.getUid()).set(cm);
