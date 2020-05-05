@@ -98,6 +98,8 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     public void onRestaurantClick(int position) {
 
