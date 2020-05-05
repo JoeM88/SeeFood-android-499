@@ -27,7 +27,7 @@ public class EditRecyclerViewAdapter extends RecyclerView.Adapter<EditRecyclerVi
     @Override
     public MyEditViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_view_rest_menu_items, parent, false);
+        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.manage_menu_item, parent, false);
         return new MyEditViewHolder(v);
 
 

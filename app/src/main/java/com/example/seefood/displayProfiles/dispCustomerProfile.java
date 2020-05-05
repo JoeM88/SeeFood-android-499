@@ -1,5 +1,6 @@
 package com.example.seefood.displayProfiles;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.seefood.MainActivity;
 import com.example.seefood.R;
 import com.example.seefood.editCustomer.changePasswordFragment;
 import com.example.seefood.editCustomer.editCustomerProfileFragment;
@@ -50,6 +52,8 @@ public class dispCustomerProfile extends Fragment {
     Button changePassword;
     ImageView im;
 
+    Button logout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +65,7 @@ public class dispCustomerProfile extends Fragment {
         editProfile1 = view.findViewById(R.id.changeDisplayName);
         changePassword = view.findViewById(R.id.changePassword);
         im = view.findViewById(R.id.profileImage);
+        logout = view.findViewById(R.id.logoutButtonCustomer);
 
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
@@ -93,6 +98,13 @@ public class dispCustomerProfile extends Fragment {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(null);
+            }
+        });
+
         return view;
     }
 
@@ -113,5 +125,11 @@ public class dispCustomerProfile extends Fragment {
                 }
             }
         });
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -7,6 +7,20 @@
     android:background="@color/white"
     tools:context=".displayProfiles.dispCustomerProfile">
 
+    <Button
+        android:id="@+id/logoutButtonCustomer"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textColor="#9e0b0f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.939" />
+
     <ImageView
         android:id="@+id/profileImage"
         android:layout_width="411dp"
