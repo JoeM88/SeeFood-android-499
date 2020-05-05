@@ -29,6 +29,7 @@ public class FragmentRestaurantDetails extends Fragment {
     private TextView detailsName;
     private TextView detailsAddress;
     private ImageView detailsCirclePhotoURL;
+    private ImageView detailsBannerPhotoURL;
 
     private RecyclerView myRecyclerView;
 
@@ -52,11 +53,14 @@ public class FragmentRestaurantDetails extends Fragment {
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
+        detailsBannerPhotoURL = v.findViewById(R.id.restaurantDetailsImage);
 
         detailsName.setText(obj.getRestName());
         detailsAddress.setText(obj.getStreetAddress());
         Picasso.get()
                 .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
+        Picasso.get()
+                .load(obj.getPhotoURL()).into(detailsBannerPhotoURL);
 
         for (Map.Entry mapElement : obj.getOfferings().entrySet()) {
 
