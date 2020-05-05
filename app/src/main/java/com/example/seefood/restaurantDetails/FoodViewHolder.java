@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
 import com.example.seefood.restaurantDetails.Food;
 import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
@@ -22,10 +23,10 @@ public class FoodViewHolder extends ChildViewHolder {
 
 
 
-        public void onBind(Food food) {
-                foodName.setText(food.getFoodName());
+        public void onBind(MealModel meal) {
+                foodName.setText(meal.getName());
                 Picasso.get()
-                        .load(food.getPhotoUrl()).fit().centerInside().into(foodPicture);
+                        .load(meal.getPhotoURL()).fit().into(foodPicture);
         }
 
 

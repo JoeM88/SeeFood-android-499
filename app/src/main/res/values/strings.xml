@@ -22,6 +22,7 @@
     <string name="button_login">Login</string>
     <string name="hintEmail">Email</string>
     <string name="button_signUpRO">Sign Up RO</string>
+    <string name="passwordInfo">Password requires 1 uppercase, 1 lowercase, 1 number, and 1 special character (@#$%^&amp;+=)</string>
     <!-- -->
 
     <string-array name="mealType">
@@ -236,4 +237,7 @@
 
     <string name="owner">owner</string>
     <string name="notOwner">notOwner</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

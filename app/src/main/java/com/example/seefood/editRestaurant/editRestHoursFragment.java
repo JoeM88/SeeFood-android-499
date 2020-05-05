@@ -25,7 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
-//import com.example.seefood.Restaurant;
+
 
 
 /**
@@ -97,7 +97,7 @@ public class editRestHoursFragment extends Fragment implements AdapterView.OnIte
         // Required empty public constructor
     }
 
-    //Restaurant dispRest;
+    //RestaurantModel dispRest;
 
 
     @Override

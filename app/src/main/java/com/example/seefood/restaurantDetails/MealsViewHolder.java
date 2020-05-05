@@ -30,6 +30,11 @@ public class MealsViewHolder extends GroupViewHolder {
         animateCollapse();
     }
 
+    @Override
+    public void expand() {
+        animateExpand();
+    }
+
     private void animateExpand() {
         RotateAnimation rotate =
                 new RotateAnimation(360, 180, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);

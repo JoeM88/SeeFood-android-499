@@ -24,37 +24,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:numStars="5"
-        android:rating="4.5"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_name"
-        android:progressTint="@color/red"/>
-
-    <TextView
-        android:id="@+id/numReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/numReviews"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar"
-        android:layout_marginLeft="4dp" />
-
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="@string/address"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name"
+        app:layout_constraintVertical_bias="0.24" />
 
     <TextView
         android:id="@+id/restaurant_name"
@@ -62,32 +40,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="@string/res_name"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/restaurant_img"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="15dp" />
-
-    <TextView
-        android:id="@+id/category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/category_type"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_name"
-        app:layout_constraintTop_toBottomOf="@+id/address" />
-
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/distance"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
