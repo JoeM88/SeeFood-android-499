@@ -50,23 +50,9 @@ public class FragmentFavorite extends Fragment {
 
     public FragmentFavorite() {}
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            this.uid = mAuth.getCurrentUser().getUid();
-        } else {
-            goSignUp(null);
-        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-        Handler handler = new Handler();
 
         v = inflater.inflate(R.layout.favorite_fragment, container, false);
 
@@ -94,26 +80,6 @@ public class FragmentFavorite extends Fragment {
         } else {
             goSignUp(null);
         }
-
-        //onStart();
-//        mContext = getContext();
-//
-//        mRecyclerView = v.findViewById(R.id.favorite_list_fragment);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-//
-//        mFavorites = new ArrayList<>();
-//        lstFavorites = new ArrayList<>();
-//        mCustomer = new CustomerModel();
-//
-//        mAuth = FirebaseAuth.getInstance();
-//        db = FirebaseFirestore.getInstance();
-//        currentUser = mAuth.getCurrentUser();
-//        assert currentUser != null;
-//        uid = currentUser.getUid();
-//        customerRef = db.collection("Customer").document(uid);
-//        restRef = db.collection("Restaurants");
-//        loadFavoritesFromDatabase();
 
         return v;
     }

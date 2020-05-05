@@ -186,13 +186,14 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (this.mCurrentUser != null) {
             RestaurantModel currRestaurant = lstRestaurant.get(position);
             //img.setImageResource(R.drawable.heart_on);
-            Toast.makeText(mContext, currRestaurant.restName + " added to favorites!", Toast.LENGTH_SHORT).show();
-            mFavoriteRestaurants.add(currRestaurant.restName);
-            if (!mFavoriteRestaurants.isEmpty()) {
-                for (String rest : mFavoriteRestaurants) {
-                    Log.d("added to favorites", rest);
-                }
+            if (!mFavoriteRestaurants.contains(currRestaurant.restName)) {
+                Toast.makeText(mContext, currRestaurant.restName + " added to favorites!", Toast.LENGTH_SHORT).show();
+                mFavoriteRestaurants.add(currRestaurant.restName);
+            } else {
+                Toast.makeText(mContext, currRestaurant.restName + " already in favorites", Toast.LENGTH_SHORT).show();
             }
+
+
         } else {
             mFragmentProfile = new FragmentProfile();
             mFragmentProfile.goSignUp(null);
