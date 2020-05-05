@@ -107,4 +107,5 @@ public class CustomerModel implements Parcelable {
         dest.writeStringList(favorites);
         dest.writeStringList(recentPlaces);
     }
+
 }
