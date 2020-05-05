@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.seefood.FragmentProfile;
+import com.example.seefood.MainActivity;
 import com.example.seefood.R;
 import com.example.seefood.displayProfiles.dispCustomerProfile;
 import com.example.seefood.displayProfiles.displayRestaurantProfile;
@@ -27,6 +29,7 @@ import com.example.seefood.login.SignUpActivity;
 import com.example.seefood.models.CustomerModel;
 import com.example.seefood.models.RestaurantModel;
 import com.example.seefood.profileSetup.createProfileActivity;
+import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
 import com.example.seefood.restaurantList.RecyclerViewAdapter;
 import com.example.seefood.restaurantList.Restaurant;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -96,8 +99,7 @@ public class FragmentFavorite extends Fragment {
         uid = mAuth.getCurrentUser().getUid();
         customerRef = db.collection("Customer").document(this.uid);
         restRef = db.collection("Restaurants");
-        //loadFavoritesFromDatabase();
-        getCustomer();
+        loadFavoritesFromDatabase();
 
         return v;
     }
@@ -108,12 +110,29 @@ public class FragmentFavorite extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        updateCustomer();
+        mCustomer.setFavorites(mFavorites);
+    }
+
+    private void updateCustomer() {
+        this.customerRef.update("favorites", mFavorites)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("successful update", "Customer data updated successfully!");
+                })
+                .addOnFailureListener(aVoid -> {
+                    Log.d("failed update", "Customer update failed");
+                });
+    }
+
     public void goSignUp(View view){
         Intent intent = new Intent(getContext(), SignUpActivity.class);
         startActivity(intent);
     }
 
-    private void getCustomer() {
+    private void loadFavoritesFromDatabase() {
         customerRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 mCustomer = task.getResult().toObject(CustomerModel.class);
@@ -143,10 +162,28 @@ public class FragmentFavorite extends Fragment {
         });
     }
 
-    private void onRestaurantLikeClicked(int i, ImageView imageView) {
+    private void onRestaurantLikeClicked(int position, ImageView img) {
+        if (this.mCustomer != null) {
+            RestaurantModel currRestaurant = lstFavorites.get(position);
+            //img.setImageResource(R.drawable.heart_on);
+            Toast.makeText(mContext, currRestaurant.restName + " removed from favorites!", Toast.LENGTH_SHORT).show();
+            mFavorites.remove(currRestaurant.restName);
+        }
     }
 
-    private void onRestaurantClick(int i) {
+    private void onRestaurantClick(int position) {
+        if (mContext == null) {
+            return;
+        }
+
+        if (mContext instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) mContext;
+            Bundle b = new Bundle();
+            b.putParcelable("RestaurantObject", lstFavorites.get(position));
+            FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
+            frag.setArguments(b);
+            mainActivity.switchContent(R.id.container_fragment, frag);
+        }
     }
 
 }

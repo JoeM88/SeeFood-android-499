@@ -31,7 +31,7 @@
         android:layout_height="32dp"
         android:contentDescription="like_button"
         android:scaleType="fitXY"
-        android:src="@drawable/heart_off"
+        android:src="@drawable/heart_on"
         tools:layout_editor_absoluteX="362dp"
         tools:layout_editor_absoluteY="53dp"
         app:layout_constraintBottom_toBottomOf="parent"

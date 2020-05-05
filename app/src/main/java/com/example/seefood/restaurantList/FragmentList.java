@@ -185,7 +185,8 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         this.mCurrentUser = firebaseAuth.getCurrentUser();
         if (this.mCurrentUser != null) {
             RestaurantModel currRestaurant = lstRestaurant.get(position);
-            img.setImageResource(R.drawable.heart_on);
+            //img.setImageResource(R.drawable.heart_on);
+            Toast.makeText(mContext, currRestaurant.restName + " added to favorites!", Toast.LENGTH_SHORT).show();
             mFavoriteRestaurants.add(currRestaurant.restName);
             if (!mFavoriteRestaurants.isEmpty()) {
                 for (String rest : mFavoriteRestaurants) {
