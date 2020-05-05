@@ -1,5 +1,6 @@
 package com.example.seefood.profileSetup;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,4 +21,10 @@ public class createProfileActivity extends AppCompatActivity {
         ft.replace(R.id.createProf_container, new createProfile_step1());
         ft.commit();
     }
+
+        @SuppressLint("MissingSuperCall")
+        @Override
+        public void onBackPressed() {
+
+        }
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.displayProfiles.displayRestaurantProfile;
 import com.example.seefood.models.MealModel;
 import com.example.seefood.models.RestaurantModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,27 +72,11 @@ public class viewRestMenuItemsFragment extends Fragment {
         assert bundle != null;
         dispRest = bundle.getParcelable("restaurant");
         //mealModelArrayList.add(dispRest.getOfferings().get("Breakfast").get(0));
+        String viewController = bundle.getString("viewController");
         assert dispRest != null;
-        mealModelArrayList = dispRest.getOfferings().get("Breakfast");
+        mealModelArrayList = dispRest.getOfferings().get(viewController);
         editAdapter = new EditRecyclerViewAdapter(mealModelArrayList);
         editRecycler.setAdapter(editAdapter);
-
-
-
-
-        //tv.setText(dispRest.printRest(dispRest));
-        //tv.append(dispRest.getOfferings().get("Breakfast").toString());
-//        ArrayList<MealModel> templist = new ArrayList<MealModel>();
-//        templist = dispRest.getOfferings().get("Breakfast");
-//        tv.append(templist.toString());
-        //tv.append(dispRest.getOfferings().get("Breakfast").get(0).getName());
-
-        /*passForward.putString("viewController", "Breakfast");
-                passForward.putSerializable("restaurant", dispRest);*/
-
-        //dispRest = (RestaurantModel) bundle.getSerializable("dispRest");
-
-
 
         newItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +95,11 @@ public class viewRestMenuItemsFragment extends Fragment {
         stepBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                Fragment nextStep = new displayRestaurantProfile();
-//                ft.replace(R.id.container_fragment, nextStep);
-//                ft.commit();
-                Toast.makeText(getContext(), mealModelArrayList.toString(), Toast.LENGTH_LONG).show();
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment nextStep = new displayRestaurantProfile();
+                ft.replace(R.id.container_fragment, nextStep);
+                ft.commit();
+                //Toast.makeText(getContext(), mealModelArrayList.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
