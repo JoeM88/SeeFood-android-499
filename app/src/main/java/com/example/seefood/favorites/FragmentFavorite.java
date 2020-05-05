@@ -30,6 +30,8 @@ import com.example.seefood.profileSetup.createProfileActivity;
 import com.example.seefood.restaurantList.RecyclerViewAdapter;
 import com.example.seefood.restaurantList.Restaurant;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,8 +44,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class FragmentFavorite extends Fragment {
     private View v;
@@ -54,6 +58,7 @@ public class FragmentFavorite extends Fragment {
     private FirebaseFirestore db;
     private FirebaseUser currentUser;
     private DocumentReference customerRef;
+    private CollectionReference restRef;
     String uid;
     CustomerModel mCustomer;
     ArrayList<String> mFavorites;
@@ -65,7 +70,7 @@ public class FragmentFavorite extends Fragment {
     public void onStart() {
         super.onStart();
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser().getUid() != null) {
             this.uid = mAuth.getCurrentUser().getUid();
         } else {
             goSignUp(null);
@@ -90,6 +95,7 @@ public class FragmentFavorite extends Fragment {
         db = FirebaseFirestore.getInstance();
         uid = mAuth.getCurrentUser().getUid();
         customerRef = db.collection("Customer").document(this.uid);
+        restRef = db.collection("Restaurants");
         //loadFavoritesFromDatabase();
         getCustomer();
 
@@ -108,75 +114,129 @@ public class FragmentFavorite extends Fragment {
     }
 
     private void getCustomer() {
-        this.customerRef.get().addOnCompleteListener(task -> {
+        customerRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                this.mCustomer = task.getResult().toObject(CustomerModel.class);
-                this.mFavorites = this.mCustomer.getFavorites();
-                Log.d("favorites", this.mCustomer.getFavorites().toString());
-                if (!this.mFavorites.isEmpty()) {
-                    Log.d("inside loop", "inside first loop");
-                    db.collection("Restaurants")
-                            .get()
-                            .addOnCompleteListener(atask -> {
-                                for (DocumentSnapshot qSnapshot : atask.getResult()) {
-                                    RestaurantModel res = qSnapshot.toObject(RestaurantModel.class);
-                                    Log.d("grabbing database", "grabbing snapshot");
-                                    for (String resName : mFavorites) {
-                                        Log.d("customer favorites", "comparing " + res.restName + " to " + resName);
-                                        if (res.restName == resName) {
-                                            lstFavorites.add(res);
-                                        }
-                                    }
+                mCustomer = task.getResult().toObject(CustomerModel.class);
+                mFavorites = mCustomer.getFavorites();
+                if (!mFavorites.isEmpty()) {
+                    for (String favorites : mFavorites) {
+                        restRef.whereEqualTo("restName", favorites)
+                                .get()
+                                .addOnCompleteListener(nTask ->{
+                            if (nTask.isSuccessful()) {
+                                for (QueryDocumentSnapshot doc : nTask.getResult()) {
+                                    RestaurantModel currRest = doc.toObject(RestaurantModel.class);
+                                    lstFavorites.add(currRest);
                                 }
-                                Log.d("list", lstFavorites.toString());
-                                mAdapter = new RecyclerViewAdapter(getContext(), lstFavorites,
-                                        FragmentFavorite.this::onRestaurantClick,
-                                        FragmentFavorite.this::onRestaurantLikeClicked);
-                                mRecyclerView.setAdapter(mAdapter);
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.e("load error", "Could not load customer data from database");
-                            });
-                } else {
-                    Log.d("empty", "currently no favorites");
+                            }
+                            lstFavorites.size();
+                            mAdapter = new RecyclerViewAdapter(getContext(), lstFavorites,
+                                    FragmentFavorite.this::onRestaurantClick,
+                                    FragmentFavorite.this::onRestaurantLikeClicked);
+                            mRecyclerView.setAdapter(mAdapter);
+                        });
+                    }
                 }
             } else {
-                Log.d("query error", "Could not find customer");
+                Log.d("customer fail", "Could not load customer");
             }
         });
     }
 
-    public void loadFavoritesFromDatabase(){
-        Log.d("inside", "Entered load data function");
-        getCustomer();
-        if (!this.mFavorites.isEmpty()) {
-            Log.d("inside loop", "inside first loop");
-            db.collection("Restaurants")
-                    .get()
-                    .addOnCompleteListener(task -> {
-                       for (DocumentSnapshot qSnapshot : task.getResult()) {
-                           RestaurantModel res = qSnapshot.toObject(RestaurantModel.class);
-                           Log.d("grabbing database", "grabbing snapshot");
-                           for (String resName : mFavorites) {
-                               Log.d("customer favorites", "comparing " + res.restName + " to " + resName);
-                               if (res.restName == resName) {
-                                   lstFavorites.add(res);
-                               }
-                           }
-                       }
-                       Log.d("list",lstFavorites.toString());
-                       mAdapter = new RecyclerViewAdapter(getContext(), lstFavorites,
-                               FragmentFavorite.this::onRestaurantClick,
-                               FragmentFavorite.this::onRestaurantLikeClicked);
-                       mRecyclerView.setAdapter(mAdapter);
-                    })
-            .addOnFailureListener(e -> {
-                Log.e("load error", "Could not load customer data from database");
-            });
-        } else {
-            Log.d("empty", "currently no favorites");
-        }
-    }
+//    private void getCustomer() {
+//        this.customerRef.get().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                this.mCustomer = task.getResult().toObject(CustomerModel.class);
+//                this.mFavorites = this.mCustomer.getFavorites();
+//                Log.d("favorites", this.mCustomer.getFavorites().toString());
+//                if (!this.mFavorites.isEmpty()) {
+//                    Log.d("inside loop", "inside first loop");
+//
+//
+//
+////                    db.collection("Restaurants")
+////                            .get()
+//////                            .addOnSuccessListener(queryDocumentSnapshots -> {
+//////                                Log.d("inside success", "inside onSuccessListener");
+//////                                RestaurantModel rest;
+//////                                for (DocumentSnapshot qSnapshot: queryDocumentSnapshots.getDocuments()) {
+//////                                    rest = qSnapshot.toObject(RestaurantModel.class);
+//////                                    for (String favorite : mFavorites) {
+//////                                        if (rest.getRestName().equals(favorite)) {
+//////                                            lstFavorites.add(rest);
+//////                                            lstFavorites.size();
+//////                                            break;
+//////                                        }
+//////                                    }
+//////                                }
+//////                            })
+//////                            .addOnFailureListener(new OnFailureListener() {
+//////                                @Override
+//////                                public void onFailure(@NonNull Exception e) {
+//////                                    Log.e("failure", "could not load restaurants");
+//////                                }
+//////                            });
+////                            .addOnCompleteListener(atask -> {
+////                                for (DocumentSnapshot qSnapshot : atask.getResult()) {
+////                                    RestaurantModel res = qSnapshot.toObject(RestaurantModel.class);
+////                                    Log.d("grabbing database", "grabbing snapshot");
+////                                    for (String resName : mFavorites) {
+////                                        Log.d("customer favorites", "comparing " + res.restName + " to " + resName);
+////                                        if (res.restName == resName) {
+////                                            lstFavorites.add(res);
+////                                        }
+////                                    }
+////                                }
+////                                Log.d("list", lstFavorites.toString());
+////                                mAdapter = new RecyclerViewAdapter(getContext(), lstFavorites,
+////                                        FragmentFavorite.this::onRestaurantClick,
+////                                        FragmentFavorite.this::onRestaurantLikeClicked);
+////                                mRecyclerView.setAdapter(mAdapter);
+////                            })
+////                            .addOnFailureListener(e -> {
+////                                Log.e("load error", "Could not load customer data from database");
+////                            });
+//                } else {
+//                    Log.d("empty", "currently no favorites");
+//                }
+//            } else {
+//                Log.d("query error", "Could not find customer");
+//            }
+//        });
+//    }
+//
+//    public void loadFavoritesFromDatabase(){
+//        Log.d("inside", "Entered load data function");
+//        getCustomer();
+//        if (!this.mFavorites.isEmpty()) {
+//            Log.d("inside loop", "inside first loop");
+//            db.collection("Restaurants")
+//                    .get()
+//                    .addOnCompleteListener(task -> {
+//                        System.out.println(task.getResult());
+//                       for (DocumentSnapshot qSnapshot : task.getResult()) {
+//                           RestaurantModel res = qSnapshot.toObject(RestaurantModel.class);
+//                           Log.d("grabbing database", "grabbing snapshot");
+//                           for (String resName : mFavorites) {
+//                               Log.d("customer favorites", "comparing " + res.restName + " to " + resName);
+//                               if (res.restName == resName) {
+//                                   lstFavorites.add(res);
+//                               }
+//                           }
+//                       }
+//                       Log.d("list",lstFavorites.toString());
+//                       mAdapter = new RecyclerViewAdapter(getContext(), lstFavorites,
+//                               FragmentFavorite.this::onRestaurantClick,
+//                               FragmentFavorite.this::onRestaurantLikeClicked);
+//                       mRecyclerView.setAdapter(mAdapter);
+//                    })
+//            .addOnFailureListener(e -> {
+//                Log.e("load error", "Could not load customer data from database");
+//            });
+//        } else {
+//            Log.d("empty", "currently no favorites");
+//        }
+//    }
 
     private void onRestaurantLikeClicked(int i, ImageView imageView) {
     }
