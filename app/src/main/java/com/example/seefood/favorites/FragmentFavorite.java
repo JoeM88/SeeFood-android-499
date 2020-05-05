@@ -69,23 +69,51 @@ public class FragmentFavorite extends Fragment {
         Handler handler = new Handler();
 
         v = inflater.inflate(R.layout.favorite_fragment, container, false);
-        onStart();
-        mContext = getContext();
 
-        mRecyclerView = v.findViewById(R.id.favorite_list_fragment);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            this.uid = mAuth.getCurrentUser().getUid();
+            mContext = getContext();
 
-        mFavorites = new ArrayList<>();
-        lstFavorites = new ArrayList<>();
-        mCustomer = new CustomerModel();
+            mRecyclerView = v.findViewById(R.id.favorite_list_fragment);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        uid = mAuth.getCurrentUser().getUid();
-        customerRef = db.collection("Customer").document(this.uid);
-        restRef = db.collection("Restaurants");
-        loadFavoritesFromDatabase();
+            mFavorites = new ArrayList<>();
+            lstFavorites = new ArrayList<>();
+            mCustomer = new CustomerModel();
+
+            mAuth = FirebaseAuth.getInstance();
+            db = FirebaseFirestore.getInstance();
+            currentUser = mAuth.getCurrentUser();
+            assert currentUser != null;
+            uid = currentUser.getUid();
+            customerRef = db.collection("Customer").document(uid);
+            restRef = db.collection("Restaurants");
+            loadFavoritesFromDatabase();
+        } else {
+            goSignUp(null);
+        }
+
+        //onStart();
+//        mContext = getContext();
+//
+//        mRecyclerView = v.findViewById(R.id.favorite_list_fragment);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
+//
+//        mFavorites = new ArrayList<>();
+//        lstFavorites = new ArrayList<>();
+//        mCustomer = new CustomerModel();
+//
+//        mAuth = FirebaseAuth.getInstance();
+//        db = FirebaseFirestore.getInstance();
+//        currentUser = mAuth.getCurrentUser();
+//        assert currentUser != null;
+//        uid = currentUser.getUid();
+//        customerRef = db.collection("Customer").document(uid);
+//        restRef = db.collection("Restaurants");
+//        loadFavoritesFromDatabase();
 
         return v;
     }
