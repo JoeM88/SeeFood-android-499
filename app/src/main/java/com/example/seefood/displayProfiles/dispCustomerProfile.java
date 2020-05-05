@@ -53,6 +53,8 @@ public class dispCustomerProfile extends Fragment {
     Button customerLogout;
     ImageView im;
 
+    Button logout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +67,7 @@ public class dispCustomerProfile extends Fragment {
         changePassword = view.findViewById(R.id.changePassword);
         customerLogout = view.findViewById(R.id.customerLogout);
         im = view.findViewById(R.id.profileImage);
+        logout = view.findViewById(R.id.logoutButtonCustomer);
 
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
@@ -97,12 +100,10 @@ public class dispCustomerProfile extends Fragment {
             }
         });
 
-        customerLogout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                logout(null);
             }
         });
 
@@ -126,5 +127,11 @@ public class dispCustomerProfile extends Fragment {
                 }
             }
         });
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
     }
 }
