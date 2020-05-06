@@ -1,6 +1,7 @@
 package com.example.seefood.restaurantList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,6 +98,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public interface OnRestaurantLikeListener {
         void onRestaurantLikeClicked(int position, ImageView img);
     }
-
 
 }

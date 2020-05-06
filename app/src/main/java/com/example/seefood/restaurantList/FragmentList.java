@@ -1,6 +1,7 @@
 package com.example.seefood.restaurantList;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -188,7 +189,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         this.mCurrentUser = firebaseAuth.getCurrentUser();
         if (this.mCurrentUser != null) {
             RestaurantModel currRestaurant = lstRestaurant.get(position);
-            //img.setImageResource(R.drawable.heart_on);
+            img.setImageResource(R.drawable.heart_on);
             if (!mFavoriteRestaurants.contains(currRestaurant.restName)) {
                 Toast.makeText(mContext, currRestaurant.restName + " added to favorites!", Toast.LENGTH_SHORT).show();
                 mFavoriteRestaurants.add(currRestaurant.restName);

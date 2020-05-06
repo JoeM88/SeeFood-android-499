@@ -2,6 +2,7 @@ package com.example.seefood.favorites;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -145,11 +146,12 @@ public class FragmentFavorite extends Fragment {
     private void onRestaurantLikeClicked(int position, ImageView img) {
         if (this.mCustomer != null) {
             RestaurantModel currRestaurant = lstFavorites.get(position);
-            //img.setImageResource(R.drawable.heart_on);
+            img.setImageResource(R.drawable.cross);
             Toast.makeText(mContext, currRestaurant.restName + " removed from favorites!", Toast.LENGTH_SHORT).show();
             mFavorites.remove(currRestaurant.restName);
         }
     }
+
 
     private void onRestaurantClick(int position) {
         if (mContext == null) {
