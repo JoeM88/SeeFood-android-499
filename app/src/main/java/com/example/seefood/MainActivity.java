@@ -12,11 +12,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.seefood.restaurantList.FragmentList;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Stack;
+
 import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private Stack<Fragment> stack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView botNav = findViewById(R.id.bottom_nav);
         botNav.setOnNavigationItemSelectedListener(navListener);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-        //ft.replace(R.id.container_fragment, new FragmentList());
-        ft.replace(R.id.container_fragment, new FragmentHome());
-        ft.commit();
+        stack = new Stack<>();
+        switchContent(R.id.container_fragment, new FragmentHome(), true);
 
 
 
@@ -52,24 +52,43 @@ public class MainActivity extends AppCompatActivity {
 
             }
             assert selectedFragment != null;
+            clearBackStack();
             getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
 
             return true;
         }
     };
 
-    public void switchContent(int id, Fragment fragment) {
+    public void switchContent(int id, Fragment fragment, boolean add) {
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(id, fragment, fragment.toString());
-        ft.addToBackStack(null);
-        ft.commit();
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(id, fragment, fragment.toString());
+//        ft.addToBackStack(null);
+//        ft.commit();
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (add)
+            stack.push(fragment);
+        transaction.replace(R.id.container_fragment, fragment);
+        transaction.commit();
     }
 
-        @SuppressLint("MissingSuperCall")
-        @Override
-        public void onBackPressed() {
+    public void popFragment() {
+        if (!stack.isEmpty()) {
+            Fragment fragment = stack.elementAt(stack.size() - 2);
+            stack.pop();
+            switchContent(R.id.container_fragment, fragment, false);
+        } else
+            super.onBackPressed();
+    }
 
-        }
+    public void clearBackStack() {
+        stack.clear();
+    }
+
+    @Override
+    public void onBackPressed() {
+        popFragment();
+    }
 
 }

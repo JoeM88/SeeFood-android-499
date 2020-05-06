@@ -118,7 +118,7 @@ public class FragmentHome extends Fragment {
                     //ft.replace(R.id.container_fragment, fl); Probably don't need this anymore
                     //ft.commit();
                     MainActivity mainActivity = (MainActivity) mContext;
-                    mainActivity.switchContent(R.id.container_fragment, fl);
+                    mainActivity.switchContent(R.id.container_fragment, fl, true);
                 }
             }
         });
@@ -134,7 +134,7 @@ public class FragmentHome extends Fragment {
                 FragmentList fl = new FragmentList();
                 fl.setArguments(b);
                 MainActivity mainActivity = (MainActivity) mContext;
-                mainActivity.switchContent(R.id.container_fragment, fl);
+                mainActivity.switchContent(R.id.container_fragment, fl, true);
             }
 
         });
@@ -252,7 +252,7 @@ public class FragmentHome extends Fragment {
             b.putString("type", "Favorite");
             FragmentList frag = new FragmentList();
             frag.setArguments(b);
-            mainActivity.switchContent(R.id.container_fragment, frag);
+            mainActivity.switchContent(R.id.container_fragment, frag, true);
         }
         Toast.makeText(getActivity(), "Working", Toast.LENGTH_SHORT).show();
     }

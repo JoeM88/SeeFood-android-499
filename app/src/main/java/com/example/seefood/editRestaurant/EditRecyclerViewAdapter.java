@@ -1,5 +1,6 @@
 package com.example.seefood.editRestaurant;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 public class EditRecyclerViewAdapter extends RecyclerView.Adapter<EditRecyclerViewAdapter.MyEditViewHolder> {
 
     private List<MealModel> mData;
+    private Context mContext;
 
     public EditRecyclerViewAdapter(List<MealModel> myData) {
         mData = myData;
@@ -45,7 +47,7 @@ public class EditRecyclerViewAdapter extends RecyclerView.Adapter<EditRecyclerVi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mData.size();
     }
 
 

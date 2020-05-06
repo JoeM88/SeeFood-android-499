@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +37,7 @@ public class FragmentRestaurantDetails extends Fragment {
     private List<Offering> lstMeals;
     private OfferingAdapter mealRecycleAdapter;
 
+    private Toolbar toolBarDetails;
 
     public FragmentRestaurantDetails(){}
 
@@ -54,6 +56,13 @@ public class FragmentRestaurantDetails extends Fragment {
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
         detailsBannerPhotoURL = v.findViewById(R.id.restaurantDetailsImage);
+        toolBarDetails = v.findViewById(R.id.toolBarDetails_back);
+        toolBarDetails.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         detailsName.setText(obj.getRestName());
         detailsAddress.setText(obj.getStreetAddress());
@@ -64,7 +73,7 @@ public class FragmentRestaurantDetails extends Fragment {
 
         for (Map.Entry mapElement : obj.getOfferings().entrySet()) {
 
-            if(mapElement.getValue() != null)
+            if(mapElement.getValue() != null && !((ArrayList<MealModel>) mapElement.getValue()).isEmpty())
             {
                 String offer = (String)mapElement.getKey();
                 arr = (ArrayList<MealModel>) mapElement.getValue();
