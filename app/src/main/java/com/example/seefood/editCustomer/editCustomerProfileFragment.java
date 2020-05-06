@@ -68,6 +68,7 @@ public class editCustomerProfileFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     String pathURL;
     Boolean galleryImage = false;
+    Boolean cameraPhoto = false;
 
     EditText nameField;
     Button addPhoto;
@@ -190,6 +191,8 @@ public class editCustomerProfileFragment extends Fragment {
                         //selectedImage = getImageUri(getContext(), cameraImage);
                         myAvatar.setImageBitmap(cameraImage);
                         //Toast.makeText(getContext(), "Not Supported, Please Select from Gallery.", Toast.LENGTH_SHORT).show();
+                        galleryImage = false;
+                        cameraPhoto = true;
 
                     }
                     break;
@@ -200,6 +203,7 @@ public class editCustomerProfileFragment extends Fragment {
                         selectedImage =  data.getData();
                         myAvatar.setImageURI(selectedImage);
                         galleryImage = true;
+                        cameraPhoto = false;
                     }
                     break;
             }
@@ -234,7 +238,7 @@ public class editCustomerProfileFragment extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "ERROR!!!!", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "ERROR!!!!", Toast.LENGTH_LONG).show();
             }
         });
         //return photoURL;
@@ -277,7 +281,7 @@ public class editCustomerProfileFragment extends Fragment {
                         });
             }
 
-        } else {
+        } else if(cameraPhoto == true){
             firebaseAuth = FirebaseAuth.getInstance();
             final String uid = firebaseAuth.getUid();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -301,11 +305,14 @@ public class editCustomerProfileFragment extends Fragment {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     //Toast.makeText(CameraActivity.this,"failed",Toast.LENGTH_LONG).show();
-
-
                 }
             });
 
+        } else {
+            firebaseAuth = FirebaseAuth.getInstance();
+            final String uid = firebaseAuth.getUid();
+            pathURL = customer.getPhotoUrl();
+            injectData();
         }
     }
 

@@ -77,10 +77,12 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
     Button cancelButton;
     Button addButton;
     ImageView restPhoto;
+    Button deleteItemButton;
 
     String whereMeal = "Breakfast";
 
     Boolean galleryImage = false;
+    Boolean cameraSelected = false;
     Bundle bundle;
     Spinner mealTypeSpinner;
 
@@ -203,7 +205,7 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
             @Override
             public void onClick(View v) {
                 if(!foodName.getText().toString().trim().equals("")){
-                    //choosePhoto();
+                    choosePhoto();
                 } else {
                     Toast.makeText(getContext(), "Please enter a name first.", Toast.LENGTH_LONG).show();
                 }
@@ -230,9 +232,20 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
             public void onClick(View v) {
 
                 //uploadPhoto();
-                //validateInput();
+                validateInput();
             }
         });
+
+        deleteItemButton = view.findViewById(R.id.deleteItemButton);
+        deleteItemButton.setVisibility(View.GONE);
+        deleteItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItemFromMenu();
+            }
+        });
+
+
 
         foodName.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -259,7 +272,38 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
         });
 
 
+
+
         return view;
+    }
+
+    private void deleteItemFromMenu(){
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Menu Item")
+                .setMessage("Are you sure you want to delete this item?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getContext(), dispRest.printRest(dispRest), Toast.LENGTH_LONG).show();
+                        int locationIndex = bundle.getInt("indexPosition");
+                        //Objects.requireNonNull(dispRest.getOfferings().get(whereMeal)).set(locationIndex, myMeal);
+                        Objects.requireNonNull(dispRest.getOfferings().get(whereMeal)).remove(locationIndex);
+                        Collections.sort(dispRest.getOfferings().get(whereMeal), new Comparator<MealModel>(){
+                            public int compare(MealModel m1, MealModel m2){
+                                return m1.getName().compareTo(m2.getName());
+                            }
+                        });
+                        db.collection("Restaurants").document(Objects.requireNonNull(firebaseAuth.getUid())).set(dispRest);
+                        final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.container_fragment, new displayRestaurantProfile());
+                        ft.commit();
+
+                    }
+                })
+                .setNegativeButton("No", null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    //Toast.makeText(getContext(), rm.printRest(rm), Toast.LENGTH_LONG).show();
     }
 
     private void getRestaurant() {
@@ -270,7 +314,8 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     for(QueryDocumentSnapshot document : task.getResult()){
-                        rm = document.toObject(RestaurantModel.class);
+                        dispRest = document.toObject(RestaurantModel.class);
+                        deleteItemButton.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -315,7 +360,7 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
                     galleryImage = false;
                     startActivityForResult(takePicture, 0);
                 } else if (options[item].equals("Get from Gallery")) {
-
+                    cameraSelected = false;
                     Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
                     startActivityForResult(pickPhoto , 1);
@@ -338,6 +383,7 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
                         //selectedImage = getImageUri(getContext(), cameraImage);
                         restPhoto.setImageBitmap(cameraImage);
                         //Toast.makeText(getContext(), "Not Supported, Please Select from Gallery.", Toast.LENGTH_SHORT).show();
+                        cameraSelected = true;
                     }
                     break;
                 case 1:
@@ -381,25 +427,30 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
 
     private void findDownloadURL() {
         StorageReference ref = mStorageRef.child(pathURL);
-        myMeal.setPhotoName(pathURL);
+        if(selectedImage != null || cameraImage != null){
+            myMeal.setPhotoName(pathURL);
 //        String answer = ref.getDownloadUrl().toString();
 //        Toast.makeText(getContext(), "YOU GOT THIS --> " + answer, Toast.LENGTH_LONG).show();
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                String url = uri.toString();
-                //Toast.makeText(getContext(),  url, Toast.LENGTH_LONG).show();
-                //photoURL = url;
-                //rm.setPhotoURL(url);
-                //Toast.makeText(getContext(), url, Toast.LENGTH_LONG).show();
-                myMeal.setPhotoURL(url);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "ERROR: URL NOT SET.", Toast.LENGTH_LONG).show();
-            }
-        });
+            ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    String url = uri.toString();
+                    //Toast.makeText(getContext(),  url, Toast.LENGTH_LONG).show();
+                    //photoURL = url;
+                    //rm.setPhotoURL(url);
+                    //Toast.makeText(getContext(), url, Toast.LENGTH_LONG).show();
+                    myMeal.setPhotoURL(url);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(), "ERROR: URL NOT SET.", Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            //Do nothing
+        }
+
         //return photoURL;
     }
 
@@ -436,7 +487,7 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
                         });
             }
 
-        } else {
+        } else if(cameraSelected ==  true){
             firebaseAuth = FirebaseAuth.getInstance();
             final String uid = firebaseAuth.getUid();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -444,7 +495,7 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
             byte[] b = stream.toByteArray();
             String substr = myMeal.getPhotoName().substring(0,myMeal.getPhotoName().indexOf("."));
             StorageReference fileReference = mStorageRef.child(substr + ".jpg");
-            pathURL = uid + setDateTime + ".jpg";
+            pathURL = substr + ".jpg";
             fileReference.putBytes(b).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -462,6 +513,10 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
                     //Toast.makeText(CameraActivity.this,"failed",Toast.LENGTH_LONG).show();
                 }
             });
+        } else {
+            pathURL = dispRest.getPhotoURL();
+            Toast.makeText(getContext(), "Update Applied", Toast.LENGTH_SHORT).show();
+            injectData();
         }
     }
 
@@ -490,7 +545,65 @@ public class manageMenuItemFragment extends Fragment implements AdapterView.OnIt
 
     public void validateInput(){
         if(cameraImage == null && selectedImage == null){
-            Toast.makeText(getContext(), "Please Select an Image", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), "Please Select an Image", Toast.LENGTH_SHORT).show();
+            if(!foodName.getText().toString().trim().equals("") && !calories.getText().toString().trim().equals("") && !description.getText().toString().trim().equals("")) {
+                myMeal.setName(foodName.getText().toString());
+                myMeal.setCalories(calories.getText().toString());
+                myMeal.setDescription(description.getText().toString());
+                myMeal.setType(whereMeal);
+
+                if (dairybox.isChecked()) {
+                    myMeal.getAllergies().put("Dairy", true);
+                } else {
+                    myMeal.getAllergies().put("Dairy", false);
+                }
+
+                if (eggbox.isChecked()) {
+                    myMeal.getAllergies().put("Eggs", true);
+                } else {
+                    myMeal.getAllergies().put("Eggs", false);
+                }
+
+                if (fishbox.isChecked()) {
+                    myMeal.getAllergies().put("Fish", true);
+                } else {
+                    myMeal.getAllergies().put("Fish", false);
+                }
+
+                if (shellbox.isChecked()) {
+                    myMeal.getAllergies().put("Shellfish", true);
+                } else {
+                    myMeal.getAllergies().put("Shellfish", false);
+                }
+
+                if (treebox.isChecked()) {
+                    myMeal.getAllergies().put("Tree Nuts", true);
+                } else {
+                    myMeal.getAllergies().put("Tree Nuts", false);
+                }
+
+                if (wheatbox.isChecked()) {
+                    myMeal.getAllergies().put("Wheat", true);
+                } else {
+                    myMeal.getAllergies().put("Wheat", false);
+                }
+
+                if (soybox.isChecked()) {
+                    myMeal.getAllergies().put("Soy", true);
+                } else {
+                    myMeal.getAllergies().put("Soy", false);
+                }
+
+                if (peanutbox.isChecked()) {
+                    myMeal.getAllergies().put("Peanuts", true);
+                } else {
+                    myMeal.getAllergies().put("Peanuts", false);
+                }
+
+                uploadPhoto();
+            } else {
+                Toast.makeText(getContext(), "Error: Form not complete", Toast.LENGTH_SHORT).show();
+            }
         } else {
             if(!foodName.getText().toString().trim().equals("") && !calories.getText().toString().trim().equals("") && !description.getText().toString().trim().equals("")){
                 myMeal.setName(foodName.getText().toString());

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -73,7 +72,7 @@ public class dispCustomerProfile extends Fragment {
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
 
-        Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
 
         displayData();
 
