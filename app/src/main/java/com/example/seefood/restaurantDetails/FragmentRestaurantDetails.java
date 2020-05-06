@@ -31,6 +31,7 @@ public class FragmentRestaurantDetails extends Fragment {
     private TextView detailsAddress;
     private ImageView detailsCirclePhotoURL;
     private ImageView detailsBannerPhotoURL;
+    private TextView detailsPhoneNumber;
 
     private RecyclerView myRecyclerView;
 
@@ -54,9 +55,13 @@ public class FragmentRestaurantDetails extends Fragment {
 
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
         detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
+        detailsPhoneNumber = v.findViewById(R.id.detailsphoneNumber);
+
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
         detailsBannerPhotoURL = v.findViewById(R.id.restaurantDetailsImage);
         toolBarDetails = v.findViewById(R.id.toolBarDetails_back);
+
+
         toolBarDetails.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +70,9 @@ public class FragmentRestaurantDetails extends Fragment {
         });
 
         detailsName.setText(obj.getRestName());
-        detailsAddress.setText(obj.getStreetAddress());
+        String a = obj.getStreetAddress() + ", " + obj.getCity()+ ", " + obj.getState();
+        detailsAddress.setText(a);
+        detailsPhoneNumber.setText(obj.getPhoneNumber());
         Picasso.get()
                 .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
         Picasso.get()
