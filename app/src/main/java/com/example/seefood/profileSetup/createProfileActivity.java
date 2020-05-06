@@ -2,6 +2,7 @@ package com.example.seefood.profileSetup;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,6 +26,6 @@ public class createProfileActivity extends AppCompatActivity {
         @SuppressLint("MissingSuperCall")
         @Override
         public void onBackPressed() {
-
+            Toast.makeText(this, "Please Complete Setup", Toast.LENGTH_SHORT).show();
         }
 }

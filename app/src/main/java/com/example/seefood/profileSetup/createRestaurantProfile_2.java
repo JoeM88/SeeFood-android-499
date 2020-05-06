@@ -37,6 +37,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -62,12 +64,17 @@ public class createRestaurantProfile_2 extends Fragment {
     private static final int LOCATION_REQUEST = 222;
     private static final int GALLERY_REQUEST_CODE = 123;
 
+    Boolean galleryImage = false;
+    Boolean cameraPhoto = false;
+
     private Uri selectedImage;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     String pathURL;
+
+    Bitmap cameraImage;
 
     Spinner typeSpinner;
 
@@ -97,13 +104,13 @@ public class createRestaurantProfile_2 extends Fragment {
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Restaurants");
 
 
-        Toast.makeText(getContext(), rm.printRest(rm), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), rm.printRest(rm), Toast.LENGTH_LONG).show();
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //goToStep3();
-                if(selectedImage != null){
+                if(selectedImage != null || cameraImage != null){
                     uploadPhoto();
 
                 } else {
@@ -214,29 +221,20 @@ public class createRestaurantProfile_2 extends Fragment {
             switch(requestCode) {
                 case 0:
                     if(resultCode == RESULT_OK && data != null){
-                        Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+                        cameraImage = (Bitmap) data.getExtras().get("data");
                         restPhoto.setImageBitmap(cameraImage);
+                        galleryImage = false;
+                        cameraPhoto = true;
                     }
                     break;
                 case 1:
                     checkLocationRequest();
-                    Toast.makeText(getActivity(), "Reached CASE 1", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "Reached CASE 1", Toast.LENGTH_LONG).show();
                     if (resultCode == RESULT_OK && data != null) {
                         selectedImage =  data.getData();
-//                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//                        if (selectedImage != null) {
-//                            Cursor cursor = getContext().getContentResolver().query(selectedImage,
-//                                    filePathColumn, null, null, null);
-//                            if (cursor != null) {
-//                                cursor.moveToFirst();
-//
-//                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                                String picturePath = cursor.getString(columnIndex);
-//                                imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-//                                cursor.close();
-//                            }
-//                        }
                         restPhoto.setImageURI(selectedImage);
+                        galleryImage = true;
+                        cameraPhoto = false;
 
                     }
                     break;
@@ -270,37 +268,107 @@ public class createRestaurantProfile_2 extends Fragment {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    private void uploadPhoto(){
-        firebaseAuth = FirebaseAuth.getInstance();
-        final String uid = firebaseAuth.getUid();
-        if(selectedImage != null){
-            StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
-            //pathURL = fileReference.toString();
-            pathURL = uid + "." + getFileExtension(selectedImage);
-            fileReference.putFile(selectedImage)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
-                            //photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
-                            goToStep3();
+    private void uploadPhoto() {
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+        if (galleryImage == true) {
+            firebaseAuth = FirebaseAuth.getInstance();
+            final String uid = firebaseAuth.getUid();
+            if (selectedImage != null) {
+                StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
+                //pathURL = fileReference.toString();
+                pathURL = uid + "." + getFileExtension(selectedImage);
+                fileReference.putFile(selectedImage)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
+                                //photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+                                //injectData();
+                                goToStep3();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
 
-                        }
-                    });
+                            }
+                        });
+            }
+
+        } else if(cameraPhoto == true){
+            firebaseAuth = FirebaseAuth.getInstance();
+            final String uid = firebaseAuth.getUid();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            cameraImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] b = stream.toByteArray();
+
+            StorageReference fileReference = mStorageRef.child(uid + ".jpg");
+            pathURL = uid + ".jpg";
+            fileReference.putBytes(b).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    Toast.makeText(getActivity(), "uploaded", Toast.LENGTH_SHORT).show();
+                    goToStep3();
+
+                    //findDownloadURL();
+                    //injectData();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    //Toast.makeText(CameraActivity.this,"failed",Toast.LENGTH_LONG).show();
+
+
+                }
+            });
+
+        } else {
+            //pathURL = dispRest.getPhotoURL();
+            //injectData();
+            Toast.makeText(getContext(), "You must select an image.", Toast.LENGTH_SHORT).show();
         }
     }
+
+//    private void uploadPhoto(){
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        final String uid = firebaseAuth.getUid();
+//        if(selectedImage != null){
+//            StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
+//            //pathURL = fileReference.toString();
+//            pathURL = uid + "." + getFileExtension(selectedImage);
+//            fileReference.putFile(selectedImage)
+//                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
+//                            //photoURL = taskSnapshot.getMetadata().getReference().getDownloadUrl().toString();
+//                            goToStep3();
+//
+//                        }
+//                    })
+//                    .addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                        }
+//                    })
+//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+//
+//                        }
+//                    });
+//        }
+//    }
 
 
 

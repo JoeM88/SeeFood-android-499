@@ -75,7 +75,7 @@
             android:id="@+id/restPhoto"
             android:layout_width="172dp"
             android:layout_height="178dp"
-            android:background="@color/white"
+            android:background="#9e0b0f"
             android:padding="10dp"
             android:src="@drawable/ntseefood"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -66,6 +66,7 @@ public class editRestPhotoFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     String pathURL;
     Boolean galleryImage = false;
+    Boolean cameraPhoto =  false;
 
     Button nextButton;
     Button addPhoto;
@@ -148,7 +149,7 @@ public class editRestPhotoFragment extends Fragment {
                         });
             }
 
-        } else {
+        } else if(cameraPhoto == true){
             firebaseAuth = FirebaseAuth.getInstance();
             final String uid = firebaseAuth.getUid();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -177,6 +178,9 @@ public class editRestPhotoFragment extends Fragment {
                 }
             });
 
+        } else {
+            pathURL = dispRest.getPhotoURL();
+            injectData();
         }
     }
 
