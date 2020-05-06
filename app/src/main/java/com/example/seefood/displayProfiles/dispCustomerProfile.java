@@ -65,9 +65,9 @@ public class dispCustomerProfile extends Fragment {
         displayName = view.findViewById(R.id.profileName);
         editProfile1 = view.findViewById(R.id.changeDisplayName);
         changePassword = view.findViewById(R.id.changePassword);
-        customerLogout = view.findViewById(R.id.customerLogout);
+        //customerLogout = view.findViewById(R.id.customerLogout);
         im = view.findViewById(R.id.profileImage);
-        logout = view.findViewById(R.id.logoutButtonCustomer);
+        logout = view.findViewById(R.id.customerLogout);
 
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();

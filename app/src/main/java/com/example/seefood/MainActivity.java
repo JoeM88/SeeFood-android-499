@@ -1,6 +1,7 @@
 package com.example.seefood;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,5 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-//        @SuppressLint("MissingSuperCall")
-//        @Override
-//        public void onBackPressed() {
-//
-//        }
 
 }
