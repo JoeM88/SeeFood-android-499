@@ -73,8 +73,6 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.search_button) ImageButton searchButton;
     @BindView(R.id.near_me_button) Button nearMeButton;
     @BindView(R.id.favorites_button) Button favoritesButton;
-    @BindView(R.id.recents_button) Button recentButton;
-
     PlacesClient placesClient;
     FusedLocationProviderClient mFusedLocationClient;
 
