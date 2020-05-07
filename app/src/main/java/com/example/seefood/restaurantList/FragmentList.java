@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seefood.FragmentHome;
 import com.example.seefood.FragmentProfile;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
@@ -139,12 +140,18 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
 
                                 lstRestaurant.add(res);
                             }
+                            if (lstRestaurant.isEmpty()){
+                                Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                                FragmentHome fragmentHome = new FragmentHome();
+                                MainActivity mainActivity = (MainActivity) mContext;
+                                mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                            }
                             recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
                             myRecyclerView.setAdapter(recycleAdapter);
 
 
                         }).addOnFailureListener(e -> {
-                            Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
                             Log.v("----1----", e.getMessage());
                         });
 
@@ -157,12 +164,18 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                                 RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
                                 lstRestaurant.add(res);
                             }
+                            if (lstRestaurant.isEmpty()){
+                                Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                                FragmentHome fragmentHome = new FragmentHome();
+                                MainActivity mainActivity = (MainActivity) mContext;
+                                mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                            }
                             recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
                             myRecyclerView.setAdapter(recycleAdapter);
 
 
                         }).addOnFailureListener(e -> {
-                            Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
                             Log.v("----1----", e.getMessage());
                         });
             }
@@ -175,16 +188,21 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
                             RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
                             lstRestaurant.add(res);
                         }
+                        if (lstRestaurant.isEmpty()){
+                            Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                            FragmentHome fragmentHome = new FragmentHome();
+                            MainActivity mainActivity = (MainActivity) mContext;
+                            mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                        }
                         recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
                         myRecyclerView.setAdapter(recycleAdapter);
 
 
                     }).addOnFailureListener(e -> {
-                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                        //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
                         Log.v("----1----", e.getMessage());
                     });
         }
-
     }
 
     @Override
