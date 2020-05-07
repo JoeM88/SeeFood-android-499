@@ -11,13 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
-import com.example.seefood.models.MealModel;
-import com.example.seefood.models.OperationsModel;
 import com.example.seefood.models.RestaurantModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -73,9 +69,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.onRestaurantListener = onRestaurantListener;
 
             itemView.setOnClickListener(this);
-
-
-
         }
         public void onClick(View view)
         {

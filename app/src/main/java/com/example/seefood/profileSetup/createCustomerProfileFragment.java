@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -64,8 +66,16 @@ public class createCustomerProfileFragment extends Fragment {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CustomerModel cm = new CustomerModel();
+    //final String uid = firebaseAuth.getUid();
+    String uid;
+
+    Boolean galleryImage = false;
+    Boolean cameraPhoto = false;
+
+    String pathURL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +88,9 @@ public class createCustomerProfileFragment extends Fragment {
         editText = view.findViewById(R.id.editText);
         mStorageRef = FirebaseStorage.getInstance().getReference("profilePhotos");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Customer");
+        uid = firebaseAuth.getUid();
+
+        Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
 
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
 //                PackageManager.PERMISSION_GRANTED) {
@@ -96,7 +109,9 @@ public class createCustomerProfileFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+
                 uploadProfile();
+                Toast.makeText(getContext(), uid, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -138,6 +153,29 @@ public class createCustomerProfileFragment extends Fragment {
         selectImage(getContext());
     }
 
+    private void injectData(){
+
+        findDownloadURL();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<String> list = new ArrayList<String>();
+                ArrayList<String> rec = new ArrayList<>();
+                cm.setDiplayName(editText.getText().toString());
+                cm.setFavorites(list);
+                cm.setPhotoName(uid);
+                cm.setDisplayID(uid);
+                cm.setRecentPlaces(rec);
+                String uploadID = uid;
+                mDatabaseRef.child(uploadID).setValue(cm);
+                db.collection("Customer").document(firebaseAuth.getUid()).set(cm);
+                goHome(null);
+            }
+        }, 500);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
@@ -145,8 +183,10 @@ public class createCustomerProfileFragment extends Fragment {
             switch(requestCode) {
                 case 0:
                     if(resultCode == RESULT_OK && data != null){
-                        Bitmap cameraImage = (Bitmap) data.getExtras().get("data");
+                        cameraImage = (Bitmap) data.getExtras().get("data");
                         imageView.setImageBitmap(cameraImage);
+                        cameraPhoto = true;
+                        galleryImage = false;
                     }
                     break;
                 case 1:
@@ -154,21 +194,9 @@ public class createCustomerProfileFragment extends Fragment {
                     Toast.makeText(getActivity(), "Reached CASE 1", Toast.LENGTH_LONG).show();
                     if (resultCode == RESULT_OK && data != null) {
                         selectedImage =  data.getData();
-//                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//                        if (selectedImage != null) {
-//                            Cursor cursor = getContext().getContentResolver().query(selectedImage,
-//                                    filePathColumn, null, null, null);
-//                            if (cursor != null) {
-//                                cursor.moveToFirst();
-//
-//                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                                String picturePath = cursor.getString(columnIndex);
-//                                imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-//                                cursor.close();
-//                            }
-//                        }
                         imageView.setImageURI(selectedImage);
-
+                        cameraPhoto = false;
+                        galleryImage = true;
                     }
                     break;
             }
@@ -181,41 +209,109 @@ public class createCustomerProfileFragment extends Fragment {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadProfile(){
-        firebaseAuth = FirebaseAuth.getInstance();
-        final String uid = firebaseAuth.getUid();
-        if(selectedImage != null){
-            StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
-            fileReference.putFile(selectedImage)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
-                            ArrayList<String> list = new ArrayList<String>();
-                            ArrayList<String> rec = new ArrayList<>();
-                            CustomerModel cm = new CustomerModel(editText.getText().toString(), list, uid, taskSnapshot.getMetadata().getReference().getDownloadUrl().toString(), rec);
-                            String uploadID = uid;
-                            mDatabaseRef.child(uploadID).setValue(cm);
-                            db.collection("Customer").document(firebaseAuth.getUid()).set(cm);
-                            goHome(null);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+    private void findDownloadURL() {
+        StorageReference ref = mStorageRef.child(pathURL);
+//        String answer = ref.getDownloadUrl().toString();
+//        Toast.makeText(getContext(), "YOU GOT THIS --> " + answer, Toast.LENGTH_LONG).show();
+        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                String url = uri.toString();
+                //Toast.makeText(getContext(),  url, Toast.LENGTH_LONG).show();
+                //photoURL = url;
+                cm.setPhotoUrl(url);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "ERROR!!!!", Toast.LENGTH_LONG).show();
+            }
+        });
+        //return photoURL;
+    }
 
-                        }
-                    });
+    private void uploadProfile(){
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        final String uid = firebaseAuth.getUid();
+        if(!editText.getText().toString().equals(""))
+        {
+            if(galleryImage == true){
+                if(selectedImage != null){
+                    StorageReference fileReference = mStorageRef.child(uid + "." + getFileExtension(selectedImage));
+                    pathURL = uid + "." + getFileExtension(selectedImage);
+                    fileReference.putFile(selectedImage)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(getActivity(), "Successfully Uploaded Image", Toast.LENGTH_LONG).show();
+//                                ArrayList<String> list = new ArrayList<String>();
+//                                ArrayList<String> rec = new ArrayList<>();
+//                                CustomerModel cm = new CustomerModel();
+//                                cm.setDiplayName(editText.getText().toString());
+//                                cm.setFavorites(list);
+//                                cm.setPhotoName(uid);
+//                                cm.setDisplayID(uid);
+//                                cm.setPhotoUrl(taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
+//                                cm.setRecentPlaces(rec);
+//                                String uploadID = uid;
+//                                mDatabaseRef.child(uploadID).setValue(cm);
+//                                db.collection("Customer").document(firebaseAuth.getUid()).set(cm);
+                                    //goHome(null);
+                                    injectData();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+
+                                }
+                            });
+                } else {
+                    Toast.makeText(getActivity(), "No file selected.", Toast.LENGTH_LONG).show();
+                }
+            } else if(cameraPhoto == true){
+                firebaseAuth = FirebaseAuth.getInstance();
+                final String uid = firebaseAuth.getUid();
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                cameraImage.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] b = stream.toByteArray();
+
+                StorageReference fileReference = mStorageRef.child(uid + ".jpg");
+                pathURL = uid + ".jpg";
+                fileReference.putBytes(b).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        Toast.makeText(getActivity(), "uploaded", Toast.LENGTH_SHORT).show();
+
+                        //findDownloadURL();
+                        injectData();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Toast.makeText(CameraActivity.this,"failed",Toast.LENGTH_LONG).show();
+
+
+                    }
+                });
+            } else {
+                Toast.makeText(getContext(), "Please select an image...", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Toast.makeText(getActivity(), "No file selected.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Form Incomplete", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     private void goHome(View view){

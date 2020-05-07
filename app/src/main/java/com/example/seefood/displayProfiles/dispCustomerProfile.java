@@ -70,6 +70,8 @@ public class dispCustomerProfile extends Fragment {
         currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
 
+        //Toast.makeText(getContext(), uid, Toast.LENGTH_LONG).show();
+
         displayData();
 
         editProfile1.setOnClickListener(new View.OnClickListener() {
