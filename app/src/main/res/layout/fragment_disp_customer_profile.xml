@@ -9,21 +9,26 @@
 
     <ImageView
         android:id="@+id/profileImage"
-        android:layout_width="411dp"
-        android:layout_height="402dp"
+        android:layout_width="390dp"
+        android:layout_height="390dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Display Name"
-        android:textSize="20dp"
+        android:textSize="25dp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
