@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -277,93 +278,185 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                 int intEndHour;
                 int intEndMinute;
 
-                if(startHalf.equals("PM")){
-                    if(Integer.parseInt(startHours) == 12){
+                if(checkHours()){
+                    if(startHalf.equals("PM")){
+                        if(Integer.parseInt(startHours) == 12){
+                            intStartHour = Integer.parseInt(startHours);
+                            intStartMinute = Integer.parseInt(startMinutes);
+                        } else {
+                            intStartHour = Integer.parseInt(startHours) + 12;
+                            intStartMinute = Integer.parseInt(startMinutes);
+                        }
+                    } else {
                         intStartHour = Integer.parseInt(startHours);
                         intStartMinute = Integer.parseInt(startMinutes);
+                    }
+                    if(endHalf.equals("PM")){
+                        if(Integer.parseInt(endHours) == 12){
+                            intEndHour = Integer.parseInt(endHours);
+                            intEndMinute = Integer.parseInt(endMinutes);
+                        } else {
+                            intEndHour = Integer.parseInt(endHours) + 12;
+                            intEndMinute = Integer.parseInt(endMinutes);
+                        }
                     } else {
-                        intStartHour = Integer.parseInt(startHours) + 12;
-                        intStartMinute = Integer.parseInt(startMinutes);
+                        if(Integer.parseInt(startHours) == 12){
+                            intStartHour = 0;
+                            intStartMinute = Integer.parseInt(startMinutes);
+                        } else {
+                            intEndHour = Integer.parseInt(endHours);
+                            intEndMinute = Integer.parseInt(endMinutes);
+                        }
+                        if(Integer.parseInt(endHours) == 12){
+                            intEndHour = 0;
+                            intEndMinute = Integer.parseInt(endMinutes);
+                        } else {
+                            intEndHour = Integer.parseInt(endHours);
+                            intEndMinute = Integer.parseInt(endMinutes);
+                        }
+                    }
+
+                    if(Monday == true){
+                        String day = "Monday";
+                        mondayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                    } if(Tuesday == true){
+                        String day = "Tuesday";
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                        tuesdayList.setText(set);
+                    } if(Wednesday == true){
+                        String day = "Wednesday";
+                        wednesdayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                    } if(Thursday == true){
+                        String day = "Thursday";
+                        thursdayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                    } if(Friday == true){
+                        String day = "Friday";
+                        fridayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                    } if(Saturday == true){
+                        String day = "Saturday";
+                        saturdayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+                    } if(Sunday == true){
+                        String day = "Sunday";
+                        sundayList.setText(set);
+                        hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+                        hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+                        hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+                        hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
                     }
                 } else {
-                    intStartHour = Integer.parseInt(startHours);
-                    intStartMinute = Integer.parseInt(startMinutes);
-                }
-                if(endHalf.equals("PM")){
-                    if(Integer.parseInt(endHours) == 12){
-                        intEndHour = Integer.parseInt(endHours);
-                        intEndMinute = Integer.parseInt(endMinutes);
-                    } else {
-                        intEndHour = Integer.parseInt(endHours) + 12;
-                        intEndMinute = Integer.parseInt(endMinutes);
-                    }
-                } else {
-                    if(Integer.parseInt(startHours) == 12){
-                        intStartHour = 0;
-                        intStartMinute = Integer.parseInt(startMinutes);
-                    } else {
-                        intEndHour = Integer.parseInt(endHours);
-                        intEndMinute = Integer.parseInt(endMinutes);
-                    }
-                    if(Integer.parseInt(endHours) == 12){
-                        intEndHour = 0;
-                        intEndMinute = Integer.parseInt(endMinutes);
-                    } else {
-                        intEndHour = Integer.parseInt(endHours);
-                        intEndMinute = Integer.parseInt(endMinutes);
-                    }
+                    Toast.makeText(getContext(), "Incompatible Hours, Try Again", Toast.LENGTH_SHORT).show();
                 }
 
-                if(Monday == true){
-                    String day = "Monday";
-                    mondayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                } if(Tuesday == true){
-                    String day = "Tuesday";
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                    tuesdayList.setText(set);
-                } if(Wednesday == true){
-                    String day = "Wednesday";
-                    wednesdayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                } if(Thursday == true){
-                    String day = "Thursday";
-                    thursdayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                } if(Friday == true){
-                    String day = "Friday";
-                    fridayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                } if(Saturday == true){
-                    String day = "Saturday";
-                    saturdayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                } if(Sunday == true){
-                    String day = "Sunday";
-                    sundayList.setText(set);
-                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
-                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
-                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
-                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
-                }
+//                if(startHalf.equals("PM")){
+//                    if(Integer.parseInt(startHours) == 12){
+//                        intStartHour = Integer.parseInt(startHours);
+//                        intStartMinute = Integer.parseInt(startMinutes);
+//                    } else {
+//                        intStartHour = Integer.parseInt(startHours) + 12;
+//                        intStartMinute = Integer.parseInt(startMinutes);
+//                    }
+//                } else {
+//                    intStartHour = Integer.parseInt(startHours);
+//                    intStartMinute = Integer.parseInt(startMinutes);
+//                }
+//                if(endHalf.equals("PM")){
+//                    if(Integer.parseInt(endHours) == 12){
+//                        intEndHour = Integer.parseInt(endHours);
+//                        intEndMinute = Integer.parseInt(endMinutes);
+//                    } else {
+//                        intEndHour = Integer.parseInt(endHours) + 12;
+//                        intEndMinute = Integer.parseInt(endMinutes);
+//                    }
+//                } else {
+//                    if(Integer.parseInt(startHours) == 12){
+//                        intStartHour = 0;
+//                        intStartMinute = Integer.parseInt(startMinutes);
+//                    } else {
+//                        intEndHour = Integer.parseInt(endHours);
+//                        intEndMinute = Integer.parseInt(endMinutes);
+//                    }
+//                    if(Integer.parseInt(endHours) == 12){
+//                        intEndHour = 0;
+//                        intEndMinute = Integer.parseInt(endMinutes);
+//                    } else {
+//                        intEndHour = Integer.parseInt(endHours);
+//                        intEndMinute = Integer.parseInt(endMinutes);
+//                    }
+//                }
+//
+//                if(Monday == true){
+//                    String day = "Monday";
+//                    mondayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                } if(Tuesday == true){
+//                    String day = "Tuesday";
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                    tuesdayList.setText(set);
+//                } if(Wednesday == true){
+//                    String day = "Wednesday";
+//                    wednesdayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                } if(Thursday == true){
+//                    String day = "Thursday";
+//                    thursdayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                } if(Friday == true){
+//                    String day = "Friday";
+//                    fridayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                } if(Saturday == true){
+//                    String day = "Saturday";
+//                    saturdayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                } if(Sunday == true){
+//                    String day = "Sunday";
+//                    sundayList.setText(set);
+//                    hoursOperation.get(day).get(controllerString).setOpenHour(intStartHour);
+//                    hoursOperation.get(day).get(controllerString).setOpenMins(intStartMinute);
+//                    hoursOperation.get(day).get(controllerString).setDurHours(intEndHour);
+//                    hoursOperation.get(day).get(controllerString).setDurMins(intEndMinute);
+//                }
                 //String set = startHours + ":" + startMinutes + startHalf + "--" + endHours + ":" + endMinutes + endHalf;
                 //mondayList.setText(set);
             }
@@ -424,7 +517,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText.setText("TRUE");
-                    monButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    monButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     monButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -445,7 +538,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText2.setText("TRUE");
-                    tueButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    tueButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     tueButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -465,7 +558,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText3.setText("TRUE");
-                    wedButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    wedButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     wedButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -485,7 +578,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText4.setText("TRUE");
-                    thuButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    thuButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     thuButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -505,7 +598,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText5.setText("TRUE");
-                    friButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    friButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     friButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -525,7 +618,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText6.setText("TRUE");
-                    satButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    satButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     satButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -545,7 +638,7 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
                     //monButton.setBackgroundColor(material_blue_grey_800);
                 } else {
                     //myText7.setText("TRUE");
-                    sunButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.MULTIPLY);
+                    sunButton.getBackground().setColorFilter(Color.rgb(112, 115, 114), PorterDuff.Mode.MULTIPLY);
                     sunButton.setTextColor(Color.WHITE);
                     //monButton.setBackgroundColor(red);
                 }
@@ -554,6 +647,29 @@ HashMap<String, HashMap<String, OperationsModel>> hoursOperation;
 
 
         return view;
+    }
+
+    private Boolean checkHours(){
+        int intStartHour;
+        int intEndHour;
+
+        if(startHalf.equals("PM")){
+            intStartHour = Integer.parseInt(startHours) + 12;
+        } else {
+            intStartHour = Integer.parseInt(startHours);
+        }
+
+        if(endHalf.equals("PM")){
+            intEndHour = Integer.parseInt(endHours) + 12;
+        } else {
+            intEndHour = Integer.parseInt(endHours);
+        }
+
+        if(intEndHour > intStartHour){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void createFinalObject() {

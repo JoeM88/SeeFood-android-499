@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.profileSetup.createProfileActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -102,15 +102,15 @@ public class SignUpFragmentUser extends Fragment {
                             if(task.isSuccessful()){
                                 // User is successfully registered and logged in
                                 Toast.makeText(getActivity(), "Registered Successfully", Toast.LENGTH_SHORT);
-                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                startActivity(new Intent(getActivity(), createProfileActivity.class));
                             }
                         }
                     });
         }
 
         String input = "Email: " + email.getEditText().getText().toString();
-        input += "\n";
-        input += "Password: " + password.getEditText().getText().toString();
+        input += "\n User Created";
+        //input += "Password: " + password.getEditText().getText().toString();
 
         Toast.makeText(getActivity(), input, Toast.LENGTH_SHORT).show();
     }

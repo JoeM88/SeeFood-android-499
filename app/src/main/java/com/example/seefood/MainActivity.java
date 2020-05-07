@@ -8,14 +8,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.seefood.restaurantList.FragmentList;
+import com.example.seefood.favorites.FragmentFavorite;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Stack;
 
 import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 2000;
 
+    private Stack<Fragment> stack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView botNav = findViewById(R.id.bottom_nav);
         botNav.setOnNavigationItemSelectedListener(navListener);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        //ft.replace(R.id.container_fragment, new FragmentList());
-        ft.replace(R.id.container_fragment, new FragmentHome());
-        ft.commit();
-
-
+        stack = new Stack<>();
+        switchContent(R.id.container_fragment, new FragmentHome(), true);
 
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,17 +51,40 @@ public class MainActivity extends AppCompatActivity {
 
             }
             assert selectedFragment != null;
+
+            clearBackStack();
+            stack.push(selectedFragment);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
 
             return true;
         }
     };
 
-    public void switchContent(int id, Fragment fragment) {
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(id, fragment, fragment.toString());
-        ft.addToBackStack(null);
-        ft.commit();
+    public void switchContent(int id, Fragment fragment, boolean add) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+        if (add)
+            stack.push(fragment);
+        transaction.replace(R.id.container_fragment, fragment);
+        transaction.commit();
     }
+
+    public void popFragment() {
+        if (!stack.isEmpty()) {
+            Fragment fragment = stack.elementAt(stack.size() - 2);
+            stack.pop();
+            switchContent(R.id.container_fragment, fragment, false);
+        } else
+            super.onBackPressed();
+    }
+
+    public void clearBackStack() {
+        stack.clear();
+    }
+
+    @Override
+    public void onBackPressed() {
+        popFragment();
+    }
+
 }

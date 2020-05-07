@@ -1,23 +1,53 @@
 package com.example.seefood.models;
 
-public class MealModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MealModel implements Parcelable {
     private String name;
     private String calories;
     private String photoName;
     private String photoURL;
     private String type;
     private String description;
+    private HashMap<String, Boolean> allergies;
 
     public MealModel(){ /*empty constructor*/ }
 
-    public MealModel(String name, String calories, String photoName, String photoURL, String type, String description){
+    public MealModel(String name, String calories, String photoName, String photoURL, String type, String description, HashMap<String, Boolean> allergies){
         this.name = name;
         this.calories = calories;
         this.photoName = photoName;
         this.photoURL = photoURL;
         this.type = type;
         this.description = description;
+        this.allergies = allergies;
     }
+
+    protected MealModel(Parcel in) {
+        name = in.readString();
+        calories = in.readString();
+        photoName = in.readString();
+        photoURL = in.readString();
+        type = in.readString();
+        description = in.readString();
+        in.readMap(allergies, HashMap.class.getClassLoader());
+    }
+
+    public static final Creator<MealModel> CREATOR = new Creator<MealModel>() {
+        @Override
+        public MealModel createFromParcel(Parcel in) {
+            return new MealModel(in);
+        }
+
+        @Override
+        public MealModel[] newArray(int size) {
+            return new MealModel[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -65,5 +95,48 @@ public class MealModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public HashMap<String, Boolean> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(HashMap<String, Boolean> allergies) {
+        this.allergies = allergies;
+    }
+
+    public String toString(){
+        return "Meal Name: " + name + " calories: " + calories + " photo name: "
+                + photoName + " photo URL: " + photoURL + " type: " + type + " description: "
+                + description + " allergies: " + allergies;
+
+    }
+
+    public StringBuilder allergyPrint(){
+        StringBuilder result = new StringBuilder("Allergy Warnings: ");
+        for(Map.Entry<String, Boolean> entry : allergies.entrySet()){
+            if(entry.getValue()){
+                result.append(" ");
+                result.append(entry.getKey());
+                result.append(",");
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(calories);
+        parcel.writeString(photoName);
+        parcel.writeString(photoURL);
+        parcel.writeString(type);
+        parcel.writeString(description);
+        parcel.writeMap(allergies);
     }
 }

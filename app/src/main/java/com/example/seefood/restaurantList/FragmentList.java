@@ -1,52 +1,58 @@
 package com.example.seefood.restaurantList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seefood.FragmentHome;
+import com.example.seefood.FragmentProfile;
 import com.example.seefood.MainActivity;
 import com.example.seefood.R;
+import com.example.seefood.login.SignUpActivity;
+import com.example.seefood.models.CustomerModel;
 import com.example.seefood.models.RestaurantModel;
 import com.example.seefood.restaurantDetails.FragmentRestaurantDetails;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener {
+public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRestaurantListener, RecyclerViewAdapter.OnRestaurantLikeListener {
 
 
     private View v;
     private RecyclerView myRecyclerView;
-    List<RestaurantModel> lstRestaurant;
-    List<String> restaurantIds;
     private RecyclerViewAdapter recycleAdapter;
     private Context mContext;
     private FirebaseFirestore db;
+    private FirebaseUser mCurrentUser;
     private String type;
+    private FragmentProfile mFragmentProfile;
+    List<RestaurantModel> lstRestaurant;
+    private Toolbar toolbar;
     FirebaseAuth firebaseAuth;
+    DocumentReference customerRef;
     String userId;
-
+    CustomerModel mCustomer;
+    ArrayList<String> mFavoriteRestaurants;
 
     public FragmentList() {
 
@@ -58,24 +64,36 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         v = inflater.inflate(R.layout.list_fragment, container, false);
         mContext = getContext();
 
+
         assert getArguments() != null;
         type = getArguments().getString("type");
         assert type != null;
-        //restaurantNames = new ArrayList<>();
 
         lstRestaurant = new ArrayList<>();
+        mFavoriteRestaurants = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         userId = firebaseAuth.getUid();
+        toolbar = v.findViewById(R.id.toolBar_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.addItemDecoration(new DividerItemDecoration(myRecyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(myRecyclerView);
+
 
         db = FirebaseFirestore.getInstance();
+        if(userId != null){
+            customerRef = db.collection("Customer").document(userId);
+            getCustomer();
+        }
+//        customerRef = db.collection("Customer").document(userId);
+//        getCustomer();
         loadDataFromFirebase(type);
-
 
         return v;
     }
@@ -85,22 +103,6 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         super.onCreate(savedInstanceState);
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
-
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            int position = viewHolder.getAdapterPosition();
-            Toast.makeText(mContext, "Swiped worked", Toast.LENGTH_SHORT);
-        }
-    };
-
-    public void onLongItemClick(final int position) {
-
-    }
 
 
     @Override
@@ -113,97 +115,146 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         if (mContext instanceof MainActivity) {
             MainActivity mainActivity = (MainActivity) mContext;
             Bundle b = new Bundle();
-            b.putSerializable("RestaurantObject", lstRestaurant.get(position));
+            b.putParcelable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
-            mainActivity.switchContent(R.id.container_fragment, frag);
+            mainActivity.switchContent(R.id.container_fragment, frag, true);
         }
-
-
     }
+
 
     public void loadDataFromFirebase(String type) {
         if (lstRestaurant.size() > 0) {
             lstRestaurant.clear();
         }
 
-
         if (type.charAt(0) < 58 && type.charAt(0) > 47) {
             if (type.length() > 5) {
                 db.collection("Restaurants")
                         .whereEqualTo("streetAddress", type)
                         .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        .addOnCompleteListener(task -> {
 
-                                for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
 
-                                    lstRestaurant.add(res);
-                                }
-                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                                myRecyclerView.setAdapter(recycleAdapter);
-
-
+                                lstRestaurant.add(res);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                        Log.v("----1----", e.getMessage());
-                    }
-                });
+                            if (lstRestaurant.isEmpty()){
+                                Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                                FragmentHome fragmentHome = new FragmentHome();
+                                MainActivity mainActivity = (MainActivity) mContext;
+                                mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                            }
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                            myRecyclerView.setAdapter(recycleAdapter);
+
+
+                        }).addOnFailureListener(e -> {
+                            //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            Log.v("----1----", e.getMessage());
+                        });
 
             } else {
                 db.collection("Restaurants")
                         .whereEqualTo("zipCode", type)
                         .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                    RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
-                                    lstRestaurant.add(res);
-                                }
-                                recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                                myRecyclerView.setAdapter(recycleAdapter);
-
-
+                        .addOnCompleteListener(task -> {
+                            for (DocumentSnapshot querySnapshot : task.getResult()) {
+                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                                lstRestaurant.add(res);
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                        Log.v("----1----", e.getMessage());
-                    }
-                });
+                            if (lstRestaurant.isEmpty()){
+                                Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                                FragmentHome fragmentHome = new FragmentHome();
+                                MainActivity mainActivity = (MainActivity) mContext;
+                                mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                            }
+                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                            myRecyclerView.setAdapter(recycleAdapter);
+
+
+                        }).addOnFailureListener(e -> {
+                            //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                            Log.v("----1----", e.getMessage());
+                        });
             }
         } else {
             db.collection("Restaurants")
                     .whereEqualTo("city", type)
                     .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            for (DocumentSnapshot querySnapshot : task.getResult()) {
-                                RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
-                                lstRestaurant.add(res);
-                            }
-                            recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick);
-                            myRecyclerView.setAdapter(recycleAdapter);
-
-
+                    .addOnCompleteListener(task -> {
+                        for (DocumentSnapshot querySnapshot : task.getResult()) {
+                            RestaurantModel res = querySnapshot.toObject(RestaurantModel.class);
+                            lstRestaurant.add(res);
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
-                    Log.v("----1----", e.getMessage());
-                }
-            });
-        }
+                        if (lstRestaurant.isEmpty()){
+                            Toast.makeText(mContext, "No Restaurants Found", Toast.LENGTH_LONG).show();
+                            FragmentHome fragmentHome = new FragmentHome();
+                            MainActivity mainActivity = (MainActivity) mContext;
+                            mainActivity.switchContent(R.id.container_fragment, fragmentHome, true);
+                        }
+                        recycleAdapter = new RecyclerViewAdapter(mContext, lstRestaurant, FragmentList.this::onRestaurantClick, FragmentList.this::onRestaurantLikeClicked);
+                        myRecyclerView.setAdapter(recycleAdapter);
 
+
+                    }).addOnFailureListener(e -> {
+                        //Toast.makeText(mContext, "Problem ----1----", Toast.LENGTH_SHORT);
+                        Log.v("----1----", e.getMessage());
+                    });
+        }
+    }
+
+    @Override
+    public void onRestaurantLikeClicked(int position, ImageView img) {
+        this.mCurrentUser = firebaseAuth.getCurrentUser();
+        if (this.mCurrentUser != null) {
+            RestaurantModel currRestaurant = lstRestaurant.get(position);
+            img.setImageResource(R.drawable.heart_on);
+            if (!mFavoriteRestaurants.contains(currRestaurant.restName)) {
+                Toast.makeText(mContext, currRestaurant.restName + " added to favorites!", Toast.LENGTH_SHORT).show();
+                mFavoriteRestaurants.add(currRestaurant.restName);
+            } else {
+                Toast.makeText(mContext, currRestaurant.restName + " already in favorites", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } else {
+            //mFragmentProfile = new FragmentProfile();
+            //mFragmentProfile.goSignUp(null);
+            Intent intent = new Intent(getContext(), SignUpActivity.class);
+            startActivity(intent);
+        }
+        Log.v("pressed", "like button pressed");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        updateCustomer();
+        mCustomer.setFavorites(mFavoriteRestaurants);
+    }
+
+    private void getCustomer() {
+        this.customerRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                this.mCustomer = task.getResult().toObject(CustomerModel.class);
+                this.mFavoriteRestaurants = mCustomer.getFavorites();
+                Log.d("display name", this.mCustomer.getDiplayName());
+            } else {
+                Log.d("query error", "Could not find customer");
+            }
+        });
+    }
+
+    private void updateCustomer() {
+        this.customerRef.update("favorites", mFavoriteRestaurants)
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("successful update", "Customer data updated successfully!");
+                })
+                .addOnFailureListener(aVoid -> {
+                    Log.d("failed update", "Customer update failed");
+                });
     }
 }
 

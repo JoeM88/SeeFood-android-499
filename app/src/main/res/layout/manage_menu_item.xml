@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/mealImageView"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ntseefood" />
+
+    <TextView
+        android:id="@+id/mealNameText"
+        android:layout_width="199dp"
+        android:layout_height="22dp"
+        android:text="Meal Name"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174" />
+
+    <TextView
+        android:id="@+id/mealDescription"
+        android:layout_width="206dp"
+        android:layout_height="42dp"
+        android:text="Meal description..."
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.427" />
+
+    <TextView
+        android:id="@+id/allergiesText"
+        android:layout_width="158dp"
+        android:layout_height="52dp"
+        android:text="Allergy List"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <TextView
+        android:id="@+id/mealCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calories"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.908" />
+
+    <Button
+        android:id="@+id/editButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:text="Edit"
+        android:textColor="#9e0b0f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.991"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

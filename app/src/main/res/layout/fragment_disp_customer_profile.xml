@@ -1,16 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/white"
     tools:context=".displayProfiles.dispCustomerProfile">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="390dp"
+        android:layout_height="390dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display Name"
+        android:textSize="25dp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImage"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/changeDisplayName"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Edit Display Name and Photo"
+        android:textColor="#9e0b0f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileName"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/changePassword"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:padding="10dp"
+        android:text="Change Password"
+        android:textColor="#9e0b0f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changeDisplayName"
+        app:layout_constraintVertical_bias="0" />
+
+    <Button
+        android:id="@+id/customerLogout"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:padding="10dp"
+        android:text="Logout"
+        android:textColor="#9e0b0f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/changePassword"
+        app:layout_constraintVertical_bias="0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 

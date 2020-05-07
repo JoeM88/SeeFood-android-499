@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    android:background="#9e0b0f"
     tools:context=".profileSetup.createRestaurantProfile_3">
 
 
@@ -194,7 +194,7 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Great! Let's set your hours of operation. Select a day or days from above."
+            android:text="Please set the hours you wish to change."
             android:textColor="#ffffff"
             android:textSize="20dp"
             android:paddingLeft="10dp"
@@ -519,7 +519,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/red"
+            android:background="#9e0b0f"
             android:padding="10dp"
             android:text="Reset All Fields"
             android:textColor="#ffffff"

@@ -1,5 +1,7 @@
 package com.example.seefood.login;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.seefood.MainActivity;
 import com.example.seefood.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -36,6 +39,13 @@ public class SignUpActivity extends AppCompatActivity {
             //fragmentTransaction.replace(R.id.fragment_container, signUpRestaurantOwnerFragment, "SignUpRO");
             fragmentTransaction.commit();
         }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

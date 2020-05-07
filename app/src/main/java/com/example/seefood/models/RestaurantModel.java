@@ -3,11 +3,11 @@ package com.example.seefood.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class RestaurantModel implements Serializable {
+public class RestaurantModel implements Parcelable {
     public String restName;
     public String owner;
     public String streetAddress;
@@ -20,10 +20,6 @@ public class RestaurantModel implements Serializable {
     private HashMap<String, HashMap<String, OperationsModel>>hOps;
     public HashMap<String, ArrayList<MealModel>> offerings;
 
-    //meal offerings
-//    public HashMap<String, ArrayList<MealModel>> offerings;
-////    private ArrayList<HashMap<String, HashMap<String, String>>> hoursOperation;
-//    private HashMap<String, HashMap<String, OperationsModel>>hOps;
 
     //TODO: Logo and Photo, must be via camera or file explorer in android studio
 
@@ -44,27 +40,34 @@ public class RestaurantModel implements Serializable {
         this.city = city;
         this.phoneNumber = phoneNumber;
         this.offerings = offerings;
-//        this.hoursOperation = hoursOperation;
         this.hOps = hOps;
         this.photoName = photoName;
         this.photoURL = photoURL;
     }
 
-//    protected RestaurantModel(Parcel in) {
-//        restName = in.readString();
-//        owner = in.readString();
-//        streetAddress = in.readString();
-//        state = in.readString();
-//        zipCode = in.readString();
-//        city = in.readString();
-//        phoneNumber = in.readString();
-//        offerings = in.readHashMap(OperationsModel.class.getClassLoader());
-//        hOps = in.readHashMap()
-//
-//        this.hOps = hOps;
-//        this.photoName = photoName;
-//        this.photoURL = photoURL;
-//    }
+    protected RestaurantModel(Parcel in) {
+        restName = in.readString();
+        owner = in.readString();
+        streetAddress = in.readString();
+        state = in.readString();
+        zipCode = in.readString();
+        city = in.readString();
+        phoneNumber = in.readString();
+        in.readMap(offerings, HashMap.class.getClassLoader());
+        in.readMap(hOps, List.class.getClassLoader());
+    }
+
+    public static final Creator<RestaurantModel> CREATOR = new Creator<RestaurantModel>() {
+        @Override
+        public RestaurantModel createFromParcel(Parcel in) {
+            return new RestaurantModel(in);
+        }
+
+        @Override
+        public RestaurantModel[] newArray(int size) {
+            return new RestaurantModel[size];
+        }
+    };
 
     public String getRestName() {
         return restName;
@@ -165,7 +168,29 @@ public class RestaurantModel implements Serializable {
 
     public String printRest(RestaurantModel rm){
         return "Name --> " + rm.getRestName() + "\n" + "Address --> " + rm.getStreetAddress() + "\n" + "City --> " + rm.getCity() + "\n"
-                + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n";
+                + "State -->" + rm.getState() + "\n" + "Zip Code--> " + rm.getZipCode() + "\n" + "Phone Number --> " + rm.getPhoneNumber() + "\n" +
+                rm.getOfferings() + "\n";
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(restName);
+        dest.writeString(owner);
+        dest.writeString(streetAddress);
+        dest.writeString(state);
+        dest.writeString(zipCode);
+        dest.writeString(phoneNumber);
+        dest.writeString(photoName);
+        dest.writeString(city);
+        dest.writeString(photoURL);
+        dest.writeMap(hOps);
+        dest.writeMap(offerings);
+
     }
 
 }

@@ -9,19 +9,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seefood.R;
+import com.example.seefood.models.MealModel;
 import com.example.seefood.models.RestaurantModel;
-import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
-
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import static com.example.seefood.restaurantDetails.MealsData.makeMeals;
+import java.util.Map;
+
 
 public class FragmentRestaurantDetails extends Fragment {
 
@@ -29,13 +30,15 @@ public class FragmentRestaurantDetails extends Fragment {
     private TextView detailsName;
     private TextView detailsAddress;
     private ImageView detailsCirclePhotoURL;
+    private ImageView detailsBannerPhotoURL;
+    private TextView detailsPhoneNumber;
 
     private RecyclerView myRecyclerView;
-    private LikeButton starButton;
 
-    private List<Meals> lstMeals;
-    private MealsAdapter mealRecycleAdapter;
+    private List<Offering> lstMeals;
+    private OfferingAdapter mealRecycleAdapter;
 
+    private Toolbar toolBarDetails;
 
     public FragmentRestaurantDetails(){}
 
@@ -43,22 +46,52 @@ public class FragmentRestaurantDetails extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.restaurant_details_fragment, container, false);
+
         assert getArguments() != null;
-        Serializable obj = getArguments().getSerializable("RestaurantObject");
-
-        RestaurantModel restaurant = (RestaurantModel) obj;
+        RestaurantModel obj = getArguments().getParcelable("RestaurantObject");
         assert obj != null;
+        lstMeals = new ArrayList<>();
+        ArrayList<MealModel> arr = new ArrayList<>();
+
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
-        detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
+        detailsAddress = v.findViewById(R.id.detailsAddress);
+        detailsPhoneNumber = v.findViewById(R.id.detailsphoneNumber);
+
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
-//        detailsFavorites = v.findViewById(R.id.favorite_icon_button);
+        detailsBannerPhotoURL = v.findViewById(R.id.restaurantDetailsImage);
+        toolBarDetails = v.findViewById(R.id.toolBarDetails_back);
 
-        detailsName.setText(restaurant.getRestName());
-        detailsAddress.setText(restaurant.getStreetAddress());
+
+        toolBarDetails.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+        detailsName.setText(obj.getRestName());
+        String a = obj.getStreetAddress() + ", " + obj.getCity()+ ", " + obj.getState() + " " + obj.getZipCode();
+        detailsAddress.setText(a);
+        detailsPhoneNumber.setText(obj.getPhoneNumber());
         Picasso.get()
-                .load(restaurant.getPhotoURL()).into(detailsCirclePhotoURL);
+                .load(obj.getPhotoURL()).into(detailsCirclePhotoURL);
+        Picasso.get()
+                .load(obj.getPhotoURL()).into(detailsBannerPhotoURL);
 
-        mealRecycleAdapter = new MealsAdapter(lstMeals);
+        for (Map.Entry mapElement : obj.getOfferings().entrySet()) {
+
+            if(mapElement.getValue() != null && !((ArrayList<MealModel>) mapElement.getValue()).isEmpty())
+            {
+                String offer = (String)mapElement.getKey();
+                arr = (ArrayList<MealModel>) mapElement.getValue();
+                //System.out.println(arr.get(0).getCalories());
+                Offering o = new Offering(offer, arr);
+                lstMeals.add(o);
+            }
+
+
+        }
+        mealRecycleAdapter = new OfferingAdapter(lstMeals);
         myRecyclerView = v.findViewById(R.id.detailsRecyclerView);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecyclerView.setAdapter(mealRecycleAdapter);
@@ -69,7 +102,6 @@ public class FragmentRestaurantDetails extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lstMeals = makeMeals();
     }
 
 }

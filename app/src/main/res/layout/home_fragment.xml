@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentHome">
+    tools:context=".FragmentHome"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SeeFood"
+        android:textSize="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/search_input"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:textColor="@color/red" />
 
     <EditText
         android:id="@+id/search_input"
@@ -12,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="25dp"
-        android:hint="City/Zip Code" />
+        android:hint="Enter City or Zip Code"
+        android:maxLines="1" />
 
     <ImageButton
         android:id="@+id/search_button"
@@ -20,16 +34,21 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/search_input"
         android:layout_centerVertical="true"
-        android:src="@android:drawable/ic_menu_search" />
+        android:layout_alignBottom="@id/search_input"
+        android:src="@drawable/looking_glass"
+        android:backgroundTint="@color/white"/>
 
     <Button
         android:id="@+id/near_me_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_input"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
         android:text="Near Me"
-        android:drawableTop="@android:drawable/ic_menu_compass"/>
+        android:drawableTop="@drawable/compass"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/red"/>
 
     <Button
         android:id="@+id/favorites_button"
@@ -38,23 +57,20 @@
         android:layout_below="@id/search_input"
         android:layout_toRightOf="@id/near_me_button"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:text="Favorites"
-        android:drawableTop="@android:drawable/btn_star"/>
+        android:drawableTop="@drawable/star"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/red"/>
 
-    <Button
-        android:id="@+id/recents_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/search_input"
-        android:layout_toRightOf="@id/favorites_button"
-        android:layout_marginLeft="15dp"
-        android:text="Recent"
-        android:drawableTop="@android:drawable/ic_menu_search"/>
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/autocomplete_fragment"-->
-<!--        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
+    <ImageView
+        android:layout_width="328dp"
+        android:layout_height="306dp"
+        android:layout_above="@id/title_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="37dp"
+        android:src="@drawable/home_icon" />
 
 </RelativeLayout>

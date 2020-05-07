@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    android:background="#9e0b0f"
     tools:context=".profileSetup.createRestaurantProfile_3">
 
 
@@ -255,7 +255,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.804"
-            tools:layout_editor_absoluteX="0dp">
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
 
             <TextView
                 android:id="@+id/mon"
@@ -457,7 +459,7 @@
         <Button
             android:id="@+id/notOffered"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="200dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:padding="10dp"
@@ -468,12 +470,13 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintVertical_bias="0.538"
+            android:layout_marginRight="20dp"/>
 
         <Button
             android:id="@+id/setHoursButton"
             style="?android:attr/borderlessButtonStyle"
-            android:layout_width="200dp"
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:padding="10dp"
@@ -484,7 +487,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.538" />
+            app:layout_constraintVertical_bias="0.538"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
 
         <TextView
             android:id="@+id/textView7"
@@ -519,7 +524,7 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/red"
+            android:background="#9e0b0f"
             android:padding="10dp"
             android:text="Reset All Fields"
             android:textColor="#ffffff"
@@ -528,7 +533,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:layout_constraintVertical_bias="0.571" />
+            app:layout_constraintVertical_bias="0.571"
+            android:layout_marginLeft="10dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="189dp"
@@ -579,7 +585,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/completeSetup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

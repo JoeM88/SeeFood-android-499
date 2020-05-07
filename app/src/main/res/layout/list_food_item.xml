@@ -15,18 +15,20 @@
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="8dp">
 
             <ImageView
                 android:id="@+id/foodImage"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="8dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp" />
 
@@ -34,15 +36,43 @@
                 android:id="@+id/foodName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                android:textSize="20sp"
+                android:layout_marginEnd="124dp"
+                android:layout_marginRight="124dp"
+                android:layout_toEndOf="@+id/foodImage"
+                android:layout_toRightOf="@+id/foodImage"
+                android:text="testing"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/foodDecriptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodName"
+                android:layout_alignStart="@+id/foodName"
+                android:layout_alignLeft="@+id/foodName"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="8dp"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/foodAllergies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodDecriptions"
+                android:layout_alignStart="@+id/foodDecriptions"
+                android:layout_alignLeft="@+id/foodDecriptions"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="8dp"
+                android:text="allergies" />
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

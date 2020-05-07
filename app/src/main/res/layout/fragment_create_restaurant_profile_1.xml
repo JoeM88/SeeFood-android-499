@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/red"
+        android:background="#9e0b0f"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="27dp">
 
@@ -25,40 +25,45 @@
             app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.223" />
+            app:layout_constraintVertical_bias="0.223"
+            android:layout_marginLeft="4dp"/>
 
-<!--        <EditText-->
-<!--            android:id="@+id/PhoneText_Input"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="#ffffff"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:inputType="phone"-->
-<!--            android:digits="0123456789+"-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/PhoneText_Input"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="#ffffff"-->
+        <!--            android:gravity="center_horizontal"-->
+        <!--            android:inputType="phone"-->
+        <!--            android:digits="0123456789+"-->
 
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.834"-->
-<!--            tools:layout_editor_absoluteX="0dp" />-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.834"-->
+        <!--            tools:layout_editor_absoluteX="0dp" />-->
 
         <com.santalu.maskedittext.MaskEditText
             android:id="@+id/PhoneText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
+            android:digits="0123456789+"
             android:gravity="center_horizontal"
             android:inputType="phone"
-            android:digits="0123456789+"
-            app:met_mask="(###) ### - ####"
+            android:maxLines="1"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.834"
+            app:met_mask="(###) ### - ####"
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:text="Phone Number"
             android:textColor="#ffffff"
             android:textSize="20dp"
@@ -73,9 +78,12 @@
             android:id="@+id/ZipText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:gravity="center_horizontal"
             android:maxLength="5"
+            android:maxLines="1"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -88,6 +96,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="9dp"
             android:text="Zip Code"
             android:textColor="#ffffff"
             android:textSize="20dp"
@@ -99,26 +108,28 @@
             app:layout_constraintVertical_bias="0.659" />
 
 
-
-<!--        <EditText-->
-<!--            android:id="@+id/StateText_Input"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:background="#ffffff"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.607" />-->
+        <!--        <EditText-->
+        <!--            android:id="@+id/StateText_Input"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="#ffffff"-->
+        <!--            android:gravity="center_horizontal"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintVertical_bias="0.607" />-->
 
         <Spinner
             android:id="@+id/StateText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +142,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
             android:text="State"
             android:textColor="#ffffff"
             android:textSize="20dp"
@@ -145,8 +157,11 @@
             android:id="@+id/CityText_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -167,14 +182,18 @@
             app:layout_constraintHorizontal_bias="0.042"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.438" />
+            app:layout_constraintVertical_bias="0.438"
+            android:layout_marginLeft="4dp"/>
 
         <EditText
             android:id="@+id/Street_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -193,14 +212,18 @@
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.332" />
+            app:layout_constraintVertical_bias="0.332"
+            android:layout_marginLeft="3dp"/>
 
         <EditText
             android:id="@+id/RestName_Input"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="#ffffff"
             android:gravity="center_horizontal"
+            android:maxLines="1"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"

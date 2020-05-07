@@ -10,20 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/red">
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meal name:"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.085" />
+        android:background="#9e0b0f">
 
         <EditText
             android:id="@+id/foodNameField"
@@ -31,25 +18,14 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:gravity="center_horizontal"
+            android:hint="Enter name of meal"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.132" />
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Calories"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.223" />
+            app:layout_constraintVertical_bias="0.298" />
 
         <EditText
             android:id="@+id/calorieField"
@@ -57,12 +33,16 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:gravity="center_horizontal"
+            android:hint="Calories"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.279" />
+            app:layout_constraintVertical_bias="0.414" />
 
         <Spinner
             android:id="@+id/mealTypeSpinner"
@@ -74,20 +54,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.279" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Meal Type"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.468"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.223" />
+            app:layout_constraintVertical_bias="0.414" />
 
         <EditText
             android:id="@+id/mealDescription"
@@ -95,40 +62,28 @@
             android:layout_height="100dp"
             android:background="@color/white"
             android:gravity="center_horizontal"
+            android:hint="Describe the dish ..."
             android:inputType="textMultiLine"
             android:maxLines="5"
             android:paddingTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.443" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textColor="#ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.047"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.355" />
+            app:layout_constraintVertical_bias="0.573" />
 
         <ImageView
             android:id="@+id/restPhoto"
             android:layout_width="172dp"
             android:layout_height="178dp"
-            android:background="@color/white"
+            android:background="#9e0b0f"
             android:padding="10dp"
             android:src="@drawable/ntseefood"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.769"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.743" />
+            app:layout_constraintVertical_bias="0.012" />
 
         <Button
             android:id="@+id/photoButton"
@@ -141,10 +96,10 @@
             android:textColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintHorizontal_bias="0.481"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.696" />
+            app:layout_constraintVertical_bias="0.957" />
 
         <Button
             android:id="@+id/cancelButton"
@@ -158,7 +113,7 @@
             app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.919" />
+            app:layout_constraintVertical_bias="0.957" />
 
         <Button
             android:id="@+id/submitButton"
@@ -174,7 +129,111 @@
             app:layout_constraintHorizontal_bias="0.946"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.919" />
+            app:layout_constraintVertical_bias="0.957" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="412dp"
+            android:layout_height="130dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.828">
+
+            <CheckBox
+                android:id="@+id/peanutBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peanuts"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.884"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/dairyBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dairy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.061" />
+
+            <CheckBox
+                android:id="@+id/wheatBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wheat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.928" />
+
+            <CheckBox
+                android:id="@+id/treenutsBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tree Nuts"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/eggBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eggs"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/shellfishBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shellfish"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.484"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.061" />
+
+            <CheckBox
+                android:id="@+id/fishBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fish"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.928" />
+
+            <CheckBox
+                android:id="@+id/soyBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.812"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.061" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
