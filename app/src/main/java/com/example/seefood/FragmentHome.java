@@ -70,7 +70,7 @@ public class FragmentHome extends Fragment {
         view = inflater.inflate(R.layout.home_fragment, container, false);
         mContext = getContext();
 
-        ((MainActivity)getActivity()).clearBackStack();
+        //((MainActivity)getActivity()).clearBackStack();
 
         ButterKnife.bind(this, view);
         if (!Places.isInitialized()){

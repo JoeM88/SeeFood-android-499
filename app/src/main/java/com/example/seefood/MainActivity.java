@@ -1,7 +1,6 @@
 package com.example.seefood;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             assert selectedFragment != null;
 
             clearBackStack();
+            stack.push(selectedFragment);
             getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
 
             return true;
@@ -61,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void switchContent(int id, Fragment fragment, boolean add) {
-
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(id, fragment, fragment.toString());
-//        ft.addToBackStack(null);
-//        ft.commit();
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction();
         if (add)

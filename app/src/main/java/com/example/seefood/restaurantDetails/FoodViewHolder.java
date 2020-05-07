@@ -6,11 +6,8 @@ import android.widget.TextView;
 
 import com.example.seefood.R;
 import com.example.seefood.models.MealModel;
-import com.example.seefood.restaurantDetails.Food;
 import com.squareup.picasso.Picasso;
 import com.thoughtbot.expandablerecyclerview.viewholders.ChildViewHolder;
-
-import org.w3c.dom.Text;
 
 public class FoodViewHolder extends ChildViewHolder {
 
@@ -32,7 +29,8 @@ public class FoodViewHolder extends ChildViewHolder {
         public void onBind(MealModel meal) {
                 foodName.setText(meal.getName());
                 foodDescription.setText(meal.getDescription());
-                foodAllergies.setText(meal.getAllergies().toString());
+                //foodAllergies.setText(meal.getAllergies().toString());
+                foodAllergies.setText(meal.allergyPrint());
                 Picasso.get()
                         .load(meal.getPhotoURL()).fit().into(foodPicture);
         }

@@ -10,6 +10,7 @@
         android:id="@+id/toolBarDetails_back"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@color/red"
         android:fitsSystemWindows="true"
         app:layout_collapseMode="pin"
         app:navigationIcon="@drawable/left_arrow"

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true"
+        android:backgroundTint="@color/red"
         app:layout_collapseMode="pin"
         app:navigationIcon="@drawable/left_arrow"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
