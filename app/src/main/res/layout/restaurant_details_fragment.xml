@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarDetails_back"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/left_arrow"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:background="@color/colorAccent"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp">
@@ -23,8 +33,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="@color/colorIcons"
-        android:padding="8dp">
+        android:background="@color/colorIcons">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Restaurant_Details_Circle_Photo"
@@ -41,31 +50,52 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/Restaurant_Details_Circle_Photo"
             android:layout_toRightOf="@+id/Restaurant_Details_Circle_Photo"
             android:text="@string/res_name"
-            android:textSize="15sp"
             android:textColor="@color/black"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/Restaurant_Details_Address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/Restaurant_Details_Name"
-            android:layout_alignStart="@+id/Restaurant_Details_Name"
+            android:layout_below="@+id/detailsAddress"
+            android:layout_alignStart="@+id/detailsAddress"
             android:layout_alignLeft="@+id/Restaurant_Details_Name"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:text="@string/category_type"
             android:textColor="@android:color/darker_gray" />
 
-<!--            app:unlike_drawable="@drawable/ic_star_border_black_24dp" />-->
+        <TextView
+            android:id="@+id/detailsAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Restaurant_Details_Name"
+            android:layout_alignStart="@+id/Restaurant_Details_Name"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="8dp"
+            android:text="123 Main Street" />
+
+        <TextView
+            android:id="@+id/detailsphoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="(831) 123-4567" />
+
+        <!--            app:unlike_drawable="@drawable/ic_star_border_black_24dp" />-->
 
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
