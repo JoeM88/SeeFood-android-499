@@ -54,7 +54,7 @@ public class FragmentRestaurantDetails extends Fragment {
         ArrayList<MealModel> arr = new ArrayList<>();
 
         detailsName = v.findViewById(R.id.Restaurant_Details_Name);
-        detailsAddress = v.findViewById(R.id.Restaurant_Details_Address);
+        detailsAddress = v.findViewById(R.id.detailsAddress);
         detailsPhoneNumber = v.findViewById(R.id.detailsphoneNumber);
 
         detailsCirclePhotoURL = v.findViewById(R.id.Restaurant_Details_Circle_Photo);
@@ -70,7 +70,7 @@ public class FragmentRestaurantDetails extends Fragment {
         });
 
         detailsName.setText(obj.getRestName());
-        String a = obj.getStreetAddress() + ", " + obj.getCity()+ ", " + obj.getState();
+        String a = obj.getStreetAddress() + ", " + obj.getCity()+ ", " + obj.getState() + " " + obj.getZipCode();
         detailsAddress.setText(a);
         detailsPhoneNumber.setText(obj.getPhoneNumber());
         Picasso.get()

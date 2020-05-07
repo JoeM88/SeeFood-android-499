@@ -49,7 +49,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.restName.setText(mData.get(position).getRestName());
-        holder.streetAddress.setText(mData.get(position).getStreetAddress());
+        String fullAddress = mData.get(position).getStreetAddress() + ", " + mData.get(position).getCity() + ", " + mData.get(position).getState() + " " + mData.get(position).getZipCode();
+        holder.streetAddress.setText(fullAddress);
+        holder.restPhone.setText(mData.get(position).getPhoneNumber());
         Picasso.get()
                 .load(mData.get(position).getPhotoURL()).into(holder.photoURL);
 
@@ -61,15 +63,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         @BindView(R.id.restaurant_name) TextView restName;
         @BindView(R.id.address) TextView streetAddress;
         @BindView(R.id.restaurant_img) ImageView photoURL;
+        @BindView(R.id.restaurant_phone) TextView restPhone;
         @BindView(R.id.like_button) ImageView like_button;
+
         OnRestaurantListener onRestaurantListener;
         OnRestaurantLikeListener onRestaurantLikeListener;
 
         public MyViewHolder(@NonNull View itemView, OnRestaurantListener onRestaurantListener, OnRestaurantLikeListener onRestaurantLikeListener) {
             super(itemView);
+
             ButterKnife.bind(this, itemView);
             this.onRestaurantListener = onRestaurantListener;
             this.onRestaurantLikeListener = onRestaurantLikeListener;

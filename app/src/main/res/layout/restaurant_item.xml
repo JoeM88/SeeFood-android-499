@@ -43,18 +43,19 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/address"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/restaurant_name"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_name"
-        app:layout_constraintVertical_bias="0.24" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/restaurant_name"
-        android:layout_width="276dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/res_name"
         android:textColor="@color/black"
         android:textSize="15sp"
@@ -63,6 +64,15 @@
         app:layout_constraintTop_toTopOf="parent"
         android:maxLines="1"
         android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/restaurant_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="831-123-4567"
+        app:layout_constraintStart_toStartOf="@+id/address"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detailsMealDecriptions"
+                android:id="@+id/foodDecriptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/foodName"
@@ -61,12 +61,12 @@
                 android:text="Description" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/foodAllergies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/detailsMealDecriptions"
-                android:layout_alignStart="@+id/detailsMealDecriptions"
-                android:layout_alignLeft="@+id/detailsMealDecriptions"
+                android:layout_below="@+id/foodDecriptions"
+                android:layout_alignStart="@+id/foodDecriptions"
+                android:layout_alignLeft="@+id/foodDecriptions"
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="8dp"
