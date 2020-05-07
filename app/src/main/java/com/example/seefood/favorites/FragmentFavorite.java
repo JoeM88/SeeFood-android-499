@@ -2,9 +2,7 @@ package com.example.seefood.favorites;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -164,7 +162,7 @@ public class FragmentFavorite extends Fragment {
             b.putParcelable("RestaurantObject", lstFavorites.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
-            mainActivity.switchContent(R.id.container_fragment, frag);
+            mainActivity.switchContent(R.id.container_fragment, frag, true);
         }
     }
 

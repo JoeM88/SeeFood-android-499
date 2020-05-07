@@ -109,8 +109,8 @@ public class SignUpFragmentUser extends Fragment {
         }
 
         String input = "Email: " + email.getEditText().getText().toString();
-        input += "\n";
-        input += "Password: " + password.getEditText().getText().toString();
+        input += "\n User Created";
+        //input += "Password: " + password.getEditText().getText().toString();
 
         Toast.makeText(getActivity(), input, Toast.LENGTH_SHORT).show();
     }

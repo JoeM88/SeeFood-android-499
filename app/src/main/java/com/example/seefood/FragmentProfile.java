@@ -121,23 +121,6 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.profile_fragment, container, false);
         //tv = v.findViewById(R.id.displayData);
-        logoutButton = v.findViewById(R.id.logoutButton);
-        createProfileButton = v.findViewById(R.id.create_profile);
-        logoutButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-               logout(v);
-           }
-        });
-        createProfileButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                createProfile(v);
-            }
-        });
-
-        logoutButton.setVisibility(View.INVISIBLE);
-        createProfileButton.setVisibility(View.INVISIBLE);
         return v;
     }
 

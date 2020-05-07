@@ -10,52 +10,33 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+
 import com.example.seefood.favorites.FragmentFavorite;
 import com.example.seefood.restaurantList.FragmentList;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.Autocomplete;
-import com.google.android.libraries.places.widget.AutocompleteActivity;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -88,6 +69,9 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_fragment, container, false);
         mContext = getContext();
+
+        ((MainActivity)getActivity()).clearBackStack();
+
         ButterKnife.bind(this, view);
         if (!Places.isInitialized()){
             Places.initialize(getActivity(), APIkey);
@@ -96,6 +80,8 @@ public class FragmentHome extends Fragment {
         //FragmentTransaction ft = getFragmentManager().beginTransaction(); Probably dont need
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
+
+
 
 
         searchBtn.setOnClickListener(view -> {
@@ -124,14 +110,14 @@ public class FragmentHome extends Fragment {
             FragmentList fl = new FragmentList();
             fl.setArguments(b);
             MainActivity mainActivity = (MainActivity) mContext;
-            mainActivity.switchContent(R.id.container_fragment, fl);
+            mainActivity.switchContent(R.id.container_fragment, fl, true);
         });
 
         favoritesButton.setOnClickListener(view -> {
             FragmentFavorite ff = new FragmentFavorite();
             ff.setArguments(null);
             MainActivity mainActivity = (MainActivity) mContext;
-            mainActivity.switchContent(R.id.container_fragment, ff);
+            mainActivity.switchContent(R.id.container_fragment, ff, true);
         });
 
         return view;
