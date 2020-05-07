@@ -40,7 +40,9 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.185" />
+            app:layout_constraintVertical_bias="0.185"
+            android:layout_margin="15dp"
+            android:maxLines="1"/>
 
         <!--        <ImageView-->
         <!--            android:id="@+id/my_avatar"-->

@@ -1,6 +1,7 @@
 package com.example.seefood;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.seefood.favorites.FragmentFavorite;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Stack;
@@ -16,6 +18,7 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static int SPLASH_TIME_OUT = 2000;
 
     private Stack<Fragment> stack;
     @Override
@@ -26,10 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView botNav = findViewById(R.id.bottom_nav);
         botNav.setOnNavigationItemSelectedListener(navListener);
+
         stack = new Stack<>();
         switchContent(R.id.container_fragment, new FragmentHome(), true);
-
-
 
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             assert selectedFragment != null;
+
             clearBackStack();
             getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, selectedFragment).commit();
 

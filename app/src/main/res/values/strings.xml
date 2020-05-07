@@ -9,7 +9,7 @@
     <string name="detailsImageDesription">Restaurant image for the details page</string>
     <!--Bottom Navigation Bar-->
     <string name="nav_bar_home">Home</string>
-    <string name="nav_bar_favorite">Favorite</string>
+    <string name="nav_bar_favorite">Favorites</string>
     <string name="nav_bar_profile">Profile</string>
     <!--    Nick's values-->
     <string name="title_home">Home</string>

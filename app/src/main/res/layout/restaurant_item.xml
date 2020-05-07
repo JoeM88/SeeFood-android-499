@@ -24,6 +24,21 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+
+    <ImageView
+        android:id="@+id/like_button"
+        android:layout_width="33dp"
+        android:layout_height="32dp"
+        android:contentDescription="like_button"
+        android:scaleType="fitXY"
+        android:src="@drawable/heart"
+        tools:layout_editor_absoluteX="362dp"
+        tools:layout_editor_absoluteY="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"/>
+
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
@@ -36,16 +51,18 @@
 
     <TextView
         android:id="@+id/restaurant_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="276dp"
+        android:layout_height="36dp"
         android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
         android:text="@string/res_name"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/restaurant_img"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="15dp" />
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
