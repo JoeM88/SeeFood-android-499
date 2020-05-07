@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -55,6 +56,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
     private String type;
     private FragmentProfile mFragmentProfile;
     List<RestaurantModel> lstRestaurant;
+    private Toolbar toolbar;
     FirebaseAuth firebaseAuth;
     DocumentReference customerRef;
     String userId;
@@ -80,6 +82,13 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
         mFavoriteRestaurants = new ArrayList<>();
         firebaseAuth = FirebaseAuth.getInstance();
         userId = firebaseAuth.getUid();
+        toolbar = v.findViewById(R.id.toolBar_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
 
         myRecyclerView = v.findViewById(R.id.restaurant_recyclerview);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -114,7 +123,7 @@ public class FragmentList extends Fragment implements RecyclerViewAdapter.OnRest
             b.putParcelable("RestaurantObject", lstRestaurant.get(position));
             FragmentRestaurantDetails frag = new FragmentRestaurantDetails();
             frag.setArguments(b);
-            mainActivity.switchContent(R.id.container_fragment, frag);
+            mainActivity.switchContent(R.id.container_fragment, frag, true);
         }
     }
 
