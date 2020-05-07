@@ -45,13 +45,13 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="411dp"
-            android:layout_height="384dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:background="#ffffff"
             android:src="@drawable/ic_person_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.406" />
@@ -84,7 +84,7 @@
             app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.806" />
+            app:layout_constraintVertical_bias="0.78" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
