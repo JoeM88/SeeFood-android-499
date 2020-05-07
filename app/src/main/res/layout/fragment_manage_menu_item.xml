@@ -25,7 +25,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.298" />
+            app:layout_constraintVertical_bias="0.298"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:maxLines="1"/>
 
         <EditText
             android:id="@+id/calorieField"
@@ -42,11 +45,12 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.414" />
+            app:layout_constraintVertical_bias="0.414"
+            android:layout_marginLeft="15dp"/>
 
         <Spinner
             android:id="@+id/mealTypeSpinner"
-            android:layout_width="250dp"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,11 +58,12 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.414" />
+            app:layout_constraintVertical_bias="0.414"
+            android:layout_marginRight="15dp"/>
 
         <EditText
             android:id="@+id/mealDescription"
-            android:layout_width="411dp"
+            android:layout_width="375dp"
             android:layout_height="100dp"
             android:background="@color/white"
             android:gravity="center_horizontal"
@@ -69,7 +74,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.573" />
+            app:layout_constraintVertical_bias="0.573"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
 
         <ImageView
             android:id="@+id/restPhoto"
@@ -133,7 +140,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
-            android:layout_width="412dp"
+            android:layout_width="375dp"
             android:layout_height="130dp"
             android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -141,7 +148,9 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.828">
+            app:layout_constraintVertical_bias="0.828"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
 
             <CheckBox
                 android:id="@+id/peanutBox"

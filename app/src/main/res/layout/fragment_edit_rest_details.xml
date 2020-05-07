@@ -25,7 +25,8 @@
             app:layout_constraintHorizontal_bias="0.062"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.223" />
+            app:layout_constraintVertical_bias="0.223"
+            android:layout_marginLeft="4dp"/>
 
         <!--        <EditText-->
         <!--            android:id="@+id/PhoneText_Input"-->
@@ -54,7 +55,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.834"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +71,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.768" />
+            app:layout_constraintVertical_bias="0.768"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
             android:id="@+id/ZipText_Input"
@@ -82,7 +87,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.72" />
+            app:layout_constraintVertical_bias="0.72"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/textView9"
@@ -96,7 +104,8 @@
             app:layout_constraintHorizontal_bias="0.033"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.659" />
+            app:layout_constraintVertical_bias="0.659"
+            android:layout_marginLeft="8dp"/>
 
 
 
@@ -125,7 +134,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.607" />
+            app:layout_constraintVertical_bias="0.607"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/textView6"
@@ -139,7 +151,8 @@
             app:layout_constraintHorizontal_bias="0.043"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.549" />
+            app:layout_constraintVertical_bias="0.549"
+            android:layout_marginLeft="4dp"/>
 
         <EditText
             android:id="@+id/CityText_Input"
@@ -153,7 +166,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.494" />
+            app:layout_constraintVertical_bias="0.494"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/textView8"
@@ -167,7 +183,8 @@
             app:layout_constraintHorizontal_bias="0.042"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.438" />
+            app:layout_constraintVertical_bias="0.438"
+            android:layout_marginLeft="4dp"/>
 
         <EditText
             android:id="@+id/Street_Input"
@@ -179,7 +196,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.383"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/textView4"
@@ -193,7 +213,8 @@
             app:layout_constraintHorizontal_bias="0.05"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.332" />
+            app:layout_constraintVertical_bias="0.332"
+            android:layout_marginLeft="4dp"/>
 
         <EditText
             android:id="@+id/RestName_Input"
@@ -205,19 +226,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.27"
-            tools:layout_editor_absoluteX="0dp" />
-
-        <!--        <com.seatgeek.placesautocomplete.PlacesAutocompleteTextView-->
-        <!--            android:id="@+id/places_autocomplete"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:background="#ffffff"-->
-        <!--            android:textColor="@color/red"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0.234"-->
-        <!--            app:pacv_googleMapsApiKey="AIzaSyAnuKtCuR8_6WyQ2pNGP_JYnkYSzdF4vgU"-->
-        <!--            tools:layout_editor_absoluteX="16dp" />-->
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:maxLines="1"/>
 
         <Button
             android:id="@+id/nextButton"
