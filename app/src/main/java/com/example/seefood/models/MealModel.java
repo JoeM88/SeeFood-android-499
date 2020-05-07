@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MealModel implements Parcelable {
     private String name;
@@ -109,6 +110,18 @@ public class MealModel implements Parcelable {
                 + photoName + " photo URL: " + photoURL + " type: " + type + " description: "
                 + description + " allergies: " + allergies;
 
+    }
+
+    public StringBuilder allergyPrint(){
+        StringBuilder result = new StringBuilder("Allergy Warnings: ");
+        for(Map.Entry<String, Boolean> entry : allergies.entrySet()){
+            if(entry.getValue()){
+                result.append(" ");
+                result.append(entry.getKey());
+                result.append(",");
+            }
+        }
+        return result;
     }
 
     @Override

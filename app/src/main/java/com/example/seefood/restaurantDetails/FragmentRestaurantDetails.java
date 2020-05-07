@@ -84,7 +84,7 @@ public class FragmentRestaurantDetails extends Fragment {
             {
                 String offer = (String)mapElement.getKey();
                 arr = (ArrayList<MealModel>) mapElement.getValue();
-                System.out.println(arr.get(0).getCalories());
+                //System.out.println(arr.get(0).getCalories());
                 Offering o = new Offering(offer, arr);
                 lstMeals.add(o);
             }

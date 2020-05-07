@@ -108,7 +108,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new viewRestMenuItemsFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -122,7 +122,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new viewRestMenuItemsFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -136,7 +136,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new viewRestMenuItemsFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -150,7 +150,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new viewRestMenuItemsFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -163,7 +163,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new editRestDetails();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -176,7 +176,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new editRestPhotoFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });
@@ -189,7 +189,7 @@ public class displayRestaurantProfile extends Fragment {
                 final FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment nextStep = new editRestHoursFragment();
                 nextStep.setArguments(passForward);
-                ft.replace(R.id.container_fragment, nextStep);
+                ft.replace(R.id.container_fragment, nextStep).addToBackStack(null);
                 ft.commit();
             }
         });

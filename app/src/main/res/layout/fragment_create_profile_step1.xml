@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    android:background="#9e0b0f"
     tools:context=".profileSetup.createProfile_step1">
 
     <TextView
@@ -32,7 +32,9 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qText"
-        app:layout_constraintVertical_bias="0.019">
+        app:layout_constraintVertical_bias="0.019"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <RadioButton
             android:id="@+id/yesButton"

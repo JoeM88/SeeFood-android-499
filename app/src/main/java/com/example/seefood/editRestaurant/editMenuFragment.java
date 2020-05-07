@@ -150,11 +150,6 @@ public class editMenuFragment extends Fragment implements AdapterView.OnItemSele
 
         String type = bundle.getString("type");
 
-        if(type.equals("editItem")){
-            //editArguments set
-        }
-
-
         foodName = view.findViewById(R.id.foodNameField);
         restPhoto = view.findViewById(R.id.restPhoto);
         setDateTime = dateTime();

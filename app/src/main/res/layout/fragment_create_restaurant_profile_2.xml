@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
+    android:background="#9e0b0f"
     tools:context=".profileSetup.createRestaurantProfile_2">
 
 
@@ -47,8 +47,8 @@
             android:id="@+id/imageView4"
             android:layout_width="251dp"
             android:layout_height="247dp"
-            android:background="#ffffff"
-            android:src="@drawable/ic_person_black_24dp"
+            android:background="#9e0b0f"
+            android:src="@drawable/ntseefood"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
